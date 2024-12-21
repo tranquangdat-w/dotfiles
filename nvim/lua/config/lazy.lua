@@ -52,26 +52,3 @@ vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
-vim.keymap.set("n", "<C-\\>", function()
-    -- Kiểm tra xem có phải là terminal hay không
-    local buf_type = vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), 'buftype')
-    
-    -- Nếu đang trong terminal, đóng terminal
-    if buf_type == 'terminal' then
-        vim.cmd('bd!')  -- Đóng buffer terminal mà không hỏi xác nhận
-    else
-        -- Nếu không phải terminal, mở terminal mới trong tab mới
-        vim.cmd('tabnew')  -- Mở tab mới
-        vim.cmd('term')    -- Tạo terminal trong tab mới
-        vim.cmd('startinsert')  -- Chuyển sang chế độ insert
-    end
-end, { desc = "Toggle terminal in new tab" })
-
-vim.keymap.set('n', '<C-Esc>', function()
-    if vim.bo.buftype == 'terminal' then
-        vim.cmd('bd!')
-    else
-        vim.cmd('bd')
-    end
-end, { noremap = true, silent = true })
-

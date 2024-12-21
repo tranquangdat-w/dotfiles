@@ -1,12 +1,8 @@
 require("config.lazy")
 
--- Lấy cấu hình winblend mặc định từ telescope.nvim
-
 require('nvim-autopairs').setup{
   map_cr = false,
 }
-
-vim.o.winblend = 15  -- 0 is no transparency, 100 is fully transparent
 
 -- gruvbox theme
 vim.o.background = "dark" -- or "light" for light mode
@@ -15,8 +11,10 @@ vim.cmd([[colorscheme gruvbox]])
 require('lualine').setup()
 options = { theme = 'gruvbox' }
 
-vim.cmd [[autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2]]
-
+vim.cmd [[
+  autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+]]
 -- nvim-tree binds 
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
@@ -28,11 +26,10 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true 
 vim.cmd [[
   let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'python' : ['flake8'],
+      \ 'python': ['pylint']
       \ }
 
   let g:ale_fixers = {
-      \ 'python': ['black'],
       \ 'javascript': ['eslint'],
       \ }
 
@@ -69,6 +66,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fm', builtin.marks, {})
+
 vim.g.coc_global_extensions = {
   "coc-json",
   "coc-tsserver",
@@ -172,12 +170,4 @@ vim.keymap.set("n", "<leader>ccp", function()
 end, { desc = "CopilotChat - Prompt actions" })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
-
-vim.keymap.set('i', '<Tab>', function()
-  return vim.fn['copilot#Accept']() == '' and vim.fn['copilot#Next']() or vim.fn['copilot#Accept']()
-end, { expr = true, silent = true })
-
-vim.keymap.set('i', '<S-Tab>', function()
-  return vim.fn['copilot#Previous']()
-end, { expr = true, silent = true })
 

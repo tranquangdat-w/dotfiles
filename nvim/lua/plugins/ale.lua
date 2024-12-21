@@ -7,7 +7,7 @@ return {
         g.ale_ruby_rubocop_auto_correct_all = 1
 
         g.ale_linters = {
-            python = {'flake8'},
+            python = {'pylint'},
             javascript = {'eslint'}
         }
         
