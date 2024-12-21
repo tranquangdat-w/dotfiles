@@ -13,12 +13,11 @@
         layout = "float",
         width = 0.9,
         height = 0.8,
-        title = 'BORN TO WIN',
-        border = 'none'
+        title = '',
       },
       auto_follow_cursor = false,    -- Don't follow the cursor after getting response
-      question_header = '# T.Q.Dat',
-      answer_header = '# Copilot',
+      question_header = '#T.Q.Dat',
+      answer_header = '#Copilot',
     },
 }
 

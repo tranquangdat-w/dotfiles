@@ -17,10 +17,6 @@ vim.cmd [[
 ]]
 -- nvim-tree binds 
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
 -- ale need install eslint, flake8, black to use.
 vim.cmd [[
@@ -152,21 +148,24 @@ dashboard.section.buttons.val = {
 
 -- Chỉnh sửa chân trang
 dashboard.section.footer.val = {
-    " Stay productive!",
+    "⚡Stay productive!",
 }
 
 -- Kích hoạt Alpha
 alpha.setup(dashboard.opts)
 
-
+-- Copilot
 vim.keymap.set("n", "<leader>ccp", function()
   require("CopilotChat.integrations.telescope").pick(
     require("CopilotChat.actions").prompt_actions(),
     require("telescope.themes").get_dropdown({
-      previewer = false,      
+      previewer = false,
       prompt_title = "Copilot Actions",
+      width = 1,     
+      height = 1,
     })
   )
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 end, { desc = "CopilotChat - Prompt actions" })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
