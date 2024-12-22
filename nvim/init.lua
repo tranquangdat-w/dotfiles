@@ -8,51 +8,39 @@ require('nvim-autopairs').setup{
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 
-require('lualine').setup()
-options = { theme = 'gruvbox' }
+require('lualine').setup{
+  options = { theme = 'gruvbox' }
+}
 
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 ]]
+
 -- nvim-tree binds 
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- ale need install eslint, flake8, black to use.
-vim.cmd [[
-  let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'python': ['pylint']
-      \ }
+vim.g.ale_linters = {
+  javascript = {'eslint'},
+  python = {'pylint'},
+  html = {},
+}
 
-  let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ }
+vim.g.ale_fixers = {
+  javascript = {'eslint'},
+}
 
-  let g:ale_linters = {
-    \   'html': [],
-    \ }
-
-  let g:ale_fix_on_save = 1
-]]
+vim.g.ale_fix_on_save = 1
 
 -- telescope binds
 require('telescope').setup({
-  defaults = {
-  },
+  defaults = {},
   pickers = {
-    buffers = {
-      initial_mode = "normal",  
-    },
-    find_files = {
-      initial_mode = "normal",
-    },
-    live_grep = {
-      initial_mode = "normal",
-    },
-    help_tags = {
-      initial_mode = "normal",
-    },
+    buffers = { initial_mode = "normal" },
+    find_files = { initial_mode = "normal" },
+    live_grep = { initial_mode = "normal" },
+    help_tags = { initial_mode = "normal" },
   },
 })
 
@@ -90,13 +78,11 @@ keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 -- <C-g>u breaks current undo, please make your own choice
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
-
 -- GoTo code navigation
 keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
 keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
 keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
 keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
-
 
 -- Use K to show documentation in preview window
 function _G.show_docs()
@@ -111,7 +97,6 @@ function _G.show_docs()
 end
 keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
-
 -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
 vim.api.nvim_create_augroup("CocGroup", {})
 vim.api.nvim_create_autocmd("CursorHold", {
@@ -119,7 +104,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
     command = "silent call CocActionAsync('highlight')",
     desc = "Highlight symbol under cursor on CursorHold"
 })
-
 
 -- Symbol renaming
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
@@ -132,7 +116,6 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
-
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
@@ -143,8 +126,6 @@ dashboard.section.buttons.val = {
     dashboard.button("s", "Settings", ":e $MYVIMRC<CR>"),
     dashboard.button("q", "Quit", ":qa!<CR>"),
 }
-
-
 
 -- Chỉnh sửa chân trang
 dashboard.section.footer.val = {
@@ -169,8 +150,3 @@ vim.keymap.set("n", "<leader>ccp", function()
 end, { desc = "CopilotChat - Prompt actions" })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
-
--- Ensure highlights for statusline
-vim.cmd("highlight! link StatusLine Normal")
-vim.cmd("highlight! link StatusLineNC NormalNC")
-

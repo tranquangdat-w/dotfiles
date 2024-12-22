@@ -4,92 +4,73 @@ return {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
     'mfussenegger/nvim-dap-python',
-    'nvim-telescope/telescope.nvim',  -- Add Telescope dependency
-    'nvim-telescope/telescope-dap.nvim'  -- Add Telescope DAP extension
+    'nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope-dap.nvim'
   },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
     local telescope = require("telescope")
-    local telescope_dap = require("telescope").load_extension("dap")
+    telescope.load_extension("dap")
 
     dapui.setup({
-        icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
-        mappings = {
-          -- Use a table to apply multiple mappings
-          expand = { "<CR>", "<2-LeftMouse>" },
-          open = "o",
-          remove = "d",
-          edit = "e",
-          repl = "r",
-          toggle = "t",
-        },
-        layouts = {
-          {
-            elements = {
-              'scopes',
-              -- 'breakpoints',
-              'stacks',
-              -- 'watches',
-            },
-            size = 40,
-            position = 'left',
+      icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
+      mappings = {
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+        toggle = "t",
+      },
+      layouts = {
+        {
+          elements = {
+            { id = 'scopes', size = 0.5 },
+            { id = 'breakpoints', size = 0.3 },
+            { id = 'stacks', size = 0.2 },
           },
-          {
-            elements = {
-              'repl',
-              'console',
-            },
-            size = 10,
-            position = 'bottom',
-          },
+          size = 40,
+          position = 'left',
         },
-        floating = {
-          max_height = nil, -- These can be integers or a float between 0 and 1.
-          max_width = nil, -- Floats will be treated as percentage of your screen.
-          border = "rounded", -- Border style. Can be "single", "double" or "rounded"
-          mappings = {
-            close = { "q", "<Esc>" },
-          },
+        {
+          elements = { 'repl', 'console' },
+          size = 10,
+          position = 'bottom',
         },
-        controls = {
-          -- Requires Neovim nightly (or 0.8 when released)
-          enabled = true, -- because the icons don't work
-          -- Display controls in this element
-          element = "repl",
-          icons = {
-            pause = "",
-            play = "",
-            step_into = "",
-            step_over = "",
-            step_out = "",
-            step_back = "",
-            run_last = "",
-            terminate = "",
-          },
+      },
+      floating = {
+        max_height = nil,
+        max_width = nil,
+        border = "rounded",
+        mappings = { close = { "q", "<Esc>" } },
+      },
+      controls = {
+        enabled = true,
+        element = "repl",
+        icons = {
+          pause = "",
+          play = "",
+          step_into = "",
+          step_over = "",
+          step_out = "",
+          step_back = "",
+          run_last = "",
+          terminate = "",
         },
-        windows = { indent = 1 },
-      })
+      },
+      windows = { indent = 1 },
+    })
 
-    -- for python: need install debugpy => 
-    -- mkdir ~/.virtualenvs
-    -- cd ~/.virtualenvs
-    -- python -m venv debugpy
-    -- debugpy/bin/python -m pip install debugpy
     require("dap-python").setup("uv")
 
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.after.event_terminated["dapui_config"] = function()
-      dapui.open()
-    end
-    
-    vim.keymap.set('n', '<Leader>dt', dap.toggle_breakpoint, {desc = 'Set breakpoint for debug'})
-    vim.keymap.set('n', '<Leader>dc', function()
+    dap.listeners.before.attach.dapui_config = function() dapui.open() end
+    dap.listeners.before.launch.dapui_config = function() dapui.open() end
+    dap.listeners.after.event_terminated["dapui_config"] = function() dapui.open() end
+
+    vim.keymap.set('n', '<Leader>dt', dap.toggle_breakpoint, { desc = 'Set breakpoint for debug' })
+
+    local function continue_debug()
       if dap.session() then
         dap.continue()
       else
@@ -97,12 +78,18 @@ return {
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
         dap.continue()
       end
-    end, {desc = "Find debug configurations or continue debug"})
-    vim.keymap.set('n', '<Leader>do', function()
-        dap.terminate()
-        dapui.close()
-    end, { desc = 'Close DAP UI'})
-    vim.o.background = "dark" -- or "light" for light mode
+    end
+
+    vim.keymap.set('n', '<F11>', continue_debug, { desc = "Find debug configurations or continue debug" })
+    vim.keymap.set('n', '<Leader>dc', continue_debug, { desc = "Find debug configurations or continue debug" })
+
+    vim.keymap.set('n', '<F12>', function()
+      dap.terminate()
+      dapui.close()
+    end, { desc = 'Close DAP UI' })
+
+    vim.o.background = "dark"
     vim.cmd([[colorscheme gruvbox]])
   end
 }
+

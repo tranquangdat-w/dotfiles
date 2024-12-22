@@ -1,8 +1,6 @@
 return {
   "folke/trouble.nvim",
-  opts={
-
-  },
+  opts={},
   cmd = "Trouble",
   keys = {
     {

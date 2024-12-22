@@ -1,6 +1,5 @@
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.loop.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
@@ -34,12 +33,9 @@ require("lazy").setup({
   checker = { enabled = false },
 })
 
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.opt.clipboard = "unnamed"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -47,8 +43,7 @@ vim.opt.tabstop = 2
 -- To copy in clipboard in vim
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
--- Đặt phím Esc để chuyển về normal mode trong terminal
+-- Set Esc to switch to normal mode in terminal
 vim.cmd([[ 
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
-
