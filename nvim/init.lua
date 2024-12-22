@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>fm', builtin.marks, {})
 vim.g.coc_global_extensions = {
   "coc-json",
   "coc-tsserver",
-  "coc-python",
+  "coc-pyright",
   "coc-html",
   "coc-css",
 }
@@ -169,4 +169,8 @@ vim.keymap.set("n", "<leader>ccp", function()
 end, { desc = "CopilotChat - Prompt actions" })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
+
+-- Ensure highlights for statusline
+vim.cmd("highlight! link StatusLine Normal")
+vim.cmd("highlight! link StatusLineNC NormalNC")
 

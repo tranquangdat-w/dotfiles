@@ -13,44 +13,70 @@ return {
     local telescope = require("telescope")
     local telescope_dap = require("telescope").load_extension("dap")
 
-    dapui.setup(
-    {
-        layouts = { {
-            elements = { {
-                id = "scopes",
-                size = 0.4
-              }, {
-                id = "breakpoints",
-                size = 0.25
-              }, {
-                id = "stacks",
-                size = 0.25
-              }, {
-                id = "watches",
-                size = 0.1
-              } },
-            position = "left",
-            size = 40
-          }, {
-            elements = { {
-                id = "repl",
-                size = 0.25
-              }, {
-                id = "console",
-                size = 0.75
-              } },
-            position = "bottom",
-            size = 10
-          } },
-      }
-    )
+    dapui.setup({
+        icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
+        mappings = {
+          -- Use a table to apply multiple mappings
+          expand = { "<CR>", "<2-LeftMouse>" },
+          open = "o",
+          remove = "d",
+          edit = "e",
+          repl = "r",
+          toggle = "t",
+        },
+        layouts = {
+          {
+            elements = {
+              'scopes',
+              -- 'breakpoints',
+              'stacks',
+              -- 'watches',
+            },
+            size = 40,
+            position = 'left',
+          },
+          {
+            elements = {
+              'repl',
+              'console',
+            },
+            size = 10,
+            position = 'bottom',
+          },
+        },
+        floating = {
+          max_height = nil, -- These can be integers or a float between 0 and 1.
+          max_width = nil, -- Floats will be treated as percentage of your screen.
+          border = "rounded", -- Border style. Can be "single", "double" or "rounded"
+          mappings = {
+            close = { "q", "<Esc>" },
+          },
+        },
+        controls = {
+          -- Requires Neovim nightly (or 0.8 when released)
+          enabled = true, -- because the icons don't work
+          -- Display controls in this element
+          element = "repl",
+          icons = {
+            pause = "",
+            play = "",
+            step_into = "",
+            step_over = "",
+            step_out = "",
+            step_back = "",
+            run_last = "",
+            terminate = "",
+          },
+        },
+        windows = { indent = 1 },
+      })
 
     -- for python: need install debugpy => 
     -- mkdir ~/.virtualenvs
     -- cd ~/.virtualenvs
     -- python -m venv debugpy
     -- debugpy/bin/python -m pip install debugpy
-    require("dap-python").setup("/home/dat/.virtualenvs/debugpy/bin/python")
+    require("dap-python").setup("uv")
 
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
@@ -72,6 +98,11 @@ return {
         dap.continue()
       end
     end, {desc = "Find debug configurations or continue debug"})
-    vim.keymap.set('n', '<Leader>do', dapui.toggle, {desc = 'Toggle DAP UI'})
+    vim.keymap.set('n', '<Leader>do', function()
+        dap.terminate()
+        dapui.close()
+    end, { desc = 'Close DAP UI'})
+    vim.o.background = "dark" -- or "light" for light mode
+    vim.cmd([[colorscheme gruvbox]])
   end
 }
