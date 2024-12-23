@@ -86,7 +86,7 @@ return {
     vim.keymap.set('n', '<F12>', function()
       dap.terminate()
       dapui.close()
-    end, { desc = 'Close DAP UI' })
+    end, { desc = 'Close dapui' })
 
     vim.o.background = "dark"
     vim.cmd([[colorscheme gruvbox]])

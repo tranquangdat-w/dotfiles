@@ -37,7 +37,9 @@ vim.g.ale_fix_on_save = 1
 require('telescope').setup({
   defaults = {},
   pickers = {
-    buffers = { initial_mode = "normal" },
+    buffers = { initial_mode = "normal",  mappings = {
+            n = { ["dd"] = require('telescope.actions').delete_buffer, } }
+    },
     find_files = { initial_mode = "normal" },
     live_grep = { initial_mode = "normal" },
     help_tags = { initial_mode = "normal" },
@@ -150,3 +152,12 @@ vim.keymap.set("n", "<leader>ccp", function()
 end, { desc = "CopilotChat - Prompt actions" })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
+
+local harpoon = require("harpoon")
+harpoon:setup()
+vim.keymap.set("n", "<Leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end)
