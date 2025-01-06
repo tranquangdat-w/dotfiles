@@ -8,12 +8,24 @@ return {
 
         g.ale_linters = {
             python = {'pylint'},
-            javascript = {'eslint'}
+            javascript = {'eslint'},
         }
         
         g.ale_fixers = {
             javascript = { 'eslint' }
         }
+
+        g.ale_linters = {
+          javascript = {'eslint'},
+          python = {'pylint'},
+          html = {},
+        }
+
+        g.ale_fixers = {
+          javascript = {'eslint'},
+        }
+
+        g.ale_fix_on_save = 1
     end
 }
 

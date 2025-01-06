@@ -1,65 +1,9 @@
 require("config.lazy")
 
-require('nvim-autopairs').setup{
-  map_cr = false,
-}
-
--- gruvbox theme
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
-
-require('lualine').setup{
-  options = { theme = 'gruvbox' }
-}
-
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 ]]
-
--- nvim-tree binds 
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
--- ale need install eslint, flake8, black to use.
-vim.g.ale_linters = {
-  javascript = {'eslint'},
-  python = {'pylint'},
-  html = {},
-}
-
-vim.g.ale_fixers = {
-  javascript = {'eslint'},
-}
-
-vim.g.ale_fix_on_save = 1
-
--- telescope binds
-require('telescope').setup({
-  defaults = {},
-  pickers = {
-    buffers = { initial_mode = "normal",  mappings = {
-            n = { ["dd"] = require('telescope.actions').delete_buffer, } }
-    },
-    find_files = { initial_mode = "normal" },
-    live_grep = { initial_mode = "normal" },
-    help_tags = { initial_mode = "normal" },
-  },
-})
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fm', builtin.marks, {})
-
-vim.g.coc_global_extensions = {
-  "coc-json",
-  "coc-tsserver",
-  "coc-pyright",
-  "coc-html",
-  "coc-css",
-}
 
 vim.opt.backup = false
 vim.opt.writebackup = false
@@ -67,26 +11,19 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 
 local keyset = vim.keymap.set
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
-
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-
--- Make <CR> to accept selected completion item or notify coc.nvim to format
--- <C-g>u breaks current undo, please make your own choice
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
--- GoTo code navigation
 keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
 keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
 keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
 keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
 
--- Use K to show documentation in preview window
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 function _G.show_docs()
     local cw = vim.fn.expand('<cword>')
     if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
@@ -155,9 +92,9 @@ vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, 
 
 local harpoon = require("harpoon")
 harpoon:setup()
-vim.keymap.set("n", "<Leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<Leader>a", function() harpoon:list():add() end, {desc = 'Add to harpoon'})
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end, {desc = 'Go to harpoon 1'})
+vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end, {desc = 'Go to harpoon 2'})
+vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end, {desc = 'Go to harpoon 3'})
+vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end, {desc = 'Go to harpoon 4'})

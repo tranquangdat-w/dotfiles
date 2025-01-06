@@ -4,6 +4,7 @@ return {
 		"nvim-tree/nvim-web-devicons"
 	},
 	config = function()
+    vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
@@ -11,6 +12,12 @@ return {
 		vim.opt.termguicolors = true
 
 		require("nvim-tree").setup({
+      sort = {
+        sorter = "case_sensitive"
+      },
+      view = {
+        width = 35
+      },
       git = {
         ignore = false,
       },
@@ -20,7 +27,7 @@ return {
 		      show = {
 			      git = false,
 			      file = true,
-			      folder = true,
+			      folder = false,
 			      folder_arrow = true,
             modified = true,
 		      },
