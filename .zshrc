@@ -110,7 +110,7 @@ PROMPT='%F{green}[%n-lost%f%F{green} %F{blue}%~%f]$ '
 alias tm="tmux"
 alias ex="exit"
 alias da="direnv allow"
-
+alias f="fzf" 
 # Cấu hình Vim và NVM
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export NVM_DIR="$HOME/.nvm"

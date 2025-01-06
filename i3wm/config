@@ -220,7 +220,7 @@ gaps outer 2
 
 exec --no-startup-id ibus-daemon -drx
 
-bindsym Mod1+space exec nautilus
+bindsym Mod1+Return exec nautilus
 
 exec --no-startup-id brightnessctl set 15% 
 
@@ -246,7 +246,8 @@ bindsym Mod1+Tab workspace back_and_forth
 # Tắt border cho các cửa sổ floating
 for_window [floating] border pixel 2
 
-for_window [floating] floating enable, resize set 1400 800
+for_window [floating] border none
 
-client.focused #696969 #696969 #696969 #696969
+# client.focused #696969 #696969 #696969 #696969
 
+assign [class="Anki"] $ws10
