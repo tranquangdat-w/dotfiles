@@ -1,10 +1,11 @@
-return 
-{ 
+return {
 	  "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      vim.o.background = "dark" -- or "light" for light mode
-      vim.cmd([[colorscheme gruvbox]])
+      require("gruvbox").setup({
+        inverse = false,
+        transparent_mode = true
+      })
     end
 }
 

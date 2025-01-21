@@ -9,4 +9,4 @@ return {
       desc = "Diagnostics (Trouble)",
     }
   },
-} 
+}

@@ -1,4 +1,6 @@
 require("config.lazy")
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
 
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
@@ -10,45 +12,7 @@ vim.opt.writebackup = false
 vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 
-local keyset = vim.keymap.set
-keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
-keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
-keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
-
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-function _G.show_docs()
-    local cw = vim.fn.expand('<cword>')
-    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
-        vim.api.nvim_command('h ' .. cw)
-    elseif vim.api.nvim_eval('coc#rpc#ready()') then
-        vim.fn.CocActionAsync('doHover')
-    else
-        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-    end
-end
-keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
-
--- Highlight the symbol and its references on a CursorHold event(cursor is idle)
-vim.api.nvim_create_augroup("CocGroup", {})
-vim.api.nvim_create_autocmd("CursorHold", {
-    group = "CocGroup",
-    command = "silent call CocActionAsync('highlight')",
-    desc = "Highlight symbol under cursor on CursorHold"
-})
-
--- Symbol renaming
-keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
-
--- require("ibl").setup()
--- -- UFO folding
+-- UFO folding
 vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
@@ -81,7 +45,7 @@ vim.keymap.set("n", "<leader>ccp", function()
     require("telescope.themes").get_dropdown({
       previewer = false,
       prompt_title = "Copilot Actions",
-      width = 1,     
+      width = 1,
       height = 1,
     })
   )
@@ -97,4 +61,35 @@ vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:lis
 vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end, {desc = 'Go to harpoon 1'})
 vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end, {desc = 'Go to harpoon 2'})
 vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end, {desc = 'Go to harpoon 3'})
-vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end, {desc = 'Go to harpoon 4'})
+vim.keymap.set("n", "<C-w>h", "<C-w>v")
+vim.keymap.set("n", "<C-w>v", "<C-w>s")
+
+-- Tùy chỉnh để hiển thị floating window khi rename
+local function rename_with_floating_window()
+  local current_name = vim.fn.expand("<cword>") -- Từ hiện tại
+  vim.ui.input(
+    { prompt = "Rename to: ", default = current_name },
+    function(new_name)
+      if new_name and #new_name > 0 then
+        vim.lsp.buf.rename(new_name)
+      end
+    end
+  )
+end
+
+-- Gán keymap cho rename với floating window
+vim.keymap.set("n", "<leader>rn", rename_with_floating_window, { desc = "LSP Rename with Floating Window" })
+
+require("floating-term")
+require("vim-helpers")
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+-- copy current file path (absolute) into clipboard
+vim.keymap.set("n", "<leader>cp", function()
+	local filepath = vim.fn.expand("%:p")
+	vim.fn.setreg("+", filepath) -- Copy to Neovim clipboard
+	vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
+	print("Copied: " .. filepath)
+end, { desc = "Copy absolute path to clipboard" })

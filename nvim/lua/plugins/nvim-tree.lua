@@ -4,7 +4,7 @@ return {
 		"nvim-tree/nvim-web-devicons"
 	},
 	config = function()
-    vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
@@ -32,10 +32,6 @@ return {
             modified = true,
 		      },
 		      glyphs = {
-			      folder = {
-			        arrow_closed = "⏵",
-			        arrow_open = "⏷",
-			      },
             modified = "●",
 			      git = {
 			        unstaged = "✗",
