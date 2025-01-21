@@ -1,9 +1,12 @@
+sudo pacman -Sy zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo pacman -Sy sof-firmware
 sudo pacman -Sy brightnessctl
 
 sudo pacman -S lua-language-server
 sudo pacman -Sy npm
 sudo npm install --global yarn
-npm install -g pyright
+sudo npm install -g pyright
 
 # uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
