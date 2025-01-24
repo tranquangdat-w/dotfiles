@@ -191,7 +191,7 @@ bindsym $mod+shift+x exec --no-startup-id systemctl poweroff
 
 
 bar {
-        status_command i3status -c /home/$USER/dotfiles/i3wm/.config/i3/i3status.conf
+        status_command i3status -c /home/$USER/.config/i3/i3status.conf
 }
 
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --scale 0.9 
