@@ -105,14 +105,17 @@ source $ZSH/oh-my-zsh.sh
 #
 # ~/.zshrc: executed by zsh for interactive shells.
 
-PROMPT='%F{green}[%n-lost%f%F{green} %F{blue}%~%f]$ '
+PROMPT='%F{green}[%n-arch%f%F{green} %F{blue}%~%f]$ '
 
 alias tm="tmux"
+alias v="nvim"
 alias ex="exit"
 alias da="direnv allow"
+alias cl='clear'
 alias f="fzf" 
 # Cấu hình Vim và NVM
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/home/dat/.emacs.d/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/zsh_completion" ] && source "$NVM_DIR/zsh_completion"
