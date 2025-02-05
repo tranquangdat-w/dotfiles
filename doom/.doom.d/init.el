@@ -191,3 +191,16 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+(setq browse-url-browser-function 'browse-url-firefox)
+
+(defun open-pdf-in-firefox ()
+  "Open the current PDF file in Firefox."
+  (interactive)
+  (let ((file (buffer-file-name)))
+    (when (and file (string-match "\\.pdf\\'" file))
+      (browse-url-firefox (concat "file://" file)))))
+
+(add-hook 'doc-view-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c o") 'open-pdf-in-firefox)))

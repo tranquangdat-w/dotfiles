@@ -105,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # ~/.zshrc: executed by zsh for interactive shells.
 
-PROMPT='%F{green}[%n-arch%f%F{green} %F{blue}%~%f]$ '
+PROMPT='%F{green}[%n-arch%f%F{green} %F{blue}%~%F{green}]%f$ '
 
 alias tm="tmux"
 alias v="nvim"

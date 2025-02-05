@@ -1,0 +1,16 @@
+#+title: Todos
+
+* Ki thuat lay mau
+** books: "~/Book/PhanTichDuLieuVoiR_NguyenVanTuan.pdf"
+** TODO bai tap va kien thuc can on lai
+ - [ ] Phan bo nhi thuc
+ - [ ] Phan phoi poisson
+ - [ ] Phan phoi chuan
+ - [X] R Co ban
+
+* Hoc may
+** Diem thanh phan: 2 2 6. Ck nhom 3 thanh vien
+** books:
+
+* Toi uu hoa
+** diem 2 2 6. duoc nghi toi da 5 buoi chuyen can. > 5 thi 0 diem chuyen can
