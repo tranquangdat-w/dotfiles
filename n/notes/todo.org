@@ -38,6 +38,7 @@ Cho nhận xét cũng như giải thích về kết quả.
 * Toi uu hoa
 ** Mang Chuyen can: [4/5]
 ** diem 2 2 6. duoc nghi toi da 5 buoi chuyen can. > 5 thi 0 diem chuyen can
+** TODO xem lai bai hom truoc cua mon toi uu hoa.
 
 * Nghien cuu khoa hoc
 ** TODO bai tap Research
