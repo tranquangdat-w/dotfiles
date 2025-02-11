@@ -1,5 +1,7 @@
 #+title: Todos
 
+* TODO Tim hieu docker
+
 * Ki thuat lay mau
 ** books: "~/Book/PhanTichDuLieuVoiR_NguyenVanTuan.pdf"
 ** TODO bai tap va kien thuc can on lai
@@ -39,3 +41,16 @@ Cho nhận xét cũng như giải thích về kết quả.
 
 * Nghien cuu khoa hoc
 ** TODO bai tap Research
+
+* Ki nang mem
+** Neu ma lam du bai tap thi + 1 diem cuoi ki
+** Deadline 15h chieu thu 6 tuan sau.
+** DONE vao nhom zalo lop
+** TODO tao 5 triet li song - nop Zalo
+** TODO ma tran diem manh, yeu
+ - [ ] liet ke diem manh, yeu. It nhat 5 diem manh va yeu
+ - [ ] Tao ma tran manh, yeu truc x. co hoi thach thuc truc y
+ - [ ] tao ra chien luoc
+ - [ ] up len nhom
+** TODO viet ra 5 dieu ban than mong muon | hanh dong cua ban than.
+** TODO chi ra 5 phong song cua ban than.
