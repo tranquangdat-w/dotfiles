@@ -39,6 +39,7 @@ vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.numberwidth = 1  -- Thu hẹp cột số dòng
 
 -- To copy in clipboard in vim
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })

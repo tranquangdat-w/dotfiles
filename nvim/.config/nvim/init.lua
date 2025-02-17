@@ -93,3 +93,5 @@ vim.keymap.set("n", "<leader>cp", function()
 	vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
 	print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
+
+
