@@ -113,6 +113,9 @@ alias ex="exit"
 alias da="direnv allow"
 alias cl='clear'
 alias f="fzf" 
+alias lzd="lazydocker"
+alias dk="docker"
+alias sf="screenfetch"
 # Cấu hình Vim và NVM
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:/home/dat/.emacs.d/bin"
@@ -131,4 +134,9 @@ precmd() {
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export DOCKER_HOST=unix:///var/run/docker.sock
+
+if command -v tmux &> /dev/null; then
+  [ -z "$TMUX" ] && (tmux attach || tmux new-session)
+fi
 
