@@ -86,6 +86,7 @@ require("vim-helpers")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+
 -- copy current file path (absolute) into clipboard
 vim.keymap.set("n", "<leader>cp", function()
 	local filepath = vim.fn.expand("%:p")
@@ -94,4 +95,8 @@ vim.keymap.set("n", "<leader>cp", function()
 	print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
 
+-- Kết quả tìm kiếm thông thường: nền trắng, chữ đỏ
+vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
 
+-- Kết quả tìm kiếm hiện tại: nền đỏ, chữ trắng
+vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })

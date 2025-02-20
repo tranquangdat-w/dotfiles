@@ -48,3 +48,4 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 vim.cmd([[ 
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
+
