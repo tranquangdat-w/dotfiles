@@ -69,7 +69,17 @@ return {
                 -- 	usePlaceholders = true,
                 -- },
             })
-            lspconfig.pyright.setup({ capabilities = capabilities })
+            lspconfig.pyright.setup({
+              capabilities = capabilities,
+              settings = {
+              python = {
+              analyses = {
+                  reportAttributeAccessIssue = true,
+                  reportOptionalMemberAccess = true,
+                }
+              }
+            }
+            })
             --java
             lspconfig.jdtls.setup({
                 settings = {
