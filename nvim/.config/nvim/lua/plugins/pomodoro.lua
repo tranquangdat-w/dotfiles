@@ -21,7 +21,7 @@ return {
                 vim.defer_fn(function()
                     vim.fn.system("pkill mplayer")
                     print("Sound stopped after 15 seconds")
-                end, 15000)
+                end, 30000)
             end
             require("notify").setup({
                 background_colour = "#1e1e2e",
@@ -30,6 +30,9 @@ return {
                         play_sound()
                     end
                 end,
+                on_close = function()
+                  play_sound()
+                end
             })
             require("lualine").setup {
                 sections = {
@@ -74,3 +77,4 @@ return {
         },
     },
 }
+
