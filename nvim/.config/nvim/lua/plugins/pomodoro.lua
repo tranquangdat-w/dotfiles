@@ -8,9 +8,9 @@ return {
         -- Optional, but highly recommended if you want to use the "Default" timer
         "rcarriga/nvim-notify",
         config = function()
-            local play_sound = function()
+            local play_sound = function(path, seconds)
                 local home_dir = os.getenv("HOME")
-                local sound_path = home_dir .. "/.config/nvim/break.mp3"
+                local sound_path = home_dir .. path
                 vim.loop.spawn("mplayer", {
                     args = { sound_path },
                     detached = true,
@@ -21,17 +21,17 @@ return {
                 vim.defer_fn(function()
                     vim.fn.system("pkill mplayer")
                     print("Sound stopped after 15 seconds")
-                end, 30000)
+                end, seconds)
             end
             require("notify").setup({
                 background_colour = "#1e1e2e",
                 on_open = function(notification)
                     if notification then
-                        play_sound()
+                        play_sound("/.config/nvim/break.mp3", 15000)
                     end
                 end,
                 on_close = function()
-                  play_sound()
+                  play_sound("/.config/nvim/break.mp3", 15000)
                 end
             })
             require("lualine").setup {
