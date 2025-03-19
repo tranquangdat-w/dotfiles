@@ -10,7 +10,6 @@ return {
             python = {'pylint'},
             javascript = {'eslint'},
         }
-        
         g.ale_fixers = {
             javascript = { 'eslint' }
         }

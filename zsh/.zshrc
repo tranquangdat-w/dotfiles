@@ -136,7 +136,7 @@ source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highl
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export DOCKER_HOST=unix:///var/run/docker.sock
 
-if command -v tmux &> /dev/null; then
-  [ -z "$TMUX" ] && (tmux attach || tmux new-session)
-fi
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
 
+ 
