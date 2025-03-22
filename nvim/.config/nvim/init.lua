@@ -105,3 +105,4 @@ vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true }
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
 
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#FFFFFF" })        -- Số dòng bình thường màu trắng
+
