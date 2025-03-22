@@ -97,12 +97,13 @@ return {
                     python = "function",
                     javascript = "function",
                     typescript = "function",
-                    java = "class",
+                    java = "method",
                     lua = "function",
                     go = { "method", "struct", "interface" },
                 }
                 local symbols = symbols_map[filetype] or "function"
-                require("telescope.builtin").lsp_document_symbols({ symbols = symbols })
+                -- require("telescope.builtin").lsp_document_symbols({ symbols = symbols})
+                require("telescope.builtin").treesitter({ symbols = symbols })
             end, {})
         end,
     },
