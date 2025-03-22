@@ -64,7 +64,7 @@ return {
             lspconfig.pyright.setup({ capabilities = capabilities })
             --java
             lspconfig.jdtls.setup({
-                cmd ={"jdtls"},
+                capabilities = capabilities,
                 settings = {
                     java = {
                         configuration = {

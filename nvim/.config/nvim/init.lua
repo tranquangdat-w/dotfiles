@@ -1,6 +1,8 @@
 require("config.lazy")
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+
+vim.cmd([[colorscheme catppuccin]])
+-- vim.cmd([[colorscheme gruvbox]])
 
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
