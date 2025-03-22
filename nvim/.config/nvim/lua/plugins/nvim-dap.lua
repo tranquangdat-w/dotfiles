@@ -87,9 +87,6 @@ return {
       dap.terminate()
       dapui.close()
     end, { desc = 'Close dapui' })
-
-    vim.o.background = "dark"
-    vim.cmd([[colorscheme gruvbox]])
   end
 }
 
