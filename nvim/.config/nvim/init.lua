@@ -106,3 +106,9 @@ vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = tru
 
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#FFFFFF" })        -- Số dòng bình thường màu trắng
 
+-- Resize windown vim
+vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true }) 
+vim.keymap.set("n", "<M-h>", ":vertical resize +5<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<M-j>", ":resize -5<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<M-k>", ":resize +5<CR>", { noremap = true, silent = true })
+
