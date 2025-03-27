@@ -33,9 +33,9 @@ return {
             n = { ["dd"] = actions.delete_buffer },
           },
         },
-        find_files = { initial_mode = "normal" },
-        live_grep = { initial_mode = "normal" },
-        help_tags = { initial_mode = "normal" },
+        -- find_files = { initial_mode = "normal" },
+        -- live_grep = { initial_mode = "normal" },
+        -- help_tags = { initial_mode = "normal" },
       },
     }
   end

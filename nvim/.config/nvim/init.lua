@@ -1,8 +1,8 @@
 require("config.lazy")
 vim.o.background = "dark" -- or "light" for light mode
 
-vim.cmd([[colorscheme catppuccin]])
--- vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme catppuccin]])
+vim.cmd([[colorscheme gruvbox]])
 
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
@@ -55,7 +55,7 @@ vim.keymap.set("n", "<leader>ccp", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 end, { desc = "CopilotChat - Prompt actions" })
 
-vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChat<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChatToggle<CR>', { noremap = true, silent = true })
 
 local harpoon = require("harpoon")
 harpoon:setup()
@@ -104,11 +104,14 @@ vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true }
 -- Kết quả tìm kiếm hiện tại: nền đỏ, chữ trắng
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
 
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#FFFFFF" })        -- Số dòng bình thường màu trắng
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
 
 -- Resize windown vim
 vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true }) 
 vim.keymap.set("n", "<M-h>", ":vertical resize +5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-j>", ":resize -5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-k>", ":resize +5<CR>", { noremap = true, silent = true })
+
+require("telescope").load_extension('harpoon')
+vim.api.nvim_create_user_command("JRRM", "JavaRunnerRunMain", {})
 
