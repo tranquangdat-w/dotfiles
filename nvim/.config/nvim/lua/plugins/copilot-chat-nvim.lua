@@ -13,7 +13,7 @@
         layout = "float",
         width = 0.9,
         height = 0.9,
-        title = '',
+        title = "Copilot Chat",
       },
       auto_follow_cursor = false,    -- Don't follow the cursor after getting response
       question_header = '#T.Q.Dat',

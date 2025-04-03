@@ -55,7 +55,7 @@ vim.keymap.set("n", "<leader>ccp", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 end, { desc = "CopilotChat - Prompt actions" })
 
-vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChatToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChatToggle<CR>', { noremap = false })
 
 local harpoon = require("harpoon")
 harpoon:setup()
@@ -67,22 +67,6 @@ vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end, {desc 
 vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end, {desc = 'Go to harpoon 4'})
 vim.keymap.set("n", "<C-w>h", "<C-w>v")
 vim.keymap.set("n", "<C-w>v", "<C-w>s")
-
--- Tùy chỉnh để hiển thị floating window khi rename
-local function rename_with_floating_window()
-  local current_name = vim.fn.expand("<cword>") -- Từ hiện tại
-  vim.ui.input(
-    { prompt = "Rename to: ", default = current_name },
-    function(new_name)
-      if new_name and #new_name > 0 then
-        vim.lsp.buf.rename(new_name)
-      end
-    end
-  )
-end
-
--- Gán keymap cho rename với floating window
-vim.keymap.set("n", "<leader>rn", rename_with_floating_window, { desc = "LSP Rename with Floating Window" })
 
 require("floating-term")
 require("vim-helpers")
@@ -105,14 +89,16 @@ vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true }
 -- Kết quả tìm kiếm hiện tại: nền đỏ, chữ trắng
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
 
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
+-- vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 -- Resize windown vim
-vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true }) 
+vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-h>", ":vertical resize +5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-j>", ":resize -5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-k>", ":resize +5<CR>", { noremap = true, silent = true })
 
 require("telescope").load_extension('harpoon')
 vim.api.nvim_create_user_command("JRRM", "JavaRunnerRunMain", {})
-

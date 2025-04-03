@@ -9,19 +9,22 @@ return {
         g.ale_linters = {
             python = {'pylint'},
             javascript = {'eslint'},
+            java = {'javac'}, -- Thêm linter cho Java
         }
+
         g.ale_fixers = {
             javascript = { 'eslint' }
         }
 
         g.ale_linters = {
-          javascript = {'eslint'},
-          python = {'pylint'},
-          html = {},
+            javascript = {'eslint'},
+            python = {'pylint'},
+            html = {},
+            java = {'javac'}, -- Thêm linter cho Java
         }
 
         g.ale_fixers = {
-          javascript = {'eslint'},
+            javascript = {'eslint'},
         }
 
         g.ale_fix_on_save = 1
