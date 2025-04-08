@@ -65,6 +65,8 @@ vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end, {desc 
 vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end, {desc = 'Go to harpoon 2'})
 vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end, {desc = 'Go to harpoon 3'})
 vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end, {desc = 'Go to harpoon 4'})
+
+
 vim.keymap.set("n", "<C-w>h", "<C-w>v")
 vim.keymap.set("n", "<C-w>v", "<C-w>s")
 
@@ -101,4 +103,4 @@ vim.keymap.set("n", "<M-j>", ":resize -5<CR>", { noremap = true, silent = true }
 vim.keymap.set("n", "<M-k>", ":resize +5<CR>", { noremap = true, silent = true })
 
 require("telescope").load_extension('harpoon')
-vim.api.nvim_create_user_command("JRRM", "JavaRunnerRunMain", {})
+vim.api.nvim_create_user_command("JRRM", "JavaRunnerRunMain", {desc = "Running Java main class"})
