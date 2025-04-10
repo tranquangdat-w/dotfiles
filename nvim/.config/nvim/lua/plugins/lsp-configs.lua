@@ -2,9 +2,9 @@ return {
     {
         "williamboman/mason.nvim",
         -- NOTE: I comment it to install jdtls (java language server)
-        -- config = function()
-        -- 	require("mason").setup()
-        -- end,
+        config = function()
+        	require("mason").setup()
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
@@ -70,7 +70,7 @@ return {
                             runtimes = {
                                 {
                                     name = "JavaSE-23",
-                                    path = "/usr/lib/jvm/java-23-openjdk",
+                                    path = "/opt/jdk-23",
                                     default = true,
                                 },
                             },
@@ -78,6 +78,19 @@ return {
                     },
                 },
             })
+
+            -- html
+            lspconfig.html.setup({
+                capabilities = capabilities,
+                filetypes = { "html", "htmldjango" },
+            })
+
+            -- css
+            lspconfig.cssls.setup({
+                capabilities = capabilities,
+                filetypes = { "css", "scss", "less" },
+            })
+
             -- nix
             lspconfig.rnix.setup({ capabilities = capabilities })
             -- lsp kepmap setting

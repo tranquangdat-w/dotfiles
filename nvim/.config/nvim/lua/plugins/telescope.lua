@@ -1,8 +1,9 @@
 return {
   'nvim-telescope/telescope.nvim',
-  -- tag = '0.1.8',
-  branch = 'master',
+  tag = '0.1.8',
+  -- branch = 'master',
   requires = { { 'nvim-lua/plenary.nvim' } },
+  file_ignore_patterns = {".class"},
   config = function()
     local telescope = require('telescope')
     local actions = require('telescope.actions')

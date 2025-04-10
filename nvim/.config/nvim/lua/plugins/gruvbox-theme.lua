@@ -6,5 +6,8 @@ return {
         inverse = false,
         transparent_mode = true
       })
+    -- vim.cmd([[colorscheme catppuccin]])
+      vim.cmd([[colorscheme gruvbox]])
+
     end
 }
