@@ -3,7 +3,6 @@ return {
   tag = '0.1.8',
   -- branch = 'master',
   requires = { { 'nvim-lua/plenary.nvim' } },
-  file_ignore_patterns = {".class"},
   config = function()
     local telescope = require('telescope')
     local actions = require('telescope.actions')
@@ -19,6 +18,7 @@ return {
     -- Telescope setup
     telescope.setup {
       defaults = {
+        file_ignore_patterns = {"%.class"},
         layout_strategy = "vertical",
         layout_config = {
           vertical = {
