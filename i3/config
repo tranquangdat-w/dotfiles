@@ -198,7 +198,7 @@ bar {
         status_command i3status -c /home/$USER/.config/i3/i3status.conf
 }
 
-exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --scale 0.9 
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --scale 1.0
 exec --no-startup-id bash /home/dat/.config/i3/inverse-scroll.sh
 exec --no-startup-id bash /home/dat/.config/i3/tap-to-click.sh
 

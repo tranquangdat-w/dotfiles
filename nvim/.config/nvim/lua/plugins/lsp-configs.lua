@@ -93,6 +93,13 @@ return {
 
             -- nix
             lspconfig.rnix.setup({ capabilities = capabilities })
+
+            -- sql
+            lspconfig.sqls.setup({
+                capabilities = capabilities,
+                filetypes = { "sql", "plsql" },
+            })
+
             -- lsp kepmap setting
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
