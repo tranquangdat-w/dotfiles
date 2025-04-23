@@ -7,7 +7,6 @@ return {
         inverse = false,
         transparent_mode = true
       })
-      vim.cmd([[colorscheme gruvbox]])
 
     end
 },
