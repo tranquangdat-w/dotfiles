@@ -30,4 +30,4 @@ vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = tru
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
-
+vim.cmd("Copilot disable")

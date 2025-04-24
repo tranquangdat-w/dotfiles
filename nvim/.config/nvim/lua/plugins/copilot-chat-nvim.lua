@@ -8,13 +8,13 @@ return {
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
       window = {
-    layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
-    width = 0.9, -- fractional width of parent, or absolute width in columns when > 1
-    height = 0.9, -- fractional height of parent, or absolute height in rows when > 1
-  },
+        layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
+        width = 0.9, -- fractional width of parent, or absolute width in columns when > 1
+        height = 0.9, -- fractional height of parent, or absolute height in rows when > 1
+      },
     },
   },
   {
-    vim.keymap.set('n', '<leader>p', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' })
-  }
+    vim.keymap.set('n', '<leader>p', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' }),
+  },
 }
