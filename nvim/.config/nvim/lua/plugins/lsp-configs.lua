@@ -94,10 +94,9 @@ return {
             -- nix
             lspconfig.rnix.setup({ capabilities = capabilities })
 
-            -- sql
             lspconfig.sqls.setup({
                 capabilities = capabilities,
-                filetypes = { "sql", "plsql" },
+                filetypes = { "sql", "mysql", "sqlite" },
             })
 
 

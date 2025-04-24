@@ -23,7 +23,6 @@ vim.o.background = "dark" -- or "light" for light mode
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-  " autocmd FileType java setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 ]]
 
 -- vim.opt.backup = false
