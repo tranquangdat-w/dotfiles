@@ -248,9 +248,10 @@ bindsym $mod+t exec /bin/bash /home/dat/.config/i3/toggle_display.sh
 # Alt+Tab: chuyển đến workspace cuối cùng được sử dụng
 bindsym Mod1+Tab workspace back_and_forth
 # Tắt border cho các cửa sổ floating
-for_window [floating] border pixel 2
+for_window [floating] border pixel 1
+for_window [floating] resize set 1700 1050
 
-for_window [floating] border none
+# for_window [floating] border none
 
 # client.focused #696969 #696969 #696969 #696969
 
