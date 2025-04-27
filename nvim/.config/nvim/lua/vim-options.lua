@@ -10,7 +10,7 @@ vim.opt.tabstop = 2
 -- vim.opt.numberwidth = 1  -- Thu hẹp cột số dòng
 
 -- To copy in clipboard in vim
-vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
+-- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Set Esc to switch to normal mode in terminal
 vim.cmd([[ 
