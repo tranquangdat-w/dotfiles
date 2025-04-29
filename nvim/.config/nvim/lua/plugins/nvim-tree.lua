@@ -22,7 +22,8 @@ return {
         ignore = false,
       },
 		  renderer = {
-        indent_width = 0.3,
+        group_empty = true,
+        indent_width = 0.1,
         highlight_modified = "icon",
 		    icons = {
 		      show = {
