@@ -69,8 +69,8 @@ return {
                         configuration = {
                             runtimes = {
                                 {
-                                    name = "JavaSE-23",
-                                    path = "/usr/lib/jvm/java-23-openjdk",
+                                    name = "JavaSE-21",
+                                    path = "/usr/lib/jvm/java-21-openjdk",
                                     default = true,
                                 },
                             },
