@@ -10,6 +10,10 @@ dat ALL=(ALL) NOPASSWD: /usr/bin/pacman -S *, /usr/bin/pacman -R *, /usr/bin/pac
 
 # edit files: 
 shell: sudo nano /etc/hosts
+---------------------------------------------------------------------------------------------------------------------
+127.0.0.1 youtube.com
+127.0.0.1 www.youtube.com
+---------------------------------------------------------------------------------------------------------------------
 after that add website want to block in hosts files.
 
 # Delete dat wheel or su group
