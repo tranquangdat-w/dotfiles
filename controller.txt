@@ -1,0 +1,20 @@
+# root only
+shell: sudo visudo 
+
+after that add this in that files:
+---------------------------------------------------------------------------------------------------------------------
+dat ALL=(ALL) NOPASSWD: /bin/systemctl restart *, /bin/systemctl stop *, /bin/systemctl star
+t *, /bin/systemctl enable *, /bin/systemctl disable *, /bin/systemctl status *
+
+dat ALL=(ALL) NOPASSWD: /usr/bin/pacman -S *, /usr/bin/pacman -R *, /usr/bin/pacman -Rs *, /
+usr/bin/pacman -Sy *, /usr/bin/pacman -Rns *, /usr/bin/pacman -Scc
+---------------------------------------------------------------------------------------------------------------------
+
+# edit files: 
+shell: sudo nano /etc/hosts
+after that add website want to block in hosts files.
+
+# Delete dat wheel or su group
+
+# check file in /etc/sudoers.d 
+# it can containt some thing need to delete
