@@ -23,17 +23,49 @@ return {
                     print("Sound stopped after 15 seconds")
                 end, seconds)
             end
+            local PrintNotifier = {}
+
+            PrintNotifier.new = function(timer, opts)
+              local self = setmetatable({}, { __index = PrintNotifier })
+              self.timer = timer
+              self.hidden = false
+              self.opts = opts -- not used
+              return self
+            end
+
+            PrintNotifier.start = function(self)
+              print(string.format("Starting timer #%d, %s, for %ds", self.timer.id, self.timer.name, self.timer.time_limit))
+            end
+
+            PrintNotifier.tick = function(self, time_left)
+              if not self.hidden then
+                print(string.format("Timer #%d, %s, %ds remaining...", self.timer.id, self.timer.name, time_left))
+              end
+            end
+
+            PrintNotifier.done = function(self)
+              print(string.format("Timer #%d, %s, complete", self.timer.id, self.timer.name))
+            end
+
+            PrintNotifier.stop = function(self) end
+
+            PrintNotifier.show = function(self)
+              self.hidden = false
+            end
+
+            PrintNotifier.hide = function(self)
+              self.hidden = true
+            end
             require("notify").setup({
-                background_colour = "#1e1e2e",
-                on_open = function(notification)
-                    if notification then
-                        play_sound("/.config/nvim/break.mp3", 15000)
-                    end
-                end,
-                on_close = function()
+              init = PrintNotifier.new,
+              background_colour = "#1e1e2e",
+              on_open = function(notification)
+                if notification then
                   play_sound("/.config/nvim/break.mp3", 15000)
                 end
+              end,
             })
+
             require("lualine").setup {
                 sections = {
                     lualine_x = {
@@ -62,9 +94,6 @@ return {
         work_time = 25,
         break_time = 5,
         long_break_time = 15,
-        notifier = {
-            sticky = true,
-        },
         sessions = {
             pomodoro = {
                 { name = "Work",        duration = "30m" },
