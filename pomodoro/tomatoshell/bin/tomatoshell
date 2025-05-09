@@ -17,16 +17,16 @@
 
 HELP="
 -r,     prints total hours spent using tomatoshell and exits
--t,     time for every session in minutes [default:25 minutes]
--d,     delay between sessions in minutes [default:5 minutes]
--n,     total sessions [default:3]
+-t,     time for every session in minutes [default:60 minutes]
+-d,     delay between sessions in minutes [default:10 minutes]
+-n,     total sessions [default:1]
 -f,     figlet on
 -p,     pause key to use during countdown [default:none]
 -h,     shows this"
 
 # defaults
 TIME=60
-DELAY=5
+DELAY=10
 SESSIONS=1
 
 FIGLET=false
@@ -60,9 +60,9 @@ total_hours_used() {
 find_sound_system() {
     # added support for pipewire audio player, tested on pop-os (debian)
     # since, its packed with the OS.
-    if command -v mpv &> /dev/null
+    if command -v mplayer &> /dev/null
     then
-        AUDIO_PLAYER=mpv
+        AUDIO_PLAYER=mplayer
 
     elif command -v paplay &> /dev/null
     then

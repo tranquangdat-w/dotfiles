@@ -107,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 
 PROMPT='%F{green}[%n@jtqd%f%F{green} %F{blue}%~%F{green}]%f$ '
 
+# alias
 alias tm="tmux"
 alias v="nvim"
 alias vim="nvim"
@@ -117,6 +118,8 @@ alias f="fzf"
 alias lzd="lazydocker"
 alias dk="docker"
 alias sf="screenfetch"
+alias pomo="tomatoshell"
+
 # Cấu hình Vim và NVM
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:/home/dat/.emacs.d/bin"
@@ -136,5 +139,8 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export DOCKER_HOST=unix:///var/run/docker.sock
+
+export POMODORO_HOME="/home/dat/tomatoshell/"
+export PATH="$POMODORO_HOME/bin:$PATH"
 
 setxkbmap -option caps:escape
