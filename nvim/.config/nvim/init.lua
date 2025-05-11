@@ -35,4 +35,4 @@ vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 vim.cmd("Copilot disable")
 
-
+require('leap').set_default_mappings()
