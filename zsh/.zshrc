@@ -1,4 +1,5 @@
 # If you come from bash you might have to change your $PATH.
+export PATH="$HOME/neovim/bin:$PATH"
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
@@ -8,7 +9,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -105,24 +105,25 @@ source $ZSH/oh-my-zsh.sh
 #
 # ~/.zshrc: executed by zsh for interactive shells.
 
-PROMPT='%F{green}[%n@jtqd%f%F{green} %F{blue}%~%F{green}]%f$ '
+# PROMPT='%F{green}[%n-arch%f%F{green} %F{blue}%~%f]$ '
+PROMPT='%F{green}[%n-jtqd %F{blue}%~%F{green}]%f$ '
+# PROMPT='[%n-arch %~]%f$ '
 
-# alias
+
 alias tm="tmux"
-alias v="nvim"
-alias vim="nvim"
+alias nv="nvim"
 alias ex="exit"
 alias da="direnv allow"
-alias cl='clear'
 alias f="fzf" 
+alias cl="clear"
 alias lzd="lazydocker"
 alias dk="docker"
 alias sf="screenfetch"
-alias pomo="tomatoshell"
+alias grd="gradle"
+alias pomo="tomatoshell -f"
+alias cal="calcurse"
 
 # Cấu hình Vim và NVM
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export PATH="$PATH:/home/dat/.emacs.d/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/zsh_completion" ] && source "$NVM_DIR/zsh_completion"
@@ -138,9 +139,19 @@ precmd() {
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-export DOCKER_HOST=unix:///var/run/docker.sock
 
-export POMODORO_HOME="/home/dat/tomatoshell/"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+export POMODORO_HOME="/home/dat/tomatoshell"
 export PATH="$POMODORO_HOME/bin:$PATH"
 
 setxkbmap -option caps:escape
+
+export CALCURSE_EDITOR="nvim"
+
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS="@im=ibus"
+export GLFW_IM_MODULE=ibus
+export QT4_IM_MODULE=ibus
