@@ -11,6 +11,7 @@ return {
         lualine_c = {
           {
             'filename',
+            path = 1,
             color = { gui = 'bold' }, -- đổi màu ở đây
           },
         },

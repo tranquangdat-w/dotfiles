@@ -256,3 +256,5 @@ for_window [floating] resize set 1700 1050
 # client.focused #696969 #696969 #696969 #696969
 
 assign [class="Anki"] $ws10
+for_window [class="kitty" floating], resize set 1400 800
+for_window [class="firefox" floating], resize set 1600 900
