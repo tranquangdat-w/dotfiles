@@ -36,3 +36,13 @@ vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 vim.cmd("Copilot disable")
 
 require('leap').set_default_mappings()
+
+-- convert to english input
+local function force_english()
+  vim.fn.jobstart({ "ibus", "engine", "xkb:us::eng" }, { detach = true })
+end
+
+-- when leave insertMode change input method to english
+vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineEnter", "CmdlineLeave" }, {
+  callback = force_english,
+})
