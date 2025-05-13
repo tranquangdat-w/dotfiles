@@ -42,7 +42,26 @@ local function force_english()
   vim.fn.jobstart({ "ibus", "engine", "xkb:us::eng" }, { detach = true })
 end
 
+local function force_unikey()
+  vim.fn.jobstart({ "ibus", "engine", "Unikey" }, { detach = true })  -- hoặc "ibus-unikey" nếu bạn dùng ibus-unikey
+end
+
 -- when leave insertMode change input method to english
 vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineEnter", "CmdlineLeave" }, {
   callback = force_english,
+})
+
+
+local ibus_switch_enabled = false
+
+vim.api.nvim_create_user_command("ToggleUnikey", function()
+  ibus_switch_enabled = not ibus_switch_enabled
+end, {})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    if ibus_switch_enabled then
+      force_unikey()
+    end
+  end
 })
