@@ -154,3 +154,5 @@ export QT_IM_MODULE=ibus
 export XMODIFIERS="@im=ibus"
 export GLFW_IM_MODULE=ibus
 export QT4_IM_MODULE=ibus
+
+export DOCKER_HOST="unix:///var/run/docker.sock"
