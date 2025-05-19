@@ -122,7 +122,7 @@ display_countdown() {
 
         if $FIGLET; then
             if [[ $session_number -ne -1 ]]; then
-                display_centered_figlet "TIME SLAYER"
+                display_centered_figlet "STAY HARD"
                 session_str="Session $session_number/$SESSIONS"
                 padding=$(( (cols + ${#session_str}) / 2 ))
                 printf "%*s\n" $padding "$session_str"
