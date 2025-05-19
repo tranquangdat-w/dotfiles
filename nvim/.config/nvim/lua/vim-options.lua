@@ -57,6 +57,10 @@ end, { desc = "Copy absolute path to clipboard" })
 vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-h>", ":vertical resize +5<CR>", { noremap = true, silent = true })
 
+-- quickfix
 vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true })
+
+-- DBUIToggle
+vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true })
 

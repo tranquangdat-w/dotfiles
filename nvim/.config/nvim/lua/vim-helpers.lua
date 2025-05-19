@@ -15,3 +15,27 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_next) -- next err
 vim.keymap.set("n", "<leader>pe", vim.diagnostic.goto_prev) -- previous err
 
+vim.keymap.set("n", "<leader>ob", function()
+	local file_path = vim.fn.expand("%:p") -- get the current file path
+	if file_path ~= "" then
+		local cmd = ""
+		-- Kiểm tra firefox có tồn tại không
+		local has_firefox = vim.fn.executable("firefox") == 1
+		local has_chrome = vim.fn.executable("google-chrome-stable") == 1 or vim.fn.executable("google-chrome") == 1
+
+		if has_firefox then
+			cmd = "firefox " .. vim.fn.shellescape(file_path)
+		elseif has_chrome then
+			local chrome = vim.fn.executable("google-chrome-stable") == 1 and "google-chrome-stable" or "google-chrome"
+			cmd = chrome .. " " .. vim.fn.shellescape(file_path)
+		else
+			print("No supported browser found (firefox or google-chrome)")
+			return
+		end
+
+		os.execute(cmd .. " &")
+	else
+		print("No file to open")
+	end
+end, { desc = "Open current file in browser" })
+

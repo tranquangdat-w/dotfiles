@@ -39,16 +39,9 @@ return {
 					{ name = "gci" },
 					{ name = "ts_ls" },
 					{ name = "gopls" },
+          { name = "vim-dadbod-completion" },
 				}),
 			})
-    -- Setup up vim-dadbod
-    -- echo $ft
-    cmp.setup.filetype({ "mysql" }, {
-      sources = {
-        { name = "vim-dadbod-completion" },
-        { name = "buffer" },
-      },
-     })
 		end,
 	},
 }

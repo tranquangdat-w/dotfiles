@@ -65,3 +65,4 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     end
   end
 })
+vim.g.db_ui_force_echo_notifications = 1
