@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # Copyright 01.01.2022 - 30.03.2022 Nicolai Brand
@@ -32,6 +31,9 @@ SESSIONS=1
 
 FIGLET=false
 ALARM="$HOME/tomatoshell/etc/alarm.wav"
+MUSIC="$HOME/Dropbox/My Hero Academia OST - You Say Run + Jet Set Run (You Say Run v2).mp3"
+START_TIME_MUSIC=0 # 124 or 0
+TIME_PLAY_MUSIC=20   # p for kill music
 LOG="$HOME/tomatoshell/tomatoshell_log.csv"
 AUDIO_PLAYER=3
 PAUSE_KEY='p'
@@ -84,6 +86,14 @@ play_alarm() {
     done
 }
 
+play_music() {
+    process_name="tomatoshell_music"
+
+    if ! [ -e /proc/"$(pidof "$process_name")"/status ]; then
+        bash -c "exec -a $process_name $AUDIO_PLAYER -ss $START_TIME_MUSIC -endpos $TIME_PLAY_MUSIC '$MUSIC' &>/dev/null" &
+    fi
+}
+
 display_centered_figlet() {
     text="$1"
     cols=$(tput cols)
@@ -132,10 +142,13 @@ display_countdown() {
 
         read -t 1 -r -s -N 1 && {
             if [[ $REPLY == 'q' ]]; then
+                pkill -f "tomatoshell_music"
                 exit_p
             elif [[ $REPLY == 's' ]]; then
+                pkill -f "tomatoshell_music"
                 break
             elif [[ $REPLY == 'p' ]]; then
+                pkill -f "tomatoshell_music"
                 echo -e "\n$YELLOW Paused... Press p to resume $FIN"
                 local pause_time=$(date +%s)
                 while :; do
@@ -157,6 +170,9 @@ countdown() {
     time=$1
     session_number=$2
     start=$(($(date +%s) + $1))
+    if [[ $session_number -ne -1 ]]; then
+        play_music
+    fi
     display_countdown $start $session_number
     clear
 
@@ -195,6 +211,7 @@ main() {
     for ((i = 1; i <= $SESSIONS; i++)); do
         clear
         countdown $TIME $i
+
         [ $i -ne $SESSIONS ] && clear && countdown $DELAY -1
     done
 }
