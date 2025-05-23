@@ -8,6 +8,12 @@ return {
     'nvim-telescope/telescope-dap.nvim'
   },
   config = function()
+    vim.fn.sign_define('DapBreakpoint', {
+      text = '', -- hoặc '' nếu bạn muốn icon đẹp kiểu nerd font
+      texthl = 'DiagnosticError',
+      linehl = '',
+      numhl = ''
+    })
     local dap = require("dap")
     local dapui = require("dapui")
     local telescope = require("telescope")
@@ -26,9 +32,9 @@ return {
       layouts = {
         {
           elements = {
-            { id = 'scopes', size = 0.5 },
+            { id = 'scopes',      size = 0.5 },
             { id = 'breakpoints', size = 0.3 },
-            { id = 'stacks', size = 0.2 },
+            { id = 'stacks',      size = 0.2 },
           },
           size = 40,
           position = 'left',
@@ -89,4 +95,3 @@ return {
     end, { desc = 'Close dapui' })
   end
 }
-
