@@ -101,14 +101,21 @@ return {
           sqls = {
             connections = {
               {
-                driver = "mysql",
-                dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sakila"
+                -- driver = "mysql",
+                -- dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sakila"
+                driver = "postgresql",
+                dataSourceName = 'host=127.0.0.1 port=5432 user=dat password=1 dbname=habitdb sslmode=disable',
               }
             }
           }
         }
       })
 
+			-- protocol buffer
+			lspconfig.buf_ls.setup({ capabilities = capabilities })
+
+      -- docker compose
+			lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
 
       -- lsp kepmap setting
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

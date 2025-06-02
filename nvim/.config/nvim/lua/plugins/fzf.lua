@@ -20,8 +20,15 @@ return {
 				bg = "-1",
 				gutter = "-1",
 			},
+      keymap = {
+        fzf = { ["ctrl-q"] = "select-all+accept"}
+      }
 		})
-		vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find Files" })
+		vim.keymap.set("n", "<leader>ff", function ()
+		  require("fzf-lua").files({
+        fd_opts = "--type f --hidden --exclude '*.class'",
+    })
+		end, { desc = "Find Files" })
 		vim.keymap.set("n", "<leader>pf", fzf.git_files, { desc = "Find Git Files" })
 		vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Live Grep" })
 		vim.keymap.set("n", "<leader>fG", function()

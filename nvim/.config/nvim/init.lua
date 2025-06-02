@@ -22,10 +22,7 @@ require("lazy").setup("plugins")
 
 vim.cmd([[colorscheme gruvbox]])
 
--- Kết quả tìm kiếm thông thường: nền trắng, chữ đỏ
 vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
-
--- Kết quả tìm kiếm hiện tại: nền đỏ, chữ trắng
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
 
 -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
@@ -51,9 +48,9 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineEnter", "CmdlineLeave" }, {
   callback = force_english,
 })
 
-
 local ibus_switch_enabled = false
 
+-- FOR VIETNAMESE
 vim.api.nvim_create_user_command("ToggleUnikey", function()
   ibus_switch_enabled = not ibus_switch_enabled
 end, {})
@@ -65,4 +62,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     end
   end
 })
+
+-- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
+

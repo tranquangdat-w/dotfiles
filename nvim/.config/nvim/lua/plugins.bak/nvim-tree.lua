@@ -11,7 +11,7 @@ return {
 		-- optionally enable 24-bit colour
 		vim.opt.termguicolors = true
 
-		require("nvim-tree").setup({
+		require("nvim.config.nvim.lua.plugins.bak.nvim-tree").setup({
       sort = {
         sorter = "case_sensitive"
       },
@@ -22,7 +22,7 @@ return {
         ignore = false,
       },
 		  renderer = {
-        group_empty = true,
+        -- group_empty = true,
         indent_width = 0.1,
         highlight_modified = "icon",
 		    icons = {

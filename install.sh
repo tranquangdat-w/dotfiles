@@ -7,6 +7,8 @@ sudo pacman -S lua-language-server
 sudo pacman -Sy npm
 sudo npm install --global yarn
 sudo npm install -g pyright
+sudo pacman -Sy tree
+sudo pacman -Sy fzf
 
 # uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
