@@ -1,4 +1,5 @@
 # If you come from bash you might have to change your $PATH.
+export PATH="$HOME/neovim/bin:$PATH"
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
@@ -45,7 +46,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #565)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -104,13 +105,10 @@ source $ZSH/oh-my-zsh.sh
 #
 # ~/.zshrc: executed by zsh for interactive shells.
 
-# PROMPT='%F{green}[%n-arch%f%F{green} %F{blue}%~%f]$ '
-PROMPT='%F{green}[%n-jtqd %F{blue}%~%F{green}]%f$ '
-# PROMPT='[%n-arch %~]%f$ '
-
+PROMPT='%F{green}[%n-sth %F{blue}%~%F{green}]%f$ '
 
 alias tm="tmux"
-alias nv="nvim"
+alias v="nvim"
 alias ex="exit"
 alias da="direnv allow"
 alias f="fzf" 
@@ -155,4 +153,14 @@ export XMODIFIERS="@im=ibus"
 export GLFW_IM_MODULE=ibus
 export QT4_IM_MODULE=ibus
 
-export DOCKER_HOST="unix:///var/run/docker.sock"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+export PYTHON_HOME="~/.pyenv/versions/3.9.18"
+export PATH="$PYTHON_HOME/bin:$PATH"
+
+export FZF_DEFAULT_OPTS='--height 100%'
+source <(fzf --zsh)  
+
