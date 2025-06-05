@@ -138,8 +138,7 @@ return {
           go = { "method", "struct", "interface" },
         }
         local symbols = symbols_map[filetype] or "function"
-        -- require("telescope.builtin").lsp_document_symbols({ symbols = symbols})
-        require("telescope.builtin").treesitter({ symbols = symbols })
+        require("fzf-lua").treesitter({ symbols = symbols })
       end, {})
     end,
   },
