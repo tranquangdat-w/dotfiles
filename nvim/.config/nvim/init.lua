@@ -20,10 +20,15 @@ require("vim-helpers")
 require("floating-term")
 require("lazy").setup("plugins")
 
-vim.cmd([[colorscheme catppuccin]])
+-- vim.cmd([[colorscheme catppuccin]])
+vim.cmd([[colorscheme gruvbox]])
 
-vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
-vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
+
+-- vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
+-- vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
+
+vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
+vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
 
 -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })

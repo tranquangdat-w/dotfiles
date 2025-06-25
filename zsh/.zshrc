@@ -164,3 +164,4 @@ export PATH="$PYTHON_HOME/bin:$PATH"
 export FZF_DEFAULT_OPTS='--height 100%'
 source <(fzf --zsh)  
 
+

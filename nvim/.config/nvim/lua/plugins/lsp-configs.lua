@@ -61,7 +61,7 @@ return {
       lspconfig.gopls.setup({
         capabilities = capabilities,
       })
-      lspconfig.pyright.setup({ capabilities = capabilities })
+
       --java
       lspconfig.jdtls.setup({
         settings = {
@@ -116,6 +116,9 @@ return {
 
       -- docker compose
 			lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
+
+      --python
+      lspconfig.pylsp.setup({ capabilities = capabilities })
 
       -- lsp kepmap setting
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

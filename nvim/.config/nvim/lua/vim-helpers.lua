@@ -43,8 +43,8 @@ vim.api.nvim_create_user_command("ShowTree", function()
 	local buf = vim.api.nvim_create_buf(false, true)
 	local editor_width = vim.o.columns
 	local editor_height = vim.o.lines
-	local width = math.floor(editor_width * 0.6)
-	local height = math.floor(editor_height * 0.9)
+	local width = math.floor(editor_width * 0.5)
+	local height = math.floor(editor_height * 0.95)
 
 	local row = math.floor((editor_height - height) / 2)
 	local col = math.floor((editor_width - width) / 2)
@@ -59,7 +59,7 @@ vim.api.nvim_create_user_command("ShowTree", function()
 	}
 
 	local win = vim.api.nvim_open_win(buf, true, opts)
-	local job_id = vim.fn.jobstart("tree", {
+	local job_id = vim.fn.jobstart("tree -I '.git|node_modules|build|bin'", {
 		stdout_buffered = true,
 		on_stdout = function(_, data)
 			if data then
