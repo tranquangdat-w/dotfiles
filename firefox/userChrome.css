@@ -1,0 +1,60 @@
+/* Đưa tab và URL bar vào cùng một hàng, URL bên trái */
+#titlebar {
+  appearance: none !important;
+  -moz-appearance: none !important;
+  height: 32px !important;
+}
+
+#navigator-toolbox {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+/* URL bar bên trái */
+#nav-bar {
+  max-width: 550px;
+  order: 1 !important;
+  flex-grow: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 32px !important;
+  gap: 0 !important;
+}
+
+/* Tab bar bên phải */
+#TabsToolbar {
+  order: 2 !important;
+  flex-grow: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 32px !important;
+}
+
+.tabbrowser-tab[closing] {
+  display: none !important;
+}
+
+/* Xoá khoảng cách giữa các tab */
+.tabbrowser-tab {
+  margin-inline: 0px !important;
+  padding-inline: 0px !important;
+}
+/* Ẩn thanh công cụ không cần thiết */
+#toolbar-menubar,
+#PersonalToolbar {
+  display: none !important;
+}
+
+/* Tab không viền cong */
+.tab-background {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+#urlbar {
+  max-width: 400px !important;
+  min-width: unset !important;
+  margin-inline: 0 !important;
+}
+
