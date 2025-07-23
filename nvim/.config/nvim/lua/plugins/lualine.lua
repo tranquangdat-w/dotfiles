@@ -9,8 +9,8 @@ return {
         lualine_c = {
           {
             'filename',
-            path = 1,
-            color = { gui = 'bold' },
+            -- path = 1,
+            color = { fg = '#ebdbb2' }, -- Gruvbox colors
           },
         },
       },

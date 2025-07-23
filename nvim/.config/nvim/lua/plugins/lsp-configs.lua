@@ -10,7 +10,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     opts = {
-      auto_install = true,
+      auto_install = true
     },
   },
   {
@@ -62,7 +62,7 @@ return {
         capabilities = capabilities,
       })
 
-      --java
+      -- java
       lspconfig.jdtls.setup({
         settings = {
           java = {
@@ -78,7 +78,6 @@ return {
           },
         },
       })
-
       -- html
       lspconfig.html.setup({
         capabilities = capabilities,
@@ -101,21 +100,24 @@ return {
           sqls = {
             connections = {
               {
-                -- driver = "mysql",
+                driver = "mysql",
                 -- dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sakila"
-                driver = "postgresql",
-                dataSourceName = 'host=127.0.0.1 port=5432 user=dat password=1 dbname=habitdb sslmode=disable',
+                -- dataSourceName = "dat:1@tcp(127.0.0.1:3307)/hr"
+                dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sms"
+
+                -- driver = "postgresql",
+                -- dataSourceName = 'host=127.0.0.1 port=5432 user=dat password=1 dbname=habitdb sslmode=disable',
               }
             }
           }
         }
       })
 
-			-- protocol buffer
-			lspconfig.buf_ls.setup({ capabilities = capabilities })
+      -- protocol buffer
+      lspconfig.buf_ls.setup({ capabilities = capabilities })
 
       -- docker compose
-			lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
+      lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
 
       --python
       lspconfig.pylsp.setup({ capabilities = capabilities })

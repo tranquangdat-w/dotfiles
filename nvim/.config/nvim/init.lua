@@ -23,7 +23,6 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme catppuccin]])
 vim.cmd([[colorscheme gruvbox]])
 
-
 -- vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
 -- vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
 
@@ -35,7 +34,11 @@ vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
+-- Disable Copilot
 vim.cmd("Copilot disable")
+
+-- Disable inlay_hint
+-- lua vim.lsp.inlay_hint.enable(false)
 
 require('leap').set_default_mappings()
 

@@ -12,7 +12,7 @@ vim.keymap.set("n", "<leader>ce", function()
 end, { noremap = true, silent = true })
 
 -- go to errors in a file :/
-vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_next) -- next err
+vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_prev) -- next err
 vim.keymap.set("n", "<leader>pe", vim.diagnostic.goto_prev) -- previous err
 
 vim.keymap.set("n", "<leader>ob", function()

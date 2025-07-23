@@ -1,9 +1,10 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$HOME/neovim/bin:$PATH"
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="eastwood"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -105,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # ~/.zshrc: executed by zsh for interactive shells.
 
-PROMPT='%F{green}[%n-sth %F{blue}%~%F{green}]%f$ '
+# PROMPT='%F{green}[%n-sth %F{blue}%~%F{green}]%f$ '
 
 alias tm="tmux"
 alias v="nvim"
@@ -140,7 +141,7 @@ source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 
-export POMODORO_HOME="/home/dat/tomatoshell"
+export POMODORO_HOME="/home/dat/dotfiles/pomodoro/tomatoshell"
 export PATH="$POMODORO_HOME/bin:$PATH"
 
 setxkbmap -option caps:escape
@@ -164,4 +165,5 @@ export PATH="$PYTHON_HOME/bin:$PATH"
 export FZF_DEFAULT_OPTS='--height 100%'
 source <(fzf --zsh)  
 
-
+# Create a quickstart maven project
+# mvn archetype:generate -DgroupId=fa.trainning.main -DartifactId=JPL.L.A203_TranQuangDat -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false

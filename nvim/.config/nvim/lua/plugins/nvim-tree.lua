@@ -4,14 +4,9 @@ return {
 		"nvim-tree/nvim-web-devicons"
 	},
 	config = function()
-    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-		vim.g.loaded_netrw = 1
-		vim.g.loaded_netrwPlugin = 1
+    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 
-		-- optionally enable 24-bit colour
-		vim.opt.termguicolors = true
-
-		require("nvim.config.nvim.lua.plugins.bak.nvim-tree").setup({
+		require("nvim-tree").setup({
       sort = {
         sorter = "case_sensitive"
       },

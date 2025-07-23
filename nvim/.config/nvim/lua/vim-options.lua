@@ -1,3 +1,10 @@
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -7,7 +14,6 @@ vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
--- vim.opt.numberwidth = 1  -- Thu hẹp cột số dòng
 
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
@@ -19,16 +25,10 @@ vim.cmd([[
 
 vim.o.background = "dark" -- or "light" for light mode
 
-
 vim.cmd [[
   autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 ]]
-
--- vim.opt.backup = false
--- vim.opt.writebackup = false
--- vim.opt.updatetime = 300
--- vim.opt.signcolumn = "yes"
 
 -- UFO folding
 vim.o.foldcolumn = "1" -- '0' is not bad
@@ -51,11 +51,6 @@ vim.keymap.set("n", "<leader>cp", function()
 	vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
 	print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
-
-
--- Resize windown vim
-vim.keymap.set("n", "<M-l>", ":vertical resize -5<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<M-h>", ":vertical resize +5<CR>", { noremap = true, silent = true })
 
 -- quickfix
 vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true })
