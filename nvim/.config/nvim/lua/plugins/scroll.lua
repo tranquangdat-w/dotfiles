@@ -20,22 +20,22 @@ return {
 			},
 		})
 		local keymap = {
-			["<C-u>"] = function()
+			["<C-u>"] = { func = function()
 				neoscroll.ctrl_u({ duration = 300 })
-			end,
-			["<C-d>"] = function()
+			end, desc = "Scroll up" },
+			["<C-d>"] = { func = function()
 				neoscroll.ctrl_d({ duration = 300 })
-			end,
-			["zz"] = function()
+			end, desc = "Scroll down" },
+			["zz"] = { func = function()
 				neoscroll.zz({ half_win_duration = 300 })
-			end,
-			["zb"] = function()
+			end, desc = "Center screen" },
+			["zb"] = { func = function()
 				neoscroll.zb({ half_win_duration = 300 })
-			end,
+			end, desc = "Scroll to bottom" },
 		}
 		local modes = { "n", "v", "x" }
-		for key, func in pairs(keymap) do
-			vim.keymap.set(modes, key, func)
+		for key, data in pairs(keymap) do
+			vim.keymap.set(modes, key, data.func, { desc = data.desc })
 		end
 	end,
 }

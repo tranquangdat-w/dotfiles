@@ -123,13 +123,13 @@ return {
       lspconfig.pylsp.setup({ capabilities = capabilities })
 
       -- lsp kepmap setting
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
       -- list all methods in a file
       -- working with go confirmed, don't know about other, keep changing as necessary
       vim.keymap.set("n", "<leader>fm", function()
@@ -144,7 +144,7 @@ return {
         }
         local symbols = symbols_map[filetype] or "function"
         require("fzf-lua").treesitter({ symbols = symbols })
-      end, {})
+      end, { desc = "Find method in file" })
     end,
   },
 }

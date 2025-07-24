@@ -1,0 +1,5 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap `\nunmap L\nunmap H\n\nmap ' Marks.activateGotoMode\n\nmap H previousTab\nmap L nextTab\nmap J goBack\nmap K goForward\nmap <a-h> moveTabLeft\nmap <a-l> moveTabRight",
+  "grabBackFocus": true,
+  "settingsVersion": "2.3"
+}

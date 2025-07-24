@@ -2,7 +2,7 @@
 #titlebar {
   appearance: none !important;
   -moz-appearance: none !important;
-  height: 32px !important;
+  height: 50px !important;
 }
 
 #navigator-toolbox {
@@ -18,7 +18,7 @@
   flex-grow: 1 !important;
   margin: 0 !important;
   padding: 0 !important;
-  height: 32px !important;
+  height: 50px !important;
   gap: 0 !important;
 }
 
@@ -28,7 +28,7 @@
   flex-grow: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  height: 32px !important;
+  height: 50px !important;
 }
 
 .tabbrowser-tab[closing] {

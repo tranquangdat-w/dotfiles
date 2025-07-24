@@ -9,11 +9,11 @@ vim.keymap.set("n", "<leader>ce", function()
     else
         print("No diagnostic at cursor")
     end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Copy diagnostic message" })
 
 -- go to errors in a file :/
-vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_prev) -- next err
-vim.keymap.set("n", "<leader>pe", vim.diagnostic.goto_prev) -- previous err
+vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_next, { desc = "Next diagnostic" }) -- next err
+vim.keymap.set("n", "<leader>pe", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" }) -- previous err
 
 vim.keymap.set("n", "<leader>ob", function()
 	local file_path = vim.fn.expand("%:p") -- get the current file path

@@ -15,6 +15,6 @@ return {
     },
   },
   {
-    vim.keymap.set('n', '<leader>p', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' }),
+    vim.keymap.set('n', '<leader>q', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' }),
   },
 }

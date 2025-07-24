@@ -9,21 +9,34 @@ return {
     harpoon:setup()
     -- REQUIRED
 
-    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon"})
+    vim.keymap.set("n", "<leader>ha", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc= "Show harpoon list" })
 
-    vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
-    vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
-    vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
-    vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
-    vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end)
-    vim.keymap.set("n", "<leader>6", function() harpoon:list():select(6) end)
-    vim.keymap.set("n", "<leader>7", function() harpoon:list():select(7) end)
-    vim.keymap.set("n", "<leader>8", function() harpoon:list():select(8) end)
-    vim.keymap.set("n", "<leader>9", function() harpoon:list():select(9) end)
+    vim.keymap.set("n", "<leader>ho", function()
+      for _, item in ipairs(require("harpoon"):list().items) do
+        vim.cmd("edit " .. item.value)
+      end
 
-    -- Toggle previous & next buffers stored within Harpoon list
-    vim.keymap.set("n", "<M-h>", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<M-l>", function() harpoon:list():next() end)
+    end, { desc = "Open all harpoon files" })
+
+    vim.keymap.set("n", "<leader>hc", function()
+      local harpoon_paths = {}
+
+      -- Lưu Harpoon paths dưới dạng đường dẫn tuyệt đối
+      for _, item in ipairs(harpoon:list().items) do
+        local abs_path = vim.fn.fnamemodify(item.value, ":p") -- :p = full path
+        harpoon_paths[abs_path] = true
+      end
+
+      -- Đóng buffer không nằm trong Harpoon list
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, "buftype") == "" then
+          local buf_path = vim.api.nvim_buf_get_name(buf)
+          if buf_path ~= "" and not harpoon_paths[buf_path] then
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+        end
+      end
+    end, { desc = "Close buffers not in Harpoon list" })
   end
 }
