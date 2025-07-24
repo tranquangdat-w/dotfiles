@@ -14,6 +14,7 @@ vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.splitright = true
 
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
