@@ -10,7 +10,24 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     opts = {
-      auto_install = true
+      auto_install = true,
+      ensure_installed = {
+        "lua_ls",
+        "ts_ls",
+        "eslint",
+        "zls",
+        "yamlls",
+        "tailwindcss",
+        "bashls",
+        "gopls",
+        "jdtls",
+        "html",
+        "cssls",
+        "sqls",
+        "buf_ls",
+        "docker_compose_language_service",
+        "pylsp",
+      },
     },
   },
   {
@@ -37,6 +54,12 @@ return {
           },
         },
       })
+
+      -- bash
+      lspconfig.bashls.setup({
+        capabilities = capabilities,
+      })
+
       -- typescript
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
@@ -62,22 +85,23 @@ return {
         capabilities = capabilities,
       })
 
-      -- java
-      lspconfig.jdtls.setup({
-        settings = {
-          java = {
-            configuration = {
-              runtimes = {
-                {
-                  name = "JavaSE-21",
-                  path = "/usr/lib/jvm/java-21-openjdk",
-                  default = true,
-                },
-              },
-            },
-          },
-        },
-      })
+      -- -- java
+      -- lspconfig.jdtls.setup({
+      --   settings = {
+      --     java = {
+      --       configuration = {
+      --         runtimes = {
+      --           {
+      --             name = "JavaSE-21",
+      --             path = "/usr/lib/jvm/java-21-openjdk",
+      --             default = true,
+      --           },
+      --         },
+      --       },
+      --     },
+      --   },
+      -- })
+
       -- html
       lspconfig.html.setup({
         capabilities = capabilities,

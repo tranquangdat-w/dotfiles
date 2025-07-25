@@ -23,8 +23,8 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme catppuccin]])
 vim.cmd([[colorscheme gruvbox]])
 
--- vim.api.nvim_set_hl(0, 'Search', { fg = '#FF0000', bg = '#FFFFFF', bold = true })
--- vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#FFFFFF', bg = '#FF0000', bold = true })
+vim.api.nvim_set_hl(0, "WinBar", { fg = "#fe8019", bg = "#3c3836", bold = true })
+vim.api.nvim_set_hl(0, "WinBarNC", { fg = "#a89984", bg = "#3c3836", italic = true })
 
 vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
@@ -36,11 +36,6 @@ vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 -- Disable Copilot
 vim.cmd("Copilot disable")
-
--- Disable inlay_hint
--- lua vim.lsp.inlay_hint.enable(false)
-
-require('leap').set_default_mappings()
 
 -- convert to english input
 local function force_english()
@@ -74,3 +69,5 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
 
+-- Highlight nền xám cho toàn bộ dòng context
+vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2e2e2e" })

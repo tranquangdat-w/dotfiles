@@ -22,7 +22,7 @@ local function create_floating_window(opts)
         row = row,
         col = col,
         style = "minimal",
-        border = "rounded"
+        border = "none"
     }
     vim.api.nvim_set_hl(0, "MyFloatingWindow", { bg = "#1e1e1e", fg = "#ffffff", blend = 10 })
     local win = vim.api.nvim_open_win(buf, true, config)

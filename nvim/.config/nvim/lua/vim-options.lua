@@ -7,14 +7,16 @@ vim.opt.termguicolors = true
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
+vim.opt.winbar = "%t %m"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
 vim.opt.splitright = true
+
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
 
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
@@ -24,12 +26,10 @@ vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
-vim.o.background = "dark" -- or "light" for light mode
+-- paste over highlight word
+vim.keymap.set("x", "<leader>p", '"_dP')
 
-vim.cmd [[
-  autocmd FileType * setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-]]
+vim.o.background = "dark" -- or "light" for light mode
 
 -- UFO folding
 vim.o.foldcolumn = "1" -- '0' is not bad
@@ -52,6 +52,8 @@ vim.keymap.set("n", "<leader>cp", function()
 	vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
 	print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
+
+vim.keymap.set("x", "p", "\"_dP", { desc = "Paste without overwriting clipboard" })
 
 -- quickfix
 vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
@@ -78,3 +80,20 @@ vim.api.nvim_set_keymap('n', '<M-c>', ':BufferClose<CR>', { noremap = true, sile
 
 vim.api.nvim_set_keymap('n', '<M-h>', '<Cmd>BufferMovePrevious<CR>', { noremap = true, silent = true, desc = "Move buffer to left" })
 vim.api.nvim_set_keymap('n', '<M-l>', '<Cmd>BufferMoveNext<CR>',{ noremap = true, silent = true, desc = "Move buffer to right" })
+
+vim.keymap.set("n", "<leader>/", function()
+  vim.opt.hlsearch = not vim.opt.hlsearch:get()
+end, { desc = "Toggle hlsearch" })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.java",
+  callback = function()
+    local file = vim.fn.expand("%:p")
+    vim.fn.jobstart({ "google-java-format", "-i", file }, {
+      on_exit = function()
+        vim.cmd("edit!")  -- reload lại sau khi format
+      end,
+    })
+  end,
+  desc = "Auto format Java file on save using google-java-format",
+})
