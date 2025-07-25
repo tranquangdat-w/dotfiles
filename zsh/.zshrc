@@ -154,14 +154,6 @@ export XMODIFIERS="@im=ibus"
 export GLFW_IM_MODULE=ibus
 export QT4_IM_MODULE=ibus
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-export PYTHON_HOME="~/.pyenv/versions/3.9.18"
-export PATH="$PYTHON_HOME/bin:$PATH"
-
 export FZF_DEFAULT_OPTS='--height 100%'
 source <(fzf --zsh)  
 
