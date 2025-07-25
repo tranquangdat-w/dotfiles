@@ -66,16 +66,3 @@ vim.keymap.set("n", "<leader>/", function()
   vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end, { desc = "Toggle hlsearch" })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.java",
-  callback = function()
-    local file = vim.fn.expand("%:p")
-    vim.fn.jobstart({ "google-java-format", "-i", file }, {
-      on_exit = function()
-        vim.cmd("edit!")  -- reload lại sau khi format
-      end,
-    })
-  end,
-  desc = "Auto format Java file on save using google-java-format",
-})
-

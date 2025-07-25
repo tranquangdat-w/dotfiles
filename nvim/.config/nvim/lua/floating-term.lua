@@ -2,7 +2,7 @@ local state = { floating = { buf = -1, win = -1 } }
 
 local function create_floating_window(opts)
     opts = opts or {}
-    local width = math.floor(vim.o.columns * 1.0)
+    local width = math.floor(vim.o.columns * 0.95)
     local height = math.floor(vim.o.lines * 0.95)
 
     local row = math.floor((vim.o.lines - height) / 2)
@@ -22,7 +22,7 @@ local function create_floating_window(opts)
         row = row,
         col = col,
         style = "minimal",
-        border = "none"
+        border = "rounded"
     }
     vim.api.nvim_set_hl(0, "MyFloatingWindow", { bg = "#1e1e1e", fg = "#ffffff", blend = 10 })
     local win = vim.api.nvim_open_win(buf, true, config)
