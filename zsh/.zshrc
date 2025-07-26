@@ -130,9 +130,9 @@ export PATH="$PATH:/home/dat/.local/bin"
 # Cấu hình Direnv
 eval "$(direnv hook zsh)"
 
-precmd() {
-  echo -ne '\e[5 q'
-}
+# precmd() {
+#   echo -ne '\e[5 q'
+# }
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

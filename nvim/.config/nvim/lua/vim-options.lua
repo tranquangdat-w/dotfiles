@@ -27,6 +27,8 @@ vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
+vim.cmd("set guicursor=n-v-c-i:block")
+
 -- paste over highlight word
 vim.keymap.set("x", "<leader>p", '"_dP')
 
