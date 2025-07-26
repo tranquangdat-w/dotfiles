@@ -1,7 +1,0 @@
-[FORMAT]
-max-line-length=200
-disable=invalid-name
-
-[MESSAGES CONTROL]
-disable=unnecessary-pass, too-few-public-methods, missing-module-docstring, use-dict-literal, trailing-whitespace
-

@@ -5,6 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
+-- vim.opt.colorcolumn = "94"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.winbar = "%t %m"
