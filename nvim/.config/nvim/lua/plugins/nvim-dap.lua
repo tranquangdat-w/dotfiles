@@ -3,95 +3,123 @@ return {
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
+
+    "leoluz/nvim-dap-go",
+
     'mfussenegger/nvim-dap-python',
-    'nvim-telescope/telescope.nvim',
-    'nvim-telescope/telescope-dap.nvim'
   },
   config = function()
-    vim.fn.sign_define('DapBreakpoint', {
-      text = '', -- hoặc '' nếu bạn muốn icon đẹp kiểu nerd font
-      texthl = 'DiagnosticError',
-      linehl = '',
-      numhl = ''
-    })
     local dap = require("dap")
     local dapui = require("dapui")
-    local telescope = require("telescope")
-    telescope.load_extension("dap")
+    local widgets = require('dap.ui.widgets')
 
-    dapui.setup({
-      icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
-      mappings = {
-        expand = { "<CR>", "<2-LeftMouse>" },
-        open = "o",
-        remove = "d",
-        edit = "e",
-        repl = "r",
-        toggle = "t",
-      },
-      layouts = {
-        {
-          elements = {
-            { id = 'scopes',      size = 0.5 },
-            { id = 'breakpoints', size = 0.3 },
-            { id = 'stacks',      size = 0.2 },
-          },
-          size = 40,
-          position = 'left',
-        },
-        {
-          elements = { 'repl', 'console' },
-          size = 10,
-          position = 'bottom',
-        },
-      },
-      floating = {
-        max_height = nil,
-        max_width = nil,
-        border = "rounded",
-        mappings = { close = { "q", "<Esc>" } },
-      },
-      controls = {
-        enabled = true,
-        element = "repl",
-        icons = {
-          pause = "",
-          play = "",
-          step_into = "",
-          step_over = "",
-          step_out = "",
-          step_back = "",
-          run_last = "",
-          terminate = "",
-        },
-      },
-      windows = { indent = 1 },
-    })
-
+    require("dap-go").setup()
+    require("dapui").setup()
     require("dap-python").setup("uv")
 
-    dap.listeners.before.attach.dapui_config = function() dapui.open() end
-    dap.listeners.before.launch.dapui_config = function() dapui.open() end
-    dap.listeners.after.event_terminated["dapui_config"] = function() dapui.open() end
+    -- "java-debug-adapter",
+    -- "js-debug-adapter"
 
-    vim.keymap.set('n', '<Leader>dt', dap.toggle_breakpoint, { desc = 'Set breakpoint for debug' })
+    -- CHECK
+    local js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+    dap.adapters["pwa-node"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
+      executable = {
+        command = "node",
+        args = { js_debug_path, "${port}" }
+      }
+    }
 
-    local function continue_debug()
-      if dap.session() then
-        dap.continue()
-      else
-        telescope.extensions.dap.configurations()
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
-        dap.continue()
-      end
+    for _, language in ipairs({
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+      "vue",
+      "svelte", }) do
+      require("dap").configurations[language] = {
+        -- attach to a node process that has been started with
+        -- `--inspect` for longrunning tasks or `--inspect-brk` for short tasks
+        -- npm script -> `node --inspect-brk ./node_modules/.bin/vite dev`
+        {
+          -- use nvim-dap-vscode-js's pwa-node debug adapter
+          type = "pwa-node",
+          -- attach to an already running node process with --inspect flag
+          -- default port: 9222
+          request = "attach",
+          -- allows us to pick the process using a picker
+          processId = require 'dap.utils'.pick_process,
+          -- name of the debug action you have to select for this config
+          name = "Attach debugger to existing `node --inspect` process",
+          -- for compiled languages like TypeScript or Svelte.js
+          sourceMaps = true,
+          -- resolve source maps in nested locations while ignoring node_modules
+          resolveSourceMapLocations = {
+            "${workspaceFolder}/**",
+            "!**/node_modules/**" },
+          -- path to src in vite based projects (and most other projects as well)
+          cwd = "${workspaceFolder}/src",
+          -- we don't want to debug code inside node_modules, so skip it!
+          skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+        },
+
+        -- {
+        --   type = "pwa-chrome",
+        --   name = "Launch Chrome to debug client",
+        --   request = "launch",
+        --   url = "http://localhost:5173",
+        --   sourceMaps = true,
+        --   protocol = "inspector",
+        --   port = 9222,
+        --   webRoot = "${workspaceFolder}/src",
+        --   -- skip files from vite's hmr
+        --   skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+        -- },
+
+        -- only if language is javascript, offer this debug action
+        {
+          -- use nvim-dap-vscode-js's pwa-node debug adapter
+          type = "pwa-node",
+          -- launch a new process to attach the debugger to
+          request = "launch",
+          -- name of the debug action you have to select for this config
+          name = "Launch file in new node process",
+          -- launch current file
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        } or nil,
+      }
+    end
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
     end
 
-    vim.keymap.set('n', '<F11>', continue_debug, { desc = "Find debug configurations or continue debug" })
-    vim.keymap.set('n', '<Leader>dc', continue_debug, { desc = "Find debug configurations or continue debug" })
+    vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Start/Continue Debugging" })
+    vim.keymap.set('n', '<leader>ds', function() widgets.hover() end, { desc = "Show Variable (Hover)" })
+    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
+    vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
 
-    vim.keymap.set('n', '<F12>', function()
-      dap.terminate()
-      dapui.close()
-    end, { desc = 'Close dapui' })
+    vim.keymap.set("n", "<leader>dw", function()
+      local word = vim.fn.expand("<cword>")
+      if word ~= "" then
+        require("dapui").elements.watches.add(word)
+        print("Added to watch: " .. word)
+      end
+    end, { desc = "Add word under cursor to Watch" })
   end
 }
+
+-- dont for get to install debugger here: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+-- eg: go... brew install delve, then add go dependencies

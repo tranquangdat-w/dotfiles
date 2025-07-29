@@ -7,7 +7,18 @@ local status, jdtls = pcall(require, 'jdtls')
 if not status then
     return
 end
+
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
+
+-- CHECK
+local bundles = {
+  vim.fn.glob('~/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')
+}
+
+local on_attach = function(client, bufnr)
+  require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+end
+
 
 local config = {
     cmd = {
@@ -32,6 +43,7 @@ local config = {
         workspace_dir,
     },
     root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' },
+    on_attach = on_attach,
 
     settings = {
         java = {
@@ -58,7 +70,7 @@ local config = {
     },
 
     init_options = {
-        bundles = {},
+        bundles = bundles,
     },
 }
 require('jdtls').start_or_attach(config)
