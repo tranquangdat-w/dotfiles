@@ -156,19 +156,6 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
       -- list all methods in a file
       -- working with go confirmed, don't know about other, keep changing as necessary
-      vim.keymap.set("n", "<leader>fm", function()
-        local filetype = vim.bo.filetype
-        local symbols_map = {
-          python = "function",
-          javascript = "function",
-          typescript = "function",
-          java = "method",
-          lua = "function",
-          go = { "method", "struct", "interface" },
-        }
-        local symbols = symbols_map[filetype] or "function"
-        require("fzf-lua").treesitter({ symbols = symbols })
-      end, { desc = "Find method in file" })
     end,
   },
 }

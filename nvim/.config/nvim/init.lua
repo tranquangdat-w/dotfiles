@@ -69,5 +69,8 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
 
--- Highlight nền xám cho toàn bộ dòng context
-vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2e2e2e" })
+-- Highlight phần context với nền đen, chữ xám
+vim.api.nvim_set_hl(0, "TreesitterContext", {
+  bg = "#000000",     -- nền đen
+})
+
