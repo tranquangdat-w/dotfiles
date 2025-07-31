@@ -79,3 +79,4 @@ vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
   fg = "#858585",   -- Giống màu line number
 })
 
+

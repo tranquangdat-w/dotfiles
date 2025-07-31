@@ -71,3 +71,7 @@ vim.keymap.set("n", "<leader>/", function()
   vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end, { desc = "Toggle hlsearch" })
 
+vim.keymap.set("n", "<leader>cb", function()
+  vim.cmd("%bd|e#|bd#")
+end, { desc = "Close all buffers except current" })
+
