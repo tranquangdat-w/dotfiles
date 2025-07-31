@@ -4,7 +4,19 @@ return {
     "nvim-tree/nvim-web-devicons"
   },
   config = function()
-    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap(
+      'n',
+      '<leader>t',
+      ':NvimTreeToggle<CR>',
+      { noremap = true, silent = true }
+    )
+
+    vim.api.nvim_set_keymap(
+      'n',
+      '<leader>vt',
+      ':NvimTreeFindFileToggle<CR>',
+      { noremap = true, silent = true }
+    )
 
     require("nvim-tree").setup({
       sort = {

@@ -51,7 +51,11 @@ return {
     -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
     -- vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
 
-    vim.keymap.set("n", "<leader>fm", ":Telescope aerial<CR>", { desc = "Find method in files" })
+    vim.keymap.set(
+      "n", "<leader>fm", ":Telescope aerial<CR>",
+      { desc = "Open Aerial symbols with Telescope" }
+    )
+
     vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
   end,
 }
