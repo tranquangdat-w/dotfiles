@@ -4,13 +4,32 @@ return {
     "nvim-tree/nvim-web-devicons"
   },
   config = function()
-    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
     require("nvim-tree").setup({
       sort = {
         sorter = "case_sensitive"
       },
       view = {
+        float = {
+          enable = true,
+          open_win_config = function()
+            local screen_w = vim.opt.columns:get()
+            local screen_h = vim.opt.lines:get()
+            local width = math.floor(screen_w * 0.4)
+            local height = math.floor(screen_h * 0.95)
+            local row = math.floor((screen_h - height) / 2)
+            local col = math.floor((screen_w - width) / 2)
+            return {
+              relative = "editor",
+              border = "rounded",
+              width = width,
+              height = height,
+              row = row,
+              col = col,
+            }
+          end,
+        },
         width = 35
       },
       git = {

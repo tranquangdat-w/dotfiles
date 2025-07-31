@@ -9,7 +9,7 @@ return {
     local aerial = require("aerial")
     aerial.setup({
       layout = {
-        min_width = 20,
+        min_width = 30,
         default_direction = "left",
       }
     })
@@ -20,14 +20,13 @@ return {
     telescope.setup({
       defaults = {
         -- file_ignore_patterns = {"%.class"},
+        sorting_strategy = "ascending",
         layout_strategy = "vertical",
 
         layout_config = {
-          vertical = {
-            height = 0.8,
-            width = 0.85,
-            preview_cutoff = 10,
-          },
+          prompt_position = "top", -- Với `center` thì prompt luôn ở trên
+          height = 0.8,
+          width = 0.85,
         },
         mappings = {
           i = {
@@ -58,4 +57,3 @@ return {
     vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
   end,
 }
-

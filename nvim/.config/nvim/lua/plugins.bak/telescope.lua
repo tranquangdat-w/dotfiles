@@ -4,7 +4,7 @@ return {
   -- branch = 'master',
   requires = { { 'nvim-lua/plenary.nvim' } },
   config = function()
-    local telescope = require('telescope')
+    local telescope = require('nvim.config.nvim.lua.plugins.find-function'g.nvim.lua.plugins.find-function')
     local builtin = require('telescope.builtin')
 
     -- Keymaps for Telescope
