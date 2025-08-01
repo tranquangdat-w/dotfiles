@@ -23,7 +23,10 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme catppuccin]])
 vim.cmd([[colorscheme gruvbox]])
 
-vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff" })
+local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
+
+vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg,
+})
 
 vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
