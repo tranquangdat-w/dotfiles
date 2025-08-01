@@ -5,14 +5,18 @@ return {
   config = function()
     local harpoon = require("harpoon")
 
+    local toggle_opts = {
+      border = "rounded",
+      title_pos = "center",
+      ui_width_ratio = 0.40,
+    }
+
     -- REQUIRED
     harpoon:setup()
-    -- REQUIRED
 
     vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon" })
-    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end,
       { desc = "Show harpoon list" })
-
     vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Move to harpoon item 1" })
     vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Move to harpoon item 2" })
     vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Move to harpoon item 3" })

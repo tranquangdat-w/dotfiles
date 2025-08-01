@@ -43,7 +43,6 @@ return {
       })
     end, { desc = "Live Grep includes hidden files" })
     vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
-    vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help Tags" })
     vim.keymap.set("n", "<leader>fs", function()
       fzf.grep({ search = vim.fn.input("Grep For > ") })
     end, { desc = "FZF grep with input" })
