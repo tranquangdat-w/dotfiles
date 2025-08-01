@@ -71,7 +71,7 @@ return {
       { desc = "Open harpoon window" })
 
     vim.keymap.set("n", "<leader>nf", ":AerialNext<CR>", { desc = "Move to next function" })
-    vim.keymap.set("n", "<leader>nf", ":AerialPrev<CR>", { desc = "Move to previous function" })
+    vim.keymap.set("n", "<leader>pf", ":AerialPrev<CR>", { desc = "Move to previous function" })
 
     -- vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
     -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
