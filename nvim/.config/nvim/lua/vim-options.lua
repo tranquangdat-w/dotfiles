@@ -8,7 +8,7 @@ vim.opt.termguicolors = true
 vim.opt.colorcolumn = "94"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.opt.winbar = "%t %m"
+vim.opt.winbar = "      %t %m"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -25,7 +25,7 @@ vim.opt.swapfile = false
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Set Esc to switch to normal mode in terminal
-vim.cmd([[ 
+vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
@@ -38,7 +38,7 @@ vim.o.background = "dark" -- or "light" for light mode
 
 -- UFO folding
 vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
@@ -52,10 +52,10 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 
 -- copy current file path (absolute) into clipboard
 vim.keymap.set("n", "<leader>cp", function()
-	local filepath = vim.fn.expand("%:p")
-	vim.fn.setreg("+", filepath) -- Copy to Neovim clipboard
-	vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
-	print("Copied: " .. filepath)
+  local filepath = vim.fn.expand("%:p")
+  vim.fn.setreg("+", filepath)                        -- Copy to Neovim clipboard
+  vim.fn.system("echo '" .. filepath .. "' | pbcopy") -- Copy to macOS clipboard
+  print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
 
 vim.keymap.set("x", "p", "\"_dP", { desc = "Paste without overwriting clipboard" })
@@ -70,4 +70,3 @@ vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent =
 vim.keymap.set("n", "<leader>/", function()
   vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end, { desc = "Toggle hlsearch" })
-

@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 -- Make sure to setup `mapleader` and `maplocalleader` before
@@ -23,13 +23,11 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme catppuccin]])
 vim.cmd([[colorscheme gruvbox]])
 
-vim.api.nvim_set_hl(0, "WinBar", { fg = "#fe8019", bg = "#3c3836", bold = true })
-vim.api.nvim_set_hl(0, "WinBarNC", { fg = "#a89984", bg = "#3c3836", italic = true })
+vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff" })
 
 vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
 vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
 
--- vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89984" })
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
@@ -43,7 +41,7 @@ local function force_english()
 end
 
 local function force_unikey()
-  vim.fn.jobstart({ "ibus", "engine", "Unikey" }, { detach = true })  -- hoặc "ibus-unikey" nếu bạn dùng ibus-unikey
+  vim.fn.jobstart({ "ibus", "engine", "Unikey" }, { detach = true }) -- hoặc "ibus-unikey" nếu bạn dùng ibus-unikey
 end
 
 -- when leave insertMode change input method to english
@@ -71,12 +69,10 @@ vim.g.db_ui_force_echo_notifications = 1
 
 
 vim.api.nvim_set_hl(0, "TreesitterContext", {
-  bg = "#1e1e1e",   -- Màu nền hơi tối (tùy theme)
-  bold = true,      -- Chữ đậm
+  bg = "#1e1e1e", -- Màu nền hơi tối (tùy theme)
+  bold = true,    -- Chữ đậm
 })
 
 vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
-  fg = "#858585",   -- Giống màu line number
+  fg = "#858585", -- Giống màu line number
 })
-
-
