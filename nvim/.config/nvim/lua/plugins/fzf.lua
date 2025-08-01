@@ -25,6 +25,10 @@ return {
         fzf = { ["ctrl-q"] = "select-all+accept" }
       }
     })
+
+    -- Tùy chỉnh màu số dòng trong grep
+    vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
+
     vim.keymap.set("n", "<leader>ff", function()
       require("fzf-lua").files({
         fd_opts =
@@ -43,5 +47,6 @@ return {
     vim.keymap.set("n", "<leader>fs", function()
       fzf.grep({ search = vim.fn.input("Grep For > ") })
     end, { desc = "FZF grep with input" })
+    vim.keymap.set("n", "<leader>fw", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
   end,
 }
