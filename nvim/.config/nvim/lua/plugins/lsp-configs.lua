@@ -41,7 +41,7 @@ return {
         callback = function()
           local mode = vim.api.nvim_get_mode().mode
           local filetype = vim.bo.filetype
-          if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
+          if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" and filetype ~= "sql" then
             vim.cmd('lua vim.lsp.buf.format()')
           else
           end
@@ -75,6 +75,18 @@ return {
       -- typescript
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+            },
+          },
+        },
       })
       -- Js
       lspconfig.eslint.setup({
@@ -166,8 +178,10 @@ return {
       vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-      -- list all methods in a file
-      -- working with go confirmed, don't know about other, keep changing as necessary
+      vim.keymap.set("n", "<leader>ih", function()
+        local enabled = vim.lsp.inlay_hint.is_enabled()
+        vim.lsp.inlay_hint.enable(not enabled)
+      end, { desc = "Toggle Inlay Hints" })
     end,
   },
 }

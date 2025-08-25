@@ -22,6 +22,8 @@ require("lazy").setup("plugins")
 
 -- vim.cmd([[colorscheme catppuccin]])
 vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme nightfox]])
+-- vim.cmd("colorscheme rose-pine")
 
 local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
 
@@ -69,7 +71,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
-
 
 vim.api.nvim_set_hl(0, "TreesitterContext", {
   bg = "#1e1e1e", -- Màu nền hơi tối (tùy theme)

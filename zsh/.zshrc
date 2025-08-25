@@ -130,10 +130,6 @@ export PATH="$PATH:/home/dat/.local/bin"
 # Cấu hình Direnv
 eval "$(direnv hook zsh)"
 
-# precmd() {
-#   echo -ne '\e[5 q'
-# }
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -157,5 +153,3 @@ export QT4_IM_MODULE=ibus
 export FZF_DEFAULT_OPTS='--height 100%'
 source <(fzf --zsh)  
 
-# Create a quickstart maven project
-# mvn archetype:generate -DgroupId=fa.trainning.main -DartifactId=JPL.L.A203_TranQuangDat -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
