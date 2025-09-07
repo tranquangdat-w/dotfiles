@@ -195,10 +195,28 @@ bindsym $mod+shift+x exec --no-startup-id systemctl poweroff
 
 
 bar {
-        # mode invisible
-        status_command i3status -c /home/$USER/.config/i3/i3status.conf
+    status_command i3status -c /home/$USER/.config/i3/i3status.conf
+
+    position top
+
+    colors {
+        background #F5F5F5
+        statusline #000000
+        separator  #CCCCCC
+
+        # focused: nền xám nhạt, chữ đen
+        focused_workspace   #E0E0E0 #E0E0E0 #000000
+
+        # active: nền trắng, chữ đen nhạt
+        active_workspace    #F5F5F5 #F5F5F5 #333333
+
+        # inactive: nền trắng, chữ xám
+        inactive_workspace  #F5F5F5 #F5F5F5 #AAAAAA
+
+        # urgent: nền đỏ, chữ trắng
+        urgent_workspace    #FF3B30 #FF3B30 #FFFFFF
+    }
 }
-bindsym $mod+b bar mode dock
 
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --scale 0.9 
 exec --no-startup-id bash /home/dat/.config/i3/inverse-scroll.sh

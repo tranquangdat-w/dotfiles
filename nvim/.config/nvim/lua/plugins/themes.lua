@@ -5,6 +5,8 @@ return {
     config = function()
       require("gruvbox").setup({
         --
+        terminal_colors = true, -- add neovim terminal colors
+        contrast = "soft",      -- can be "hard", "soft" or empty string
         inverse = false,
         transparent_mode = true
       })

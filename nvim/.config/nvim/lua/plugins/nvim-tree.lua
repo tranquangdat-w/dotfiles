@@ -24,7 +24,7 @@ return {
       },
       view = {
         float = {
-          enable = true,
+          enable = false,
           open_win_config = function()
             local screen_w = vim.opt.columns:get()
             local screen_h = vim.opt.lines:get()
@@ -55,7 +55,7 @@ return {
           show = {
             git = false,
             file = true,
-            folder = true,
+            folder = false,
             folder_arrow = true,
             modified = true,
           },

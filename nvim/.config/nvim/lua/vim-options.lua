@@ -21,6 +21,8 @@ vim.opt.softtabstop = 2
 
 vim.opt.swapfile = false
 
+vim.opt.guicursor = "n-v-c-i:block-blinkwait700-blinkon400-blinkoff250"
+
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
@@ -29,7 +31,6 @@ vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
-vim.cmd("set guicursor=n-v-c-i:block")
 
 -- paste over highlight word
 vim.keymap.set("x", "<leader>p", '"_dP')
@@ -70,3 +71,5 @@ vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent =
 vim.keymap.set("n", "<leader>/", function()
   vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end, { desc = "Toggle hlsearch" })
+
+vim.keymap.set("n", "<leader>si", ":!feh %<CR>")

@@ -5,7 +5,6 @@ return {
     'nvim-neotest/nvim-nio',
 
     "leoluz/nvim-dap-go",
-
     'mfussenegger/nvim-dap-python',
   },
   config = function()
@@ -16,9 +15,6 @@ return {
     require("dap-go").setup()
     require("dapui").setup()
     require("dap-python").setup("uv")
-
-    -- "java-debug-adapter",
-    -- "js-debug-adapter"
 
     -- CHECK
     local js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
