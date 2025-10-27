@@ -34,8 +34,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require("lspconfig")
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function()
@@ -49,135 +48,157 @@ return {
       })
 
       -- lua
-      lspconfig.lua_ls.setup({
+      vim.lsp.config['lua_ls'] = {
+        cmd = { "lua-language-server" },
         capabilities = capabilities,
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
+            diagnostics = { globals = { "vim" } },
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false,
             },
-            telemetry = {
-              enable = false,
-            },
+            telemetry = { enable = false },
           },
         },
-      })
+      }
 
-      -- bash
-      lspconfig.bashls.setup({
-        capabilities = capabilities,
-      })
-
-      -- typescript
-      lspconfig.ts_ls.setup({
+      vim.lsp.config['ts_ls'] = {
         capabilities = capabilities,
         settings = {
           typescript = {
             inlayHints = {
-              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHints = "all",        -- Hiển thị tên tham số
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true, -- Hiển thị kiểu tham số hàm
+              includeInlayVariableTypeHints = true,          -- Hiển thị kiểu biến
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
             },
           },
           javascript = {
             inlayHints = {
               includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
             },
           },
         },
-      })
-      -- Js
-      lspconfig.eslint.setup({
-        capabilities = capabilities,
-      })
-      -- zig
-      lspconfig.zls.setup({
-        capabilities = capabilities,
-      })
-      -- yaml
-      lspconfig.yamlls.setup({
-        capabilities = capabilities,
-      })
-      -- tailwindcss
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities,
-      })
-      -- golang
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-      })
+      }
 
-      -- -- java
-      -- lspconfig.jdtls.setup({
-      --   settings = {
-      --     java = {
-      --       configuration = {
-      --         runtimes = {
-      --           {
-      --             name = "JavaSE-21",
-      --             path = "/usr/lib/jvm/java-21-openjdk",
-      --             default = true,
-      --           },
-      --         },
-      --       },
-      --     },
-      --   },
-      -- })
-
-      -- html
-      lspconfig.html.setup({
+      vim.lsp.config['eslint'] = {
         capabilities = capabilities,
-        filetypes = { "html", "htmldjango" },
-      })
+      }
 
-      -- css
-      lspconfig.cssls.setup({
+      vim.lsp.config['zls'] = {
         capabilities = capabilities,
-        filetypes = { "css", "scss", "less" },
-      })
+      }
+
+      vim.lsp.config['yamlls'] = {
+        capabilities = capabilities,
+      }
+
+      vim.lsp.config['tailwindcss'] = {
+        capabilities = capabilities,
+      }
+
+      vim.lsp.config['gopls'] = {
+        capabilities = capabilities,
+      }
 
       -- nix
-      lspconfig.rnix.setup({ capabilities = capabilities })
-
-      lspconfig.sqls.setup({
+      vim.lsp.config['rnix'] = {
         capabilities = capabilities,
-        filetypes = { "sql", "mysql", "sqlite" },
-        settings = {
-          sqls = {
-            connections = {
-              {
-                driver = "mysql",
-                -- dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sakila"
-                -- dataSourceName = "dat:1@tcp(127.0.0.1:3307)/hr"
-                dataSourceName = "dat:1@tcp(127.0.0.1:3307)/sms"
-
-                -- driver = "postgresql",
-                -- dataSourceName = 'host=127.0.0.1 port=5432 user=dat password=1 dbname=habitdb sslmode=disable',
-              }
-            }
-          }
-        }
-      })
+      }
 
       -- protocol buffer
-      lspconfig.buf_ls.setup({ capabilities = capabilities })
+      vim.lsp.config['buf_ls'] = {
+        capabilities = capabilities,
+      }
 
       -- docker compose
-      lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
+      vim.lsp.config['docker_compose_language_service'] = {
+        capabilities = capabilities,
+      }
 
-      --python
-      lspconfig.pylsp.setup({ capabilities = capabilities })
+      -- cobol
+      vim.lsp.config['cobol_ls'] = {
+        capabilities = capabilities,
+      }
+
+      -- svelte
+      vim.lsp.config['svelte'] = {
+        capabilities = capabilities,
+      }
+
+      -- python
+      vim.lsp.config['pyright'] = {
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              inlayHints = {
+                variableTypes = true,
+                functionReturnTypes = true,
+                callArgumentNames = "all", -- hoặc "none" nếu muốn tắt
+                propertyDeclarationTypes = true,
+                parameterTypes = true,
+              },
+            },
+          },
+        },
+        on_attach = function(_, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end,
+      }
+
+      -- bash
+      vim.lsp.config['bashls'] = {
+        capabilities = capabilities,
+      }
+
+      -- protocol buffer (kích hoạt riêng theo filetype)
+      vim.lsp.config['buf_language_server'] = {
+        capabilities = capabilities,
+      }
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "proto",
+        callback = function()
+          vim.lsp.enable('buf_language_server')
+        end,
+      })
+      vim.lsp.enable({
+        'lua_ls',
+        'ts_ls',
+        'eslint',
+        'zls',
+        'yamlls',
+        'tailwindcss',
+        'gopls',
+        'rnix',
+        'buf_ls',
+        'docker_compose_language_service',
+        'cobol_ls',
+        'svelte',
+        'pyright',
+        'bashls'
+      })
 
       -- lsp kepmap setting
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, {})
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
       vim.keymap.set("n", "<leader>ih", function()
         local enabled = vim.lsp.inlay_hint.is_enabled()
         vim.lsp.inlay_hint.enable(not enabled)
