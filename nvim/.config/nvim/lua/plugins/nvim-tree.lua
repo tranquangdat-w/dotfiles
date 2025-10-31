@@ -46,6 +46,7 @@ return {
       },
       git = {
         ignore = false,
+        show_on_open_dirs = false,
       },
       renderer = {
         -- group_empty = true,
@@ -53,7 +54,7 @@ return {
         highlight_modified = "icon",
         icons = {
           show = {
-            git = false,
+            git = true,
             file = true,
             folder = false,
             folder_arrow = true,

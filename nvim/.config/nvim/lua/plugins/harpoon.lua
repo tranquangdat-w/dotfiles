@@ -8,7 +8,7 @@ return {
     local toggle_opts = {
       border = "rounded",
       title_pos = "center",
-      ui_width_ratio = 0.40,
+      ui_width_ratio = 0.6,
     }
 
     -- REQUIRED

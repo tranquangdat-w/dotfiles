@@ -5,13 +5,32 @@ return {
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
   config = function()
+    -- Declare a global function to retrieve the current directory
+    function _G.get_oil_winbar()
+      local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+      local dir = require("oil").get_current_dir(bufnr)
+      if dir then
+        local cwd = vim.loop.cwd()
+        local relative = dir:gsub("^" .. vim.pesc(cwd) .. "/?", ""):gsub("/$", "")
+        if relative == "" then
+          return string.rep(" ", 6) .. "."
+        else
+          return string.rep(" ", 6) .. "./" .. relative
+        end
+      else
+        return string.rep(" ", 6) .. vim.api.nvim_buf_get_name(0)
+      end
+    end
     require("oil").setup({
+      win_options = {
+        winbar = "%!v:lua.get_oil_winbar()",
+      },
       float = {
         -- Padding around the floating window
         padding = 2,
         max_width = 80,
         max_height = 0,
-        -- border = "rounded",
+        border = "rounded",
         win_options = {
           winblend = 0,
         },
