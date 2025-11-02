@@ -164,6 +164,14 @@ return {
         capabilities = capabilities,
       }
 
+      vim.lsp.config.lemminx = {
+        capabilities = capabilities
+      }
+
+      vim.lsp.config.cssls = {
+        capabilities = capabilities
+      }
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "proto",
         callback = function()
@@ -184,7 +192,9 @@ return {
         'cobol_ls',
         'svelte',
         'pyright',
-        'bashls'
+        'bashls',
+        'lemminx',
+        "cssls"
       })
 
       -- lsp kepmap setting
