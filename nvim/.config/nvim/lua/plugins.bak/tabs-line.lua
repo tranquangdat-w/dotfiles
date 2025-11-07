@@ -5,6 +5,7 @@ return {
     require("bufferline").setup({
       options = {
         mode = "tabs",
+        max_name_length = 200,
         modified_icon = "",
         separator_style = "none",
         show_buffer_close_icons = false,

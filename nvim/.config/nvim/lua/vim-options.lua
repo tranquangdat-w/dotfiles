@@ -21,7 +21,7 @@ vim.opt.softtabstop = 2
 
 vim.opt.swapfile = false
 
-vim.opt.guicursor = "n-v-c-i:block-blinkwait700-blinkon400-blinkoff250"
+vim.opt.guicursor = "n-v-c-i:block"
 
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
@@ -64,12 +64,31 @@ vim.keymap.set("x", "p", "\"_dP", { desc = "Paste without overwriting clipboard"
 -- quickfix
 vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
 vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
+vim.keymap.set("n", "<leader>cq", ":cclose<CR>", { noremap = true, silent = true, desc = "Close quickfix list" })
+vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true, desc = "Open quickfix list" })
+
+-- change size panel
+vim.keymap.set("n", "<A-h>", "3<C-w><", { desc = "Decrease window width" })
+vim.keymap.set("n", "<A-l>", "3<C-w>>", { desc = "Increase window width" })
 
 -- DBUIToggle
 vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true, desc = "Toggle database UI" })
 
-vim.keymap.set("n", "<leader>/", function()
-  vim.opt.hlsearch = not vim.opt.hlsearch:get()
-end, { desc = "Toggle hlsearch" })
+-- Inline search
+vim.keymap.set("n", "<leader>/", ":nohl<CR>", { desc = "Close hlsearch" })
 
-vim.keymap.set("n", "<leader>si", ":!feh %<CR>")
+-- Diagnostics toggle
+local minimal_diagnostic = false
+vim.keymap.set("n", "<leader>id", function()
+  minimal_diagnostic = not inimal_diagnostic
+  vim.diagnostic.config({
+    virtual_text = not minimal_diagnostic,
+    virtual_lines = false,
+    underline = not minimal_diagnostic,
+    signs = true,
+  })
+  print(minimal_diagnostic and "Minimal diagnostics (only signs)" or "Full diagnostics")
+end, { desc = "Toggle minimal diagnostics" })
+
+-- Open image file
+vim.keymap.set("n", "<leader>si", ":!feh %<CR>", { desc = "Open image file" })

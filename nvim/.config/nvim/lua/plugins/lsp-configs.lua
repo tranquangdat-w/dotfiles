@@ -133,6 +133,23 @@ return {
         capabilities = capabilities,
       }
 
+      vim.lsp.config['pylsp'] = {
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              inlayHints = {
+                variableTypes = true,
+                functionReturnTypes = true,
+                callArgumentNames = "all",
+                propertyDeclarationTypes = true,
+                parameterTypes = true,
+              },
+            },
+          },
+        }
+      }
+
       -- python
       vim.lsp.config['pyright'] = {
         capabilities = capabilities,
@@ -142,16 +159,13 @@ return {
               inlayHints = {
                 variableTypes = true,
                 functionReturnTypes = true,
-                callArgumentNames = "all", -- hoặc "none" nếu muốn tắt
+                callArgumentNames = "all",
                 propertyDeclarationTypes = true,
                 parameterTypes = true,
               },
             },
           },
-        },
-        on_attach = function(_, bufnr)
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end,
+        }
       }
 
       -- bash
@@ -194,7 +208,8 @@ return {
         'pyright',
         'bashls',
         'lemminx',
-        "cssls"
+        "cssls",
+        "pylsp",
       })
 
       -- lsp kepmap setting
