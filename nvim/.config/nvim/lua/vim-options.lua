@@ -31,10 +31,6 @@ vim.cmd([[
   autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
 ]])
 
-
--- paste over highlight word
-vim.keymap.set("x", "<leader>p", '"_dP')
-
 vim.o.background = "dark" -- or "light" for light mode
 
 -- UFO folding
@@ -49,7 +45,12 @@ vim.keymap.set("n", "<C-w>v", "<C-w>s", { desc = "Split window horizontally" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostics" })
+
+vim.keymap.set("n", "<leader>e", function()
+  vim.diagnostic.open_float(nil, {
+    border = "rounded",
+  })
+end, { desc = "Show diagnostics (with border)" })
 
 -- copy current file path (absolute) into clipboard
 vim.keymap.set("n", "<leader>cp", function()
@@ -59,7 +60,7 @@ vim.keymap.set("n", "<leader>cp", function()
   print("Copied: " .. filepath)
 end, { desc = "Copy absolute path to clipboard" })
 
-vim.keymap.set("x", "p", "\"_dP", { desc = "Paste without overwriting clipboard" })
+vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without overwriting clipboard" })
 
 -- quickfix
 vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
@@ -80,7 +81,7 @@ vim.keymap.set("n", "<leader>/", ":nohl<CR>", { desc = "Close hlsearch" })
 -- Diagnostics toggle
 local minimal_diagnostic = false
 vim.keymap.set("n", "<leader>id", function()
-  minimal_diagnostic = not inimal_diagnostic
+  minimal_diagnostic = not minimal_diagnostic
   vim.diagnostic.config({
     virtual_text = not minimal_diagnostic,
     virtual_lines = false,
@@ -92,3 +93,13 @@ end, { desc = "Toggle minimal diagnostics" })
 
 -- Open image file
 vim.keymap.set("n", "<leader>si", ":!feh %<CR>", { desc = "Open image file" })
+
+-- highlight yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+  pattern = "*",
+  desc = "highlight select on yank",
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200, visual = true })
+  end
+})
