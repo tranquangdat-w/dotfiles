@@ -5,7 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
-vim.opt.colorcolumn = "94"
+-- vim.opt.colorcolumn = "94"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.winbar = "      %t %m"
@@ -27,9 +27,12 @@ vim.opt.guicursor = "n-v-c-i:block"
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Set Esc to switch to normal mode in terminal
-vim.cmd([[
-  autocmd TermOpen * tnoremap <Esc> <C-\><C-n>
-]])
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  command = "setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab",
+})
 
 vim.o.background = "dark" -- or "light" for light mode
 
@@ -63,8 +66,8 @@ end, { desc = "Copy absolute path to clipboard" })
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without overwriting clipboard" })
 
 -- quickfix
-vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
-vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
+-- vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
+-- vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
 vim.keymap.set("n", "<leader>cq", ":cclose<CR>", { noremap = true, silent = true, desc = "Close quickfix list" })
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true, desc = "Open quickfix list" })
 

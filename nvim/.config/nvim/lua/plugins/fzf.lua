@@ -13,7 +13,7 @@ return {
         width = 0.85,
         preview = {
           layout = "reverse",
-          vertical = "up", -- preview ở trên
+          vertical = "up:60%", -- preview ở trên
         },
       },
       fzf_colors = {
@@ -47,5 +47,8 @@ return {
       fzf.grep({ search = vim.fn.input("Grep For > ") })
     end, { desc = "FZF grep with input" })
     vim.keymap.set("n", "<leader>fw", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
+    vim.api.nvim_create_user_command('Fgs', function()
+      require('fzf-lua').git_status()
+    end, {})
   end,
 }

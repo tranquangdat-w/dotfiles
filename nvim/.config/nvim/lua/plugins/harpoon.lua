@@ -27,7 +27,7 @@ return {
     vim.keymap.set("n", "<leader>8", function() harpoon:list():select(8) end, { desc = "Move to harpoon item 8" })
     vim.keymap.set("n", "<leader>9", function() harpoon:list():select(9) end, { desc = "Move to harpoon item 9" })
 
-    vim.keymap.set("n", "H", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
-    vim.keymap.set("n", "L", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
+    vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
+    vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
   end
 }

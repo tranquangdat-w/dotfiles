@@ -103,7 +103,9 @@ return {
 
     vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
     vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Start/Continue Debugging" })
-    vim.keymap.set('n', '<leader>ds', function() widgets.hover() end, { desc = "Show Variable (Hover)" })
+    vim.keymap.set('n', '<leader>de', function() require("dapui").eval(nil, { enter = true }) end, { noremap = true, silent = true, desc = "DAP Eval (focus window)" })
+    vim.keymap.set('v', '<leader>de', function() require("dapui").eval(nil, { enter = true }) end, { noremap = true, silent = true, desc = "DAP Eval (focus window)" })
+    vim.keymap.set('n', '<leader>ds', function() widgets.hover(nil, { border = "rounded" }) end, { desc = "Show Variable (Hover)" })
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
 

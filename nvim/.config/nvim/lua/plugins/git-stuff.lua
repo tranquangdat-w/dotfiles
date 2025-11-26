@@ -5,6 +5,11 @@ return {
     dependencies = { "sindrets/diffview.nvim" },
     opts = {
       on_attach = function(bufnr)
+        require("gitsigns").setup({
+          preview_config = {
+            border = "rounded",
+          },
+        })
         local gs = package.loaded.gitsigns
         local function map(mode, l, r, desc)
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
@@ -14,11 +19,12 @@ return {
         map("n", "[h", gs.prev_hunk, "Prev hunk")
         -- Actions
         map("n", "<leader>ghs", gs.stage_hunk, "Stage hunk")
-        map("n", "<leader>ghr", gs.stage_hunk, "Reset hunk")
+        map("n", "<leader>ghr", gs.reset_hunk, "Reset hunk")
+        map("n", "<leader>ghp", gs.preview_hunk, "Preview hunk")
         map("v", "<leader>ghs", function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, "Stage hunk")
-        map("v", "<leader>hr", function()
+        map("v", "<leader>ghr", function()
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, "Reset hunk")
 
@@ -48,4 +54,7 @@ return {
       end,
     },
   },
+  {
+    'tpope/vim-fugitive'
+  }
 }
