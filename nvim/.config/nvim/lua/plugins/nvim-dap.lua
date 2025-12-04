@@ -3,8 +3,7 @@ return {
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
-
-    "leoluz/nvim-dap-go",
+    'leoluz/nvim-dap-go',
     -- 'mfussenegger/nvim-dap-python',
   },
   config = function()
@@ -12,8 +11,8 @@ return {
     local dapui = require("dapui")
     local widgets = require('dap.ui.widgets')
 
+    dapui.setup()
     require("dap-go").setup()
-    require("dapui").setup()
     -- require("dap-python").setup("uv")
 
     -- CHECK
@@ -88,6 +87,26 @@ return {
         } or nil,
       }
     end
+
+    require("dapui").setup({
+      layouts = {
+        {
+          elements = {
+            { id = "stacks",      size = 0.10 },
+            { id = "breakpoints", size = 0.20 },
+            { id = "scopes",      size = 0.25 },
+            { id = "watches",     size = 0.45 },
+          },
+          size = 60,
+          position = "left",
+        },
+        {
+          elements = { "repl", "console" },
+          size = 20,
+          position = "bottom",
+        },
+      },
+    })
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
     end
@@ -112,10 +131,46 @@ return {
     vim.keymap.set("n", "<leader>dw", function()
       local word = vim.fn.expand("<cword>")
       if word ~= "" then
-        require("dapui").elements.watches.add(word)
+        dapui.elements.watches.add(word)
         print("Added to watch: " .. word)
       end
     end, { desc = "Add word under cursor to Watch" })
+
+    local function get_visual_selection()
+      local _, ls, cs, _ = unpack(vim.fn.getpos("'<"))
+      local _, le, ce, _ = unpack(vim.fn.getpos("'>"))
+
+      -- Normalize (swap if reversed)
+      if (ls > le) or (ls == le and cs > ce) then
+        ls, le = le, ls
+        cs, ce = ce, cs
+      end
+
+      local lines = vim.fn.getline(ls, le)
+      if #lines == 0 then
+        return ""
+      end
+
+      -- Trim last line
+      lines[#lines] = string.sub(
+        lines[#lines],
+        1,
+        ce - (vim.o.selection == "inclusive" and 0 or 1)
+      )
+
+      -- Trim first line
+      lines[1] = string.sub(lines[1], cs)
+
+      return table.concat(lines, "\n")
+    end
+
+    vim.keymap.set("v", "<leader>dw", function()
+      local text = get_visual_selection()
+      if text ~= "" then
+        require("dapui").elements.watches.add(text)
+        print("Added to watch: " .. text)
+      end
+    end, { desc = "Add visual selection to Watch" })
   end
 }
 

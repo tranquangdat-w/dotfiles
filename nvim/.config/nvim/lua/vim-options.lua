@@ -27,7 +27,7 @@ vim.opt.guicursor = "n-v-c-i:block"
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Set Esc to switch to normal mode in terminal
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+-- vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
@@ -66,10 +66,23 @@ end, { desc = "Copy absolute path to clipboard" })
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without overwriting clipboard" })
 
 -- quickfix
--- vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
--- vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
-vim.keymap.set("n", "<leader>cq", ":cclose<CR>", { noremap = true, silent = true, desc = "Close quickfix list" })
-vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true, desc = "Open quickfix list" })
+vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
+vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
+vim.keymap.set("n", "<leader>cq", function()
+  local qf_open = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      qf_open = true
+      break
+    end
+  end
+
+  if qf_open then
+    vim.cmd("cclose")
+  else
+    vim.cmd("copen")
+  end
+end, { noremap = true, silent = true, desc = "Toggle quickfix" })
 
 -- change size panel
 vim.keymap.set("n", "<A-h>", "3<C-w><", { desc = "Decrease window width" })
@@ -103,6 +116,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
   desc = "highlight select on yank",
   callback = function()
-    vim.highlight.on_yank({ timeout = 200, visual = true })
+    vim.highlight.on_yank({ timeout = 40, visual = true })
   end
 })

@@ -12,6 +12,7 @@ return {
 
     require('lualine').setup {
       options = { theme = 'gruvbox_dark' },
+      -- options = { theme = 'rose-pine' },
       -- options = { theme = 'catppuccin' },
       -- options = { theme = 'nightfox' },
       sections = {

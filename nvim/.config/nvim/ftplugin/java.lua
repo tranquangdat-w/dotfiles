@@ -17,7 +17,9 @@ local bundles = {
 }
 
 local on_attach = function(client, bufnr)
-  require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+  require('jdtls').setup_dap({
+    hotcodereplace = 'auto',
+  })
 end
 
 

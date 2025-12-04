@@ -6,6 +6,20 @@ return {
   { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline" },
   {
     "hrsh7th/nvim-cmp",
+    dependencies = { "rcarriga/cmp-dap" },
+    opts = function()
+      require("cmp").setup({
+        enabled = function()
+          return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+        end,
+      })
+
+      require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+          { name = "dap" },
+        },
+      })
+    end,
     config = function()
       local cmp = require("cmp")
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -17,7 +31,9 @@ return {
           end,
         },
         window = {
-          completion = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered({
+            max_height = 24
+          }),
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
