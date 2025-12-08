@@ -49,7 +49,7 @@ return {
         show_on_open_dirs = false,
       },
       renderer = {
-        -- group_empty = true,
+        group_empty = true,
         indent_width = 0.1,
         highlight_modified = "icon",
         icons = {
