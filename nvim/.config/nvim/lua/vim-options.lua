@@ -96,6 +96,12 @@ vim.keymap.set("n", "<leader>/", ":nohl<CR>", { desc = "Close hlsearch" })
 
 -- Diagnostics toggle
 local minimal_diagnostic = false
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = false,
+  underline = true,
+  signs = true,
+})
 vim.keymap.set("n", "<leader>id", function()
   minimal_diagnostic = not minimal_diagnostic
   vim.diagnostic.config({
