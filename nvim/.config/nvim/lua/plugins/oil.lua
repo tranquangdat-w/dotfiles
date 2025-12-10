@@ -25,10 +25,9 @@ return {
       -- win_options = {
       --   winbar = "%!v:lua.get_oil_winbar()",
       -- },
-      confirm = {
-        create = false,
-        rename = true,
-        delete = true,
+      skip_confirm_for_simple_edits = true,
+      confirmation = {
+        border = "rounded",
       },
       float = {
         -- Padding around the floating window

@@ -3,7 +3,6 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons"
   },
-  lazy = true,
   config = function()
     vim.api.nvim_set_keymap(
       'n',
