@@ -10,12 +10,28 @@ return {
         separator_style = "none",
         show_buffer_close_icons = false,
         show_close_icon = false,
+        name_formatter = function(buf)
+          local path = buf.path or buf.name or ""
+
+          -- Nếu là oil buffer thì loại bỏ prefix "oil://"
+          if path:match("^oil://") then
+            path = path:gsub("^oil://", "")
+          end
+
+          -- Loại bỏ trường hợp oil tự thêm 3 dấu "/" → "oil:///"
+          path = path:gsub("^///", "/")
+
+          -- Chuyển thành relative path
+          local rel = vim.fn.fnamemodify(path, ":.")
+
+          return rel ~= "" and rel or "[Oil]"
+        end,
       },
       highlights = {
         background = { bg = 'none' },
         fill = { bg = 'none' },
-        buffer_selected = { bg = 'none', fg = '#fabd2f', bold = true }, -- Gruvbox vàng
-        buffer_visible = { bg = 'none', fg = '#a89984' }, -- Gruvbox nâu nhạt
+        buffer_selected = { bg = 'none', fg = '#fabd2f', bold = true },
+        buffer_visible = { bg = 'none', fg = '#a89984' },
         close_button = { bg = 'none' },
         close_button_selected = { bg = 'none' },
         close_button_visible = { bg = 'none' },

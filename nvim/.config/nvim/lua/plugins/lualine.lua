@@ -19,8 +19,8 @@ return {
         lualine_c = {
           {
             'filename',
-            path = 1,
-            color = { fg = '#ebdbb2' }, -- Gruvbox colors
+            -- path = 1,
+            -- color = { fg = '#ebdbb2' }, -- Gruvbox colors
           },
           { IsZoomedIn },
         },
