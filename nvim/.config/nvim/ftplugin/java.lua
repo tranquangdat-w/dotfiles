@@ -25,7 +25,7 @@ end
 
 local config = {
   cmd = {
-    'java',
+    '/home/dat.tran5/.sdkman/candidates/java/21-oracle/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',

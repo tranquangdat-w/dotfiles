@@ -127,6 +127,7 @@ return {
     vim.keymap.set('n', '<leader>ds', function() widgets.hover(nil, { border = "rounded" }) end, { desc = "Show Variable (Hover)" })
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
+    vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
 
     vim.keymap.set("n", "<leader>dw", function()
       local word = vim.fn.expand("<cword>")

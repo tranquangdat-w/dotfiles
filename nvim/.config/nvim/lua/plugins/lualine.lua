@@ -4,6 +4,7 @@ return {
   config = function()
     local function IsZoomedIn()
       if vim.t['simple-zoom'] == nil then
+        vim.o.showtabline = 2
         return ''
       elseif vim.t['simple-zoom'] == 'zoom' then
         return 'Zoom'
@@ -22,7 +23,10 @@ return {
             -- path = 1,
             -- color = { fg = '#ebdbb2' }, -- Gruvbox colors
           },
-          { IsZoomedIn },
+          {
+            IsZoomedIn,
+            color = { fg = '#fb4934' },
+          },
         },
       },
     }
