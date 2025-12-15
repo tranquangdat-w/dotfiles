@@ -22,7 +22,13 @@ return {
         gutter = "-1",
       },
       keymap = {
-        fzf = { ["ctrl-q"] = "select-all+accept" }
+        fzf = {
+          ["ctrl-q"] = "select-all+accept",
+        },
+				builtin = {
+					["<C-d>"] = "preview-page-down",
+					["<C-u>"] = "preview-page-up",
+				},
       }
     })
 
@@ -32,7 +38,7 @@ return {
     vim.keymap.set("n", "<leader>ff", function()
       require("fzf-lua").files({
         fd_opts =
-        "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings, --exclude 'build'",
+        "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
       })
     end, { desc = "Find Files" })
     -- vim.keymap.set("n", "<leader>pf", fzf.git_files, { desc = "Find Git Files" })
