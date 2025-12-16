@@ -26,8 +26,8 @@ return {
           ["ctrl-q"] = "select-all+accept",
         },
 				builtin = {
-					["<C-d>"] = "preview-page-down",
-					["<C-u>"] = "preview-page-up",
+					["<C-e>"] = "preview-page-down",
+					["<C-y>"] = "preview-page-up",
 				},
       }
     })
