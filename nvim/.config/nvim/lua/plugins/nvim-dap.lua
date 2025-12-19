@@ -102,7 +102,7 @@ return {
         },
         {
           elements = { "repl", "console" },
-          size = 20,
+          size = 15,
           position = "bottom",
         },
       },

@@ -1,23 +1,14 @@
 return {
   "nvim-tree/nvim-tree.lua",
+  lazy=true,
   dependencies = {
     "nvim-tree/nvim-web-devicons"
   },
+  keys = {
+    { "<leader>t", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+    { "<leader>vt", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Find file in NvimTree" },
+  },
   config = function()
-    vim.api.nvim_set_keymap(
-      'n',
-      '<leader>t',
-      ':NvimTreeToggle<CR>',
-      { noremap = true, silent = true }
-    )
-
-    vim.api.nvim_set_keymap(
-      'n',
-      '<leader>vt',
-      ':NvimTreeFindFileToggle<CR>',
-      { noremap = true, silent = true }
-    )
-
     require("nvim-tree").setup({
       sort = {
         sorter = "case_sensitive"
