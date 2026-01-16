@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/dat.tran5/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # If you come from bash you might have to change your $PATH.
 
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -113,6 +120,7 @@ alias v="nvim"
 alias ex="exit"
 alias da="direnv allow"
 alias f="fzf" 
+alias c="clear"
 alias cl="clear"
 alias lzd="lazydocker"
 alias dk="docker"
@@ -120,6 +128,8 @@ alias sf="screenfetch"
 alias grd="gradle"
 alias pomo="tomatoshell -f"
 alias cal="calcurse"
+alias lzg="lazygit"
+alias pn=pnpm
 
 # Cấu hình Vim và NVM
 export NVM_DIR="$HOME/.nvm"
@@ -134,13 +144,11 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
-export PATH="$JAVA_HOME/bin:$PATH"
-
 export POMODORO_HOME="/home/dat/dotfiles/pomodoro/tomatoshell"
 export PATH="$POMODORO_HOME/bin:$PATH"
 
-setxkbmap -option caps:escape
+export SMARTGIT_HOME="/home/dat.tran5/smartgit"
+export PATH="$SMARTGIT_HOME/bin:$PATH"
 
 export CALCURSE_EDITOR="nvim"
 
@@ -155,3 +163,12 @@ source <(fzf --zsh)
 
 eval $(thefuck --alias fuck)
 
+
+[[ -s "/home/dat.tran5/.gvm/scripts/gvm" ]] && source "/home/dat.tran5/.gvm/scripts/gvm"
+
+export PATH=$PATH:/usr/local/go/bin
+
+bindkey -v
+
+setxkbmap -option caps:escape
+# setxkbmap -option ctrl:swap_lalt_lctl

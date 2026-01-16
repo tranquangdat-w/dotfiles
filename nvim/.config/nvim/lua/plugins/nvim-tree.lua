@@ -5,8 +5,8 @@ return {
     "nvim-tree/nvim-web-devicons"
   },
   keys = {
-    { "<leader>t", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
-    { "<leader>vt", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Find file in NvimTree" },
+    { "<leader><leader>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+    { "<leader>ve", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Find file in NvimTree" },
   },
   config = function()
     require("nvim-tree").setup({
@@ -40,15 +40,18 @@ return {
         show_on_open_dirs = false,
       },
       renderer = {
+        indent_markers = {
+          enable = true,
+        },
         group_empty = true,
-        indent_width = 0.1,
+        -- indent_width = 0.1,
         highlight_modified = "icon",
         icons = {
           show = {
             git = true,
             file = true,
-            folder = false,
-            folder_arrow = true,
+            folder = true,
+            folder_arrow = false,
             modified = true,
           },
           glyphs = {

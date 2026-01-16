@@ -14,7 +14,6 @@ return {
       ensure_installed = {
         "lua_ls",
         "ts_ls",
-        "eslint",
         "zls",
         "yamlls",
         "tailwindcss",
@@ -27,6 +26,7 @@ return {
         "buf_ls",
         "docker_compose_language_service",
         "pylsp",
+        "jsonls",
       },
     },
   },
@@ -186,6 +186,10 @@ return {
         capabilities = capabilities
       }
 
+      vim.lsp.config.jsonls = {
+        capabilities = capabilities
+      }
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "proto",
         callback = function()
@@ -210,6 +214,7 @@ return {
         'lemminx',
         "cssls",
         "pylsp",
+        "jsonls",
       })
 
       -- lsp kepmap setting
@@ -219,6 +224,7 @@ return {
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, {})
+      vim.keymap.set("n", "gf", vim.lsp.buf.incoming_calls, {})
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 

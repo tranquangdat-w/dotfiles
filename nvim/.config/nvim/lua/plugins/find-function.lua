@@ -24,7 +24,8 @@ return {
       layout = {
         min_width = 30,
         default_direction = "left",
-      }
+      },
+      filter_kind = false
     })
 
     local actions = require("telescope.actions")
@@ -94,6 +95,16 @@ return {
       "n", "<leader>fm", ":Telescope aerial<CR>",
       { desc = "Open Aerial symbols with Telescope" }
     )
+
+vim.keymap.set(
+  "n", "<leader>fm",
+  function()
+    require("telescope").extensions.aerial.aerial({
+      filter_kind = { "Function", "Method" }
+    })
+  end,
+  { desc = "Open Aerial (functions only) with Telescope" }
+)
 
     vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
   end,

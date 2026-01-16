@@ -94,23 +94,33 @@ vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent =
 -- Inline search
 vim.keymap.set("n", "<leader>/", ":nohl<CR>", { desc = "Close hlsearch" })
 
--- Diagnostics toggle
-local minimal_diagnostic = false
+-- Diagnostic state (global để dễ dùng ở nơi khác, ví dụ lualine)
+vim.g.minimal_diagnostic = false
+
+-- Default config
 vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
   underline = true,
   signs = true,
 })
+
+-- Toggle keymap
 vim.keymap.set("n", "<leader>id", function()
-  minimal_diagnostic = not minimal_diagnostic
+  vim.g.minimal_diagnostic = not vim.g.minimal_diagnostic
+
   vim.diagnostic.config({
-    virtual_text = not minimal_diagnostic,
+    virtual_text = not vim.g.minimal_diagnostic,
     virtual_lines = false,
-    underline = not minimal_diagnostic,
-    signs = true,
+    underline = not vim.g.minimal_diagnostic,
+    signs = not vim.g.minimal_diagnostic,
   })
-  print(minimal_diagnostic and "Minimal diagnostics (only signs)" or "Full diagnostics")
+
+  local msg = vim.g.minimal_diagnostic
+    and "Minimal diagnostics (only signs)"
+    or "Full diagnostics"
+
+  print(msg)
 end, { desc = "Toggle minimal diagnostics" })
 
 -- Open image file
