@@ -92,19 +92,15 @@ return {
     -- vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
 
     vim.keymap.set(
-      "n", "<leader>fm", ":Telescope aerial<CR>",
-      { desc = "Open Aerial symbols with Telescope" }
+      "n", "<leader>fm",
+      function()
+        require("telescope").extensions.aerial.aerial({
+          filter_kind = { "Function", "Method" },
+          previewer = false,
+        })
+      end,
+      { desc = "Open Aerial (functions only) with Telescope" }
     )
-
-vim.keymap.set(
-  "n", "<leader>fm",
-  function()
-    require("telescope").extensions.aerial.aerial({
-      filter_kind = { "Function", "Method" }
-    })
-  end,
-  { desc = "Open Aerial (functions only) with Telescope" }
-)
 
     vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
   end,

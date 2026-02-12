@@ -13,7 +13,7 @@ return {
           height = 0.8,
           width = 0.85,
           preview = {
-            layout = "reverse",
+            layout = "vertical",
             vertical = "up:60%", -- preview ở trên
           },
         },
@@ -38,8 +38,8 @@ return {
 
       vim.keymap.set("n", "<leader>ff", function()
         require("fzf-lua").files({
-          fd_opts =
-          "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
+          fd_opts = "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
+          previewer = false,
         })
       end, { desc = "Find Files" })
       -- vim.keymap.set("n", "<leader>pf", fzf.git_files, { desc = "Find Git Files" })

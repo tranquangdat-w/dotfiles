@@ -50,12 +50,20 @@ return {
     name = "rose-pine",
     config = function()
       require("rose-pine").setup({
-        variant = "moon", -- auto, main, moon, or dawn
-        styles = {
-          transparency = true
-        }
+          disable_background = true
       })
+      function ColorMyPencils(color) 
+        color = color or "rose-pine"
+        vim.cmd.colorscheme(color)
+
+        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+      end
+
+      ColorMyPencils()
     end
+
   },
   {
     "EdenEast/nightfox.nvim",

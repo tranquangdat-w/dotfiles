@@ -24,7 +24,8 @@ return {
 
     require('lualine').setup {
       options = {
-        theme = 'gruvbox_dark',
+        -- theme = 'gruvbox_dark',
+        theme = 'rose pine'
       },
       sections = {
         lualine_c = {

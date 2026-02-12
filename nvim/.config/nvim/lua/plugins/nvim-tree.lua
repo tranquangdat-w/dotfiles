@@ -10,6 +10,13 @@ return {
   },
   config = function()
     require("nvim-tree").setup({
+      update_focused_file = {
+        enable = true,
+        update_root = false, -- đổi thành true nếu muốn root đổi theo file
+      },
+      filesystem_watchers = {
+        enable = true,
+      },
       sort = {
         sorter = "case_sensitive"
       },

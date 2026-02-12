@@ -21,20 +21,20 @@ require("floating-term")
 require("lazy").setup("plugins")
 
 -- vim.cmd([[colorscheme catppuccin]])
-vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd([[colorscheme nightfox]])
--- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine")
 
 local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
 
 vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
 
-vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
-vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
+-- vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
+-- vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
 
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
+-- vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
+-- vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
+-- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 -- Disable Copilot
 vim.cmd("Copilot disable")
@@ -71,11 +71,11 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
 
-vim.api.nvim_set_hl(0, "TreesitterContext", {
-  bg = "#1e1e1e", -- Màu nền hơi tối (tùy theme)
-  bold = true,    -- Chữ đậm
-})
-
-vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
-  fg = "#858585", -- Giống màu line number
-})
+-- vim.api.nvim_set_hl(0, "TreesitterContext", {
+--   bg = "#1e1e1e", -- Màu nền hơi tối (tùy theme)
+--   bold = true,    -- Chữ đậm
+-- })
+--
+-- vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
+--   fg = "#858585", -- Giống màu line number
+-- })

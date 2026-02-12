@@ -28,6 +28,8 @@ return {
       }
     },
     config = function()
+    local current_path = vim.loop.cwd()
+    local in_special_repo = current_path:match("projects/myspecialrepo") ~= nil
       require("neotest").setup({
         adapters = {
           require("neotest-golang")({ recursive_run = true }), -- Registration

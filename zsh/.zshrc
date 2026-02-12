@@ -11,7 +11,8 @@ compinit
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="eastwood"
+# ZSH_THEME="eastwood"
+ZSH_THEME="robbyrussell"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -123,13 +124,14 @@ alias f="fzf"
 alias c="clear"
 alias cl="clear"
 alias lzd="lazydocker"
-alias dk="docker"
+alias d="docker"
 alias sf="screenfetch"
 alias grd="gradle"
 alias pomo="tomatoshell -f"
 alias cal="calcurse"
 alias lzg="lazygit"
 alias pn=pnpm
+alias ge=gemini
 
 # Cấu hình Vim và NVM
 export NVM_DIR="$HOME/.nvm"
@@ -172,3 +174,11 @@ bindkey -v
 
 setxkbmap -option caps:escape
 # setxkbmap -option ctrl:swap_lalt_lctl
+
+# pnpm
+export PNPM_HOME="/home/dat.tran5/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
