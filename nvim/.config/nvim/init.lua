@@ -37,7 +37,7 @@ vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
 -- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 -- Disable Copilot
-vim.cmd("Copilot disable")
+-- vim.cmd("Copilot disable")
 
 -- convert to english input
 local function force_english()
