@@ -36,7 +36,7 @@ return {
       -- Tùy chỉnh màu số dòng trong grep
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
 
-      vim.keymap.set("n", "<leader>ff", function()
+      vim.keymap.set("n", "<leader><leader>", function()
         require("fzf-lua").files({
           fd_opts = "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
           previewer = false,
@@ -49,11 +49,11 @@ return {
           rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
         })
       end, { desc = "Live Grep includes hidden files" })
-      vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+      vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>fs", function()
         fzf.grep({ search = vim.fn.input("Grep For > ") })
       end, { desc = "FZF grep with input" })
-      vim.keymap.set("n", "<leader>fw", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
+      vim.keymap.set("n", "<leader>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
       vim.api.nvim_create_user_command('Fgs', function()
         require('fzf-lua').git_status()
       end, {})

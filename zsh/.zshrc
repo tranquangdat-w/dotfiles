@@ -139,9 +139,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/zsh_completion" ] && source "$NVM_DIR/zsh_completion"
 export PATH="$PATH:/home/dat/.local/bin"
 
-# Cấu hình Direnv
-eval "$(direnv hook zsh)"
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

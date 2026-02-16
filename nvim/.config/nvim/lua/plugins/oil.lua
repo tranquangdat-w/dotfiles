@@ -74,38 +74,6 @@ return {
       use_default_keymaps = false,
     })
 
-    vim.keymap.set("n", "<leader>vv", require("oil").open, { desc = "Open parent directory" })
-    vim.keymap.set("n", "<leader>vf", require("oil").open_float, { desc = "Oil float" })
-
-    vim.keymap.set("n", "<leader>vi", function()
-      local oil = require("oil")
-      local entry = oil.get_cursor_entry()
-      local dir = oil.get_current_dir()
-
-      if entry and dir then
-        local full_path = vim.fn.fnamemodify(dir .. entry.name, ":p")
-
-        local stat = vim.loop.fs_stat(full_path)
-
-        if stat then
-          vim.notify(
-            vim.inspect({
-              name = entry.name,
-              type = entry.type,
-              full_path = full_path,
-              size = stat.size,
-              mode = stat.mode,
-              mtime = os.date("%c", stat.mtime.sec),
-            }),
-            vim.log.levels.INFO,
-            { title = "Oil Entry Info" }
-          )
-        else
-          vim.notify("Failed to stat file: " .. full_path, vim.log.levels.WARN)
-        end
-      else
-        vim.notify("No entry under cursor", vim.log.levels.WARN)
-      end
-    end, { desc = "Show full file info from Oil" })
+    vim.keymap.set("n", "<leader>v", require("oil").open, { desc = "Open parent directory" })
   end,
 }
