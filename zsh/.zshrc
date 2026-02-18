@@ -1,6 +1,6 @@
 # OPENSPEC:START
 # OpenSpec shell completions configuration
-fpath=("/home/dat.tran5/.oh-my-zsh/custom/completions" $fpath)
+fpath=("~/.oh-my-zsh/custom/completions" $fpath)
 autoload -Uz compinit
 compinit
 # OPENSPEC:END
@@ -146,7 +146,6 @@ source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.
 export POMODORO_HOME="/home/dat/dotfiles/pomodoro/tomatoshell"
 export PATH="$POMODORO_HOME/bin:$PATH"
 
-export SMARTGIT_HOME="/home/dat.tran5/smartgit"
 export PATH="$SMARTGIT_HOME/bin:$PATH"
 
 export CALCURSE_EDITOR="nvim"
@@ -160,10 +159,7 @@ export QT4_IM_MODULE=ibus
 export FZF_DEFAULT_OPTS='--height 100%'
 source <(fzf --zsh)  
 
-eval $(thefuck --alias fuck)
-
-
-[[ -s "/home/dat.tran5/.gvm/scripts/gvm" ]] && source "/home/dat.tran5/.gvm/scripts/gvm"
+[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
 
 export PATH=$PATH:/usr/local/go/bin
 
@@ -173,9 +169,10 @@ setxkbmap -option caps:escape
 # setxkbmap -option ctrl:swap_lalt_lctl
 
 # pnpm
-export PNPM_HOME="/home/dat.tran5/.local/share/pnpm"
+export PNPM_HOME="/home/dat/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

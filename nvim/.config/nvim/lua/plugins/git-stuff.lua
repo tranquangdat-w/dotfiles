@@ -43,6 +43,8 @@ return {
         -- text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
 
+        vim.keymap.set('n', "<leader>gg", "<Cmd>Git<CR>", { desc = "Git status" })
+
         -- Diffview
         vim.keymap.set("n", "<leader>dv", function()
           if next(require("diffview.lib").views) == nil then
