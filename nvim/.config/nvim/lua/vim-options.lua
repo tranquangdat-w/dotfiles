@@ -91,9 +91,6 @@ vim.keymap.set("n", "<A-l>", "3<C-w>>", { desc = "Increase window width" })
 -- DBUIToggle
 vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true, desc = "Toggle database UI" })
 
--- Inline search
-vim.keymap.set("n", "<leader>/", ":nohl<CR>", { desc = "Close hlsearch" })
-
 -- Diagnostic state (global để dễ dùng ở nơi khác, ví dụ lualine)
 vim.g.minimal_diagnostic = false
 
