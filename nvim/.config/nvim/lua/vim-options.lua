@@ -66,8 +66,6 @@ end, { desc = "Copy absolute path to clipboard" })
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without overwriting clipboard" })
 
 -- quickfix
-vim.keymap.set("n", "<M-k>", ":cprev<CR>", { noremap = true, silent = true, desc = "Previous quickfix item" })
-vim.keymap.set("n", "<M-j>", ":cnext<CR>", { noremap = true, silent = true, desc = "Next quickfix item" })
 vim.keymap.set("n", "<leader>cc", function()
   local qf_open = false
   for _, win in ipairs(vim.fn.getwininfo()) do

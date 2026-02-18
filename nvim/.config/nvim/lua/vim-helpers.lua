@@ -11,19 +11,6 @@ vim.keymap.set("n", "<leader>ce", function()
     end
 end, { noremap = true, silent = true, desc = "Copy diagnostic message" })
 
--- go to errors in a file :/
-vim.keymap.set("n", "<leader>ne", function()
-  vim.diagnostic.goto_next({
-    float = { border = "rounded" },
-  })
-end, { desc = "Next diagnostic (with border)" })
-
-vim.keymap.set("n", "<leader>pe", function()
-  vim.diagnostic.goto_prev({
-    float = { border = "rounded" },
-  })
-end, { desc = "Previous diagnostic (with border)" })
-
 vim.keymap.set("n", "<leader>ob", function()
 	local file_path = vim.fn.expand("%:p") -- get the current file path
 	if file_path ~= "" then
