@@ -5,75 +5,15 @@ return {
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
   config = function()
-    -- Declare a global function to retrieve the current directory
-    -- function _G.get_oil_winbar()
-    --   local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-    --   local dir = require("oil").get_current_dir(bufnr)
-    --   if dir then
-    --     local cwd = vim.loop.cwd()
-    --     local relative = dir:gsub("^" .. vim.pesc(cwd) .. "/?", ""):gsub("/$", "")
-    --     if relative == "" then
-    --       return string.rep(" ", 6) .. "."
-    --     else
-    --       return string.rep(" ", 6) .. "./" .. relative
-    --     end
-    --   else
-    --     return string.rep(" ", 6) .. vim.api.nvim_buf_get_name(0)
-    --   end
-    -- end
     require("oil").setup({
-      -- win_options = {
-      --   winbar = "%!v:lua.get_oil_winbar()",
-      -- },
       skip_confirm_for_simple_edits = true,
       confirmation = {
         border = "rounded",
       },
-      float = {
-        -- Padding around the floating window
-        padding = 2,
-        max_width = 80,
-        max_height = 0,
-        border = "rounded",
-        win_options = {
-          winblend = 0,
-        },
+      view_options = {
+        show_hidden = true,
       },
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "oil",
-        callback = function()
-          local oil_actions = require("oil.actions")
-
-          local map = function(lhs, rhs, desc)
-            local opts = { buffer = true, noremap = true, silent = true, desc = desc }
-            vim.keymap.set("n", lhs, rhs, opts)
-          end
-
-          map("g?", oil_actions.show_help.callback, "Show help")
-          map("<CR>", oil_actions.select.callback, "Select file")
-          map("<C-t>", function()
-            oil_actions.select.callback({ tab = true })
-          end, "Select file in new tab")
-          map("<C-p>", function()
-            oil_actions.preview.callback({ vertical = true, split = "rightbelow" })
-          end, "Preview file")
-          map("<C-c>", oil_actions.close.callback, "Close oil")
-          map("R", oil_actions.refresh.callback, "Refresh")
-          map("-", oil_actions.parent.callback, "Parent directory")
-          map("_", oil_actions.open_cwd.callback, "Open current working directory")
-          map("`", oil_actions.cd.callback, "Change directory")
-          map("~", function()
-            oil_actions.cd.callback({ scope = "tab" })
-          end, "Change directory in tab")
-          map("gs", oil_actions.change_sort.callback, "Change sort")
-          map("gx", oil_actions.open_external.callback, "Open in external application")
-          map("H", oil_actions.toggle_hidden.callback, "Toggle hidden files")
-          map("g\\", oil_actions.toggle_trash.callback, "Toggle trash")
-        end,
-      }),
-      use_default_keymaps = false,
     })
-
-    vim.keymap.set("n", "<leader>v", require("oil").open, { desc = "Open parent directory" })
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }

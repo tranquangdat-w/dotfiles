@@ -52,6 +52,7 @@ adjust-cursor-thickness = 2
 window-padding-balance = true 
 window-padding-y = 0,0
 window-padding-x = 0,0
+background = #222222
 
 cursor-style = block
 cursor-style-blink = false
