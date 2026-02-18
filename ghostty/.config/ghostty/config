@@ -56,6 +56,7 @@ window-padding-x = 0,0
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
+app-notifications=no-clipboard-copy
 
 clipboard-read = allow
 clipboard-write = allow
