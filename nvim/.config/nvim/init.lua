@@ -70,12 +70,3 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
-
--- vim.api.nvim_set_hl(0, "TreesitterContext", {
---   bg = "#1e1e1e", -- Màu nền hơi tối (tùy theme)
---   bold = true,    -- Chữ đậm
--- })
---
--- vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
---   fg = "#858585", -- Giống màu line number
--- })
