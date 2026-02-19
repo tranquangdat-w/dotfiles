@@ -132,6 +132,7 @@ alias cal="calcurse"
 alias lzg="lazygit"
 alias pn=pnpm
 alias ge=gemini
+alias oc=opencode
 
 # Cấu hình Vim và NVM
 export NVM_DIR="$HOME/.nvm"

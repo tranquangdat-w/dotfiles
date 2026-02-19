@@ -23,7 +23,7 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme catppuccin]])
 -- vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd([[colorscheme nightfox]])
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine-moon")
 
 local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
 
