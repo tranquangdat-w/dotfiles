@@ -10,11 +10,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-
--- Setup lazy.nvim
 require("vim-options")
 require("vim-helpers")
 require("floating-term")
@@ -28,13 +23,6 @@ vim.cmd("colorscheme rose-pine-moon")
 local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
 
 vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
-
--- vim.api.nvim_set_hl(0, 'Search', { fg = '#282828', bg = '#fabd2f', bold = true })
--- vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#282828', bg = '#fe8019', bold = true })
-
--- vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#a89984" })
--- vim.api.nvim_set_hl(0, "LineNr", { fg = "orange" })
--- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#a89984" })
 
 -- Disable Copilot
 -- vim.cmd("Copilot disable")

@@ -133,3 +133,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ timeout = 40, visual = true })
   end
 })
+
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
