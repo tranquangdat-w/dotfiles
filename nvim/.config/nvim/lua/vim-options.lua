@@ -45,6 +45,8 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "{", "{zz")
+vim.keymap.set("n", "}", "}zz")
 
 vim.keymap.set("n", "<C-w>h", "<C-w>v", { desc = "Split window vertically" })
 vim.keymap.set("n", "<C-w>v", "<C-w>s", { desc = "Split window horizontally" })

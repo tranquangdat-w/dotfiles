@@ -15,8 +15,20 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
         -- navigation
-        map("n", "]h", gs.next_hunk, "Next hunk")
-        map("n", "[h", gs.prev_hunk, "Prev hunk")
+        map("n", "]h", function()
+          gs.next_hunk()
+          vim.defer_fn(function()
+            vim.cmd("normal! zz")
+          end, 20)
+        end, "Next hunk")
+
+        map("n", "[h", function()
+          gs.prev_hunk()
+          vim.defer_fn(function()
+            vim.cmd("normal! zz")
+          end, 20)
+        end, "Prev hunk")
+
         -- Actions
         map("n", "<leader>ghs", gs.stage_hunk, "Stage hunk")
         map("n", "<leader>ghr", gs.reset_hunk, "Reset hunk")
