@@ -9,23 +9,10 @@ return {
     local aerial = require("aerial")
 
     aerial.setup({
-      icons = {
-        Constructor = "",
-        Class = "",
-        Function = "󰊕",
-        Method = "󰆧",
-        Variable = "",
-        Constant = "󰏿",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Field = "",
-      },
       layout = {
         min_width = 30,
         default_direction = "left",
       },
-      filter_kind = false
     })
 
     local actions = require("telescope.actions")

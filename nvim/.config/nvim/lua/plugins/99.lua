@@ -82,22 +82,27 @@ return {
     -- so just prepare for it now
     vim.keymap.set("v", "<leader>9v", function()
       _99.visual()
-    end)
+    end, { desc = "visual selection" })
 
     --- if you have a request you dont want to make any changes, just cancel it
     vim.keymap.set("n", "<leader>9x", function()
       _99.stop_all_requests()
-    end)
+    end, { desc = "stop all requests" })
 
     vim.keymap.set("n", "<leader>9s", function()
       _99.search()
-    end)
+    end, { desc = "search" })
+
+    vim.keymap.set("n", "<leader>9l", function()
+      _99.view_logs()
+    end, { desc = "view logs" })
+
     vim.keymap.set("n", "<leader>9m", function()
       require("99.extensions.fzf_lua").select_model()
-    end)
+    end, { desc = "select model" })
 
     vim.keymap.set("n", "<leader>9p", function()
       require("99.extensions.fzf_lua").select_provider()
-    end)
+    end, { desc = "select provider" })
   end,
 }
