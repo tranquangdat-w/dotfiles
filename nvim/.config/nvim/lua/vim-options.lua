@@ -23,6 +23,12 @@ vim.opt.swapfile = false
 
 vim.opt.guicursor = "n-v-c-i:block"
 
+vim.diagnostic.config({
+  float = {
+    border = "rounded",
+  },
+})
+
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
@@ -46,7 +52,18 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "{", "{zz")
-vim.keymap.set("n", "}", "}zz")
+vim.keymap.set("n", "}", "}z")
+vim.keymap.set("n", "]`", "]`zz")
+vim.keymap.set("n", "[`", "[`zz")
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.goto_next({ float = false })
+  vim.cmd("normal! zz")
+end)
+
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.goto_prev({ float = false })
+  vim.cmd("normal! zz")
+end)
 
 vim.keymap.set("n", "<C-w>h", "<C-w>v", { desc = "Split window vertically" })
 vim.keymap.set("n", "<C-w>v", "<C-w>s", { desc = "Split window horizontally" })
