@@ -15,14 +15,14 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
         -- navigation
-        map("n", "]h", function()
+        map("n", "]c", function()
           gs.next_hunk()
           vim.defer_fn(function()
             vim.cmd("normal! zz")
           end, 20)
         end, "Next hunk")
 
-        map("n", "[h", function()
+        map("n", "[c", function()
           gs.prev_hunk()
           vim.defer_fn(function()
             vim.cmd("normal! zz")
