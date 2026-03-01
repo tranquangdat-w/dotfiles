@@ -10,12 +10,12 @@ return {
       local fzf = require("fzf-lua")
       fzf.setup({
         winopts = {
-          height = 0.8,
-          width = 0.85,
-          preview = {
-            layout = "vertical",
-            vertical = "up:60%", -- preview ở trên
-          },
+          -- height = 0.8,
+          -- width = 0.85,
+          -- preview = {
+          --   layout = "vertical",
+          --   vertical = "up:60%", -- preview ở trên
+          -- },
         },
         fzf_colors = {
           true,
@@ -54,6 +54,7 @@ return {
         fzf.grep({ search = vim.fn.input("Grep For > ") })
       end, { desc = "FZF grep with input" })
       vim.keymap.set("n", "<leader>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
+      vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "Resume fzf serach" })
       vim.keymap.set("n", "<leader>fq", fzf.quickfix_stack, { desc = "Open quickfix history" })
       vim.api.nvim_create_user_command('Fgs', function()
         require('fzf-lua').git_status()

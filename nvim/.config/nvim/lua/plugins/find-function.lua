@@ -21,15 +21,6 @@ return {
 
     telescope.setup({
       defaults = {
-        -- file_ignore_patterns = {"%.class"},
-        sorting_strategy = "ascending",
-        layout_strategy = "vertical",
-
-        layout_config = {
-          prompt_position = "top", -- Với `center` thì prompt luôn ở trên
-          height = 0.8,
-          width = 0.85,
-        },
         mappings = {
           i = {
             ["<C-j>"] = "move_selection_next",
@@ -82,7 +73,7 @@ return {
       function()
         require("telescope").extensions.aerial.aerial({
           filter_kind = { "Function", "Method" },
-          previewer = false,
+          previewer = true,
         })
       end,
       { desc = "Open Aerial (functions only) with Telescope" }
