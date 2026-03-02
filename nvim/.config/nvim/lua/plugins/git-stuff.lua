@@ -70,5 +70,15 @@ return {
   },
   {
     'tpope/vim-fugitive'
+  },
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      require("diffview").setup({
+        file_panel = {
+          listing_style = "list", -- mặc định là "tree", đổi thành "list"
+        },
+      })
+    end,
   }
 }

@@ -80,6 +80,10 @@ return {
       _99.tutorial()
     end, { desc = "AI tutorial" })
 
+    vim.keymap.set("n", "<leader>9d", function()
+      _99.clear_previous_requests()
+    end, { desc = "Clear previous request" })
+
     vim.keymap.set("n", "<leader>9c", function()
       _99.vibe()
     end, { desc = "AI coding only" })
