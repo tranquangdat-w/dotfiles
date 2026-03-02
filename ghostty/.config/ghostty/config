@@ -2,8 +2,8 @@
 # background-blur-radius = 5
 # font-family = "Inconsolata Nerd Font Mono"
 theme=TokyoNight
-font-size = 11
-window-decoration = none
+font-size = 14
+window-decoration = server
 title = ""
 adjust-cursor-thickness = 2
 window-padding-balance = true 
