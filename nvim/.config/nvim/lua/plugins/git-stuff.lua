@@ -55,8 +55,6 @@ return {
         -- text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
 
-        vim.keymap.set('n', "<leader>gs", "<Cmd>Git<CR>", { desc = "Git status" })
-
         -- Diffview
         vim.keymap.set("n", "<leader>dv", function()
           if next(require("diffview.lib").views) == nil then
@@ -69,7 +67,14 @@ return {
     },
   },
   {
-    'tpope/vim-fugitive'
+    "tpope/vim-fugitive",
+    cmd = { "Git", "Gdiffsplit", "Gblame" }, -- lazy load khi gọi lệnh
+    keys = {
+      { "<leader>gs", "<cmd>Git<CR>",        desc = "Git status" },
+      { "<leader>gl", "<cmd>Git pull<CR>",   desc = "Git pull" },
+      { "<leader>gd", "<cmd>Gdiffsplit<CR>", desc = "Git diff" },
+      { "<leader>gb", "<cmd>Git blame<CR>",  desc = "Git blame" },
+    },
   },
   {
     "sindrets/diffview.nvim",

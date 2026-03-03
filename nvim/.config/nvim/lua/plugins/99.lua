@@ -9,7 +9,7 @@ return {
     local cwd = vim.uv.cwd()
     local basename = vim.fs.basename(cwd)
     _99.setup({
-      provider = _99.Providers.GeminiCLIProvider,  -- default: OpenCodeProvider
+      provider = _99.Providers.GeminiCLIProvider, -- default: OpenCodeProvider
       logger = {
         level = _99.DEBUG,
         path = "/tmp/" .. basename .. ".99.debug",
@@ -110,6 +110,14 @@ return {
 
     vim.keymap.set("n", "<leader>9p", function()
       require("99.extensions.fzf_lua").select_provider()
+    end, { desc = "select provider" })
+
+    vim.keymap.set("n", "<leader>9ww", function()
+      _99.Extensions.Worker.set_work()
+    end, { desc = "select provider" })
+
+    vim.keymap.set("n", "<leader>9ws", function()
+      _99.Extensions.Worker.search()
     end, { desc = "select provider" })
   end,
 }
