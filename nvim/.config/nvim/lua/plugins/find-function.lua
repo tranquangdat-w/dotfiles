@@ -69,7 +69,7 @@ return {
     -- vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
 
     vim.keymap.set(
-      "n", "<leader>fm",
+      "n", "<leader>ff",
       function()
         require("telescope").extensions.aerial.aerial({
           filter_kind = { "Function", "Method" },

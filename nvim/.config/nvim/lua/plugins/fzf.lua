@@ -44,6 +44,7 @@ return {
       end, { desc = "Find Files" })
       -- vim.keymap.set("n", "<leader>pf", fzf.git_files, { desc = "Find Git Files" })
       vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Live Grep" })
+      vim.keymap.set("n", "<leader>fm", fzf.marks, { desc = "Find marks" })
       vim.keymap.set("n", "<leader>fG", function()
         require("fzf-lua").live_grep({
           rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
