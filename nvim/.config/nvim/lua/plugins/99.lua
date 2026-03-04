@@ -39,11 +39,11 @@ return {
         --- "scratch/custom_rules/"
         ---
         --- Output Rules:
-        --- {path = "scratch/custom_rules/vim/SKILL.md", name = "vim"},
+        {path = "printf_debug/SKILL.md", name = "printf_debug"},
         --- ... the other rules in that dir ...
         ---
         custom_rules = {
-          "scratch/custom_rules/",
+          "~/.config/nvim/skills",
         },
 
         --- Configure @file completion (all fields optional, sensible defaults)
