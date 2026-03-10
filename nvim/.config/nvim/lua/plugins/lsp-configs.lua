@@ -227,7 +227,7 @@ return {
       vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
       vim.keymap.set("n", "gf", vim.lsp.buf.incoming_calls, { desc = "Go to Incoming Calls" })
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", require("fzf-lua").lsp_code_actions, { desc = "Code Action" })
       vim.keymap.set("n", "<leader>ih", function()
         local enabled = vim.lsp.inlay_hint.is_enabled()
         vim.lsp.inlay_hint.enable(not enabled)
