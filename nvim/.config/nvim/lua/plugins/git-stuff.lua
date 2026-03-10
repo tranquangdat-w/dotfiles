@@ -71,9 +71,10 @@ return {
     cmd = { "Git", "Gdiffsplit", "Gblame" }, -- lazy load khi gọi lệnh
     keys = {
       { "<leader>gs", "<cmd>Git<CR>",        desc = "Git status" },
-      { "<leader>gl", "<cmd>Git pull<CR>",   desc = "Git pull" },
+      { "<leader>gp", "<cmd>Git pull<CR>",   desc = "Git pull" },
       { "<leader>gd", "<cmd>Gdiffsplit<CR>", desc = "Git diff" },
       { "<leader>gb", "<cmd>Git blame<CR>",  desc = "Git blame" },
+      { "<leader>gl", "<cmd>Git log --oneline<CR>",   desc = "Git log" },
     },
   },
   {
