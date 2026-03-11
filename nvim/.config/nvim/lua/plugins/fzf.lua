@@ -27,8 +27,8 @@ return {
             ["ctrl-q"] = "select-all+accept",
           },
           builtin = {
-            ["<C-e>"] = "preview-page-down",
-            ["<C-y>"] = "preview-page-up",
+            ["<C-d>"] = "preview-page-down",
+            ["<C-u>"] = "preview-page-up",
           },
         }
       })
@@ -68,9 +68,6 @@ return {
         })
       end, { desc = "Live Grep includes hidden files" })
       vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buffers" })
-      vim.keymap.set("n", "<leader>fs", function()
-        fzf.grep({ search = vim.fn.input("Grep For > ") })
-      end, { desc = "FZF grep with input" })
       vim.keymap.set("n", "<leader>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
       vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "Resume fzf serach" })
       vim.keymap.set("n", "<leader>fq", fzf.quickfix_stack, { desc = "Open quickfix history" })
