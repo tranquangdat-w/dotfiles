@@ -13,6 +13,8 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.splitright = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
