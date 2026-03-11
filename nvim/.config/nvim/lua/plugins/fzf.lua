@@ -26,10 +26,6 @@ return {
           fzf = {
             ["ctrl-q"] = "select-all+accept",
           },
-          builtin = {
-            ["<C-d>"] = "preview-page-down",
-            ["<C-u>"] = "preview-page-up",
-          },
         }
       })
 
@@ -59,10 +55,10 @@ return {
           -- previewer = false,
         })
       end, { desc = "Find Files" })
-      -- vim.keymap.set("n", "<leader>pf", fzf.git_files, { desc = "Find Git Files" })
-      vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Live Grep" })
+      vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Find Git Files" })
+      vim.keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Live Grep" })
       vim.keymap.set("n", "<leader>fm", fzf.marks, { desc = "Find marks" })
-      vim.keymap.set("n", "<leader>fG", function()
+      vim.keymap.set("n", "<leader>fS", function()
         require("fzf-lua").live_grep({
           rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
         })

@@ -120,29 +120,11 @@ vim.g.minimal_diagnostic = false
 
 -- Default config
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   virtual_lines = false,
   underline = true,
   signs = true,
 })
-
--- Toggle keymap
-vim.keymap.set("n", "<leader>id", function()
-  vim.g.minimal_diagnostic = not vim.g.minimal_diagnostic
-
-  vim.diagnostic.config({
-    virtual_text = not vim.g.minimal_diagnostic,
-    virtual_lines = false,
-    underline = not vim.g.minimal_diagnostic,
-    signs = not vim.g.minimal_diagnostic,
-  })
-
-  local msg = vim.g.minimal_diagnostic
-    and "Minimal diagnostics (only signs)"
-    or "Full diagnostics"
-
-  print(msg)
-end, { desc = "Toggle minimal diagnostics" })
 
 -- Open image file
 vim.keymap.set("n", "<leader>si", ":!feh %<CR>", { desc = "Open image file" })
