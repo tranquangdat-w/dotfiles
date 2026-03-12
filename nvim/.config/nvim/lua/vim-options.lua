@@ -20,6 +20,11 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
+vim.opt.hlsearch = false
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.scrolloff = 8
+vim.opt.updatetime = 50
 
 vim.opt.swapfile = false
 
@@ -62,12 +67,12 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.goto_next({ float = false })
+  vim.diagnostic.goto_next({ float = true })
   vim.cmd("normal! zz")
 end)
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = false })
+  vim.diagnostic.goto_prev({ float = true })
   vim.cmd("normal! zz")
 end)
 
@@ -142,3 +147,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
