@@ -65,12 +65,12 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.goto_next({ float = false })
+  vim.diagnostic.goto_next({ float = true })
   vim.cmd("normal! zz")
 end)
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = false })
+  vim.diagnostic.goto_prev({ float = true })
   vim.cmd("normal! zz")
 end)
 
@@ -146,8 +146,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
