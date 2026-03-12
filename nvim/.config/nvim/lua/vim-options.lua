@@ -18,6 +18,11 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
+vim.opt.hlsearch = false
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.scrolloff = 8
+vim.opt.updatetime = 50
 
 vim.opt.swapfile = false
 
@@ -140,3 +145,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
