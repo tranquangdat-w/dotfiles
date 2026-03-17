@@ -1,7 +1,7 @@
-# background-opacity = 0.95
+# background-opacity = 0.8
 # background-blur-radius = 5
 # font-family = "Inconsolata Nerd Font Mono"
-theme=TokyoNight
+theme=TokyoNight Night
 font-size = 14
 window-decoration = server
 title = ""

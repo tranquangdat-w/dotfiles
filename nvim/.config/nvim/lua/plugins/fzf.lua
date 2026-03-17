@@ -52,7 +52,7 @@ return {
         require("fzf-lua").files({
           fd_opts =
           "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
-          -- previewer = false,
+          previewer = false,
         })
       end, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Find Git Files" })
