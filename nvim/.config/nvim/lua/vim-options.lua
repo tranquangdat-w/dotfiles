@@ -57,7 +57,7 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "{", "{zz")
-vim.keymap.set("n", "}", "}z")
+vim.keymap.set("n", "}", "}zz")
 vim.keymap.set("n", "]`", "]`zz")
 vim.keymap.set("n", "[`", "[`zz")
 vim.keymap.set("n", "<C-o>", "<C-o>zz")

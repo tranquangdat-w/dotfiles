@@ -13,10 +13,10 @@ return {
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
-        winopts = {
-          height = 0.85,
-          width = 0.90,
-        },
+        -- winopts = {
+        --   height = 0.85,
+        --   width = 0.90,
+        -- },
         fzf_colors = {
           true,
           bg = "-1",
@@ -52,10 +52,10 @@ return {
         require("fzf-lua").files({
           fd_opts =
           "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
-          -- previewer = false,
+          previewer = false,
         })
       end, { desc = "Find Files" })
-      vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Find Git Files" })
+      vim.keymap.set("n", "<leader>fg", fzf.git_status, { desc = "Find Git status Files" })
       vim.keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Live Grep" })
       vim.keymap.set("n", "<leader>fm", fzf.marks, { desc = "Find marks" })
       vim.keymap.set("n", "<leader>fS", function()
