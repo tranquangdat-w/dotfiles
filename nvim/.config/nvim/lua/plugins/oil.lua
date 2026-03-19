@@ -20,6 +20,7 @@ return {
       },
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
+        ["<C-y>"] = "actions.select",
         ["<CR>"] = "actions.select",
         ["<C-s>"] = { "actions.select", opts = { vertical = true } },
         ["<C-x>"] = { "actions.select", opts = { horizontal = true } },
