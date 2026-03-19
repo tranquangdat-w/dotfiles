@@ -13,16 +13,16 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.splitright = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
-vim.opt.hlsearch = false
-vim.opt.smartindent = true
-vim.opt.wrap = false
+-- vim.opt.hlsearch = true
+-- vim.opt.smartindent = true
+vim.opt.wrap = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 
@@ -67,12 +67,12 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.goto_next({ float = true })
+  vim.diagnostic.jump({ count = 1, float = true })
   vim.cmd("normal! zz")
 end)
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = true })
+  vim.diagnostic.jump({ count = -1,  float = true })
   vim.cmd("normal! zz")
 end)
 
@@ -146,9 +146,46 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end
 })
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
+vim.keymap.set("n", "j", function(...)
+  local count = vim.v.count
+
+  if count == 0 then
+    return "gj"
+  else
+    return "j"
+  end
+end, { expr = true })
+
+vim.keymap.set("n", "k", function(...)
+  local count = vim.v.count
+
+  if count == 0 then
+    return "gk"
+  else
+    return "k"
+  end
+end, { expr = true })
+
+vim.keymap.set("n", "<left>", "gT")
+vim.keymap.set("n", "<right>", "gt")
+
+vim.keymap.set("c", "<CR>", function()
+  local cmdtype = vim.fn.getcmdtype()
+  if cmdtype == "/" or cmdtype == "?" then
+    return "<CR><cmd>nohl<CR>"
+  end
+  return "<CR>"
+end, { expr = true })
+
+vim.keymap.set("n", "<CR>", function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd.nohl()
+    return ""
+  else
+    return vim.keycode "<CR>"
+  end
+end, { expr = true })
