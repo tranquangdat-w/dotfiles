@@ -6,7 +6,7 @@ return {
   lazy = false,
   config = function()
     require("oil").setup({
-      columns = {},
+      columns = { 'icon' },
       use_default_keymaps = false,
       skip_confirm_for_simple_edits = true,
       confirmation = {
@@ -20,7 +20,6 @@ return {
       },
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
-        ["<C-y>"] = "actions.select",
         ["<CR>"] = "actions.select",
         ["<C-s>"] = { "actions.select", opts = { vertical = true } },
         ["<C-x>"] = { "actions.select", opts = { horizontal = true } },
@@ -29,6 +28,7 @@ return {
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<C-r>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
+        ["<Tab>"] = { "actions.parent", mode = "n" },
         ["_"] = { "actions.open_cwd", mode = "n" },
         ["`"] = { "actions.cd", mode = "n" },
         ["g~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
@@ -39,5 +39,6 @@ return {
       },
     })
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "<Tab>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }
