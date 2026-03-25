@@ -73,51 +73,51 @@ return {
       },
     })
 
-    vim.keymap.set("v", "<leader>9v", function()
+    vim.keymap.set("v", "9v", function()
       _99.visual()
     end, { desc = "visual selection" })
 
-    vim.keymap.set("n", "<leader>9t", function()
+    vim.keymap.set("n", "9t", function()
       _99.tutorial()
     end, { desc = "AI tutorial" })
 
-    vim.keymap.set("n", "<leader>9d", function()
+    vim.keymap.set("n", "9d", function()
       _99.clear_previous_requests()
     end, { desc = "Clear previous request" })
 
-    vim.keymap.set("n", "<leader>9c", function()
+    vim.keymap.set("n", "9c", function()
       _99.vibe()
     end, { desc = "AI coding only" })
 
-    vim.keymap.set("n", "<leader>9s", function()
+    vim.keymap.set("n", "9s", function()
       _99.search()
     end, { desc = "search" })
 
-    vim.keymap.set("n", "<leader>9o", function()
+    vim.keymap.set("n", "9o", function()
       _99.open()
     end, { desc = "open vibe coding result" })
 
-    vim.keymap.set("n", "<leader>9x", function()
+    vim.keymap.set("n", "9x", function()
       _99.stop_all_requests()
     end, { desc = "stop all requests" })
 
-    vim.keymap.set("n", "<leader>9l", function()
+    vim.keymap.set("n", "9l", function()
       _99.view_logs()
     end, { desc = "view logs" })
 
-    vim.keymap.set("n", "<leader>9m", function()
+    vim.keymap.set("n", "9m", function()
       require("99.extensions.fzf_lua").select_model()
     end, { desc = "select model" })
 
-    vim.keymap.set("n", "<leader>9p", function()
+    vim.keymap.set("n", "9p", function()
       require("99.extensions.fzf_lua").select_provider()
     end, { desc = "select provider" })
 
-    vim.keymap.set("n", "<leader>9ww", function()
+    vim.keymap.set("n", "9ww", function()
       _99.Extensions.Worker.set_work()
     end, { desc = "select provider" })
 
-    vim.keymap.set("n", "<leader>9ws", function()
+    vim.keymap.set("n", "9ws", function()
       _99.Extensions.Worker.search()
     end, { desc = "select provider" })
   end,
