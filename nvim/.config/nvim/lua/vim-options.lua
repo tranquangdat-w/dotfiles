@@ -55,7 +55,7 @@ vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.opt.foldcolumn = "1"
-vim.o.fillchars = "eob:~,fold: ,foldopen:▼,foldsep: ,foldclose:▶"
+vim.o.fillchars = "eob:~,foldopen:v,foldclose:>"
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
