@@ -192,3 +192,10 @@ vim.keymap.set("n", "<CR>", function()
     return vim.keycode "<CR>"
   end
 end, { expr = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "qf", "fugitive" },
+    callback = function()
+        vim.opt_local.cursorline = true
+    end,
+})
