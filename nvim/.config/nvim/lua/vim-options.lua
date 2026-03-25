@@ -49,12 +49,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.o.background = "dark" -- or "light" for light mode
 
--- UFO folding
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
+-- Folding
 vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.opt.foldcolumn = "1"
+vim.o.fillchars = "eob:~,fold: ,foldopen:▼,foldsep: ,foldclose:▶"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
