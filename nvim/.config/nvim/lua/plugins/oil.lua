@@ -27,7 +27,6 @@ return {
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<C-r>"] = "actions.refresh",
-        ["-"] = { "actions.parent", mode = "n" },
         ["<Tab>"] = { "actions.parent", mode = "n" },
         ["_"] = { "actions.open_cwd", mode = "n" },
         ["`"] = { "actions.cd", mode = "n" },
@@ -38,7 +37,6 @@ return {
         ["g\\"] = { "actions.toggle_trash", mode = "n" },
       },
     })
-    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     vim.keymap.set("n", "<Tab>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }
