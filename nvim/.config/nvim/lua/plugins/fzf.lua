@@ -67,6 +67,9 @@ return {
       vim.keymap.set("n", "<leader>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
       vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "Resume fzf serach" })
       vim.keymap.set("n", "<leader>fq", fzf.quickfix_stack, { desc = "Open quickfix history" })
+      vim.keymap.set("n", "<leader>fw", function()
+        require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
+      end)
     end,
   }
 }
