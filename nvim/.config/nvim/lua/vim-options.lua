@@ -123,6 +123,9 @@ end, { noremap = true, silent = true, desc = "Toggle quickfix" })
 vim.keymap.set("n", "<A-h>", "3<C-w><", { desc = "Decrease window width" })
 vim.keymap.set("n", "<A-l>", "3<C-w>>", { desc = "Increase window width" })
 
+vim.keymap.set("n", "<A-j>", "3<C-w>-", { desc = "Decrease window height" })
+vim.keymap.set("n", "<A-k>", "3<C-w>+", { desc = "Increase window height" })
+
 -- DBUIToggle
 vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true, desc = "Toggle database UI" })
 
