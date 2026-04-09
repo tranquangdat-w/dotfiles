@@ -54,15 +54,6 @@ return {
 
         -- text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
-
-        -- Diffview
-        vim.keymap.set("n", "<leader>dv", function()
-          if next(require("diffview.lib").views) == nil then
-            vim.cmd("DiffviewOpen")
-          else
-            vim.cmd("DiffviewClose")
-          end
-        end, { desc = "Toggle Diffview" })
       end,
     },
   },
@@ -70,11 +61,11 @@ return {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gdiffsplit", "Gblame" }, -- lazy load khi gọi lệnh
     keys = {
-      { "<leader>gs", "<cmd>Git<CR>",        desc = "Git status" },
-      { "<leader>gp", "<cmd>Git pull<CR>",   desc = "Git pull" },
-      { "<leader>gd", "<cmd>Gdiffsplit<CR>", desc = "Git diff" },
-      { "<leader>gb", "<cmd>Git blame<CR>",  desc = "Git blame" },
-      { "<leader>gl", "<cmd>Git log --oneline<CR>",   desc = "Git log" },
+      { "<leader>gs", "<cmd>Git<CR>",               desc = "Git status" },
+      { "<leader>gp", "<cmd>Git pull<CR>",          desc = "Git pull" },
+      { "<leader>gd", "<cmd>Gdiffsplit<CR>",        desc = "Git diff" },
+      { "<leader>gb", "<cmd>Git blame<CR>",         desc = "Git blame" },
+      { "<leader>gl", "<cmd>Git log --oneline<CR>", desc = "Git log" },
     },
   },
   {
@@ -85,6 +76,15 @@ return {
           listing_style = "list", -- mặc định là "tree", đổi thành "list"
         },
       })
+
+      -- Keymap toggle Diffview
+      vim.keymap.set("n", "<leader>dv", function()
+        if next(require("diffview.lib").views) == nil then
+          vim.cmd("DiffviewOpen")
+        else
+          vim.cmd("DiffviewClose")
+        end
+      end, { desc = "Toggle Diffview" })
     end,
   }
 }

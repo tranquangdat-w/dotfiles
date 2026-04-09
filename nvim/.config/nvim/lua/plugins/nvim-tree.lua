@@ -13,15 +13,15 @@ return {
       --   -- enable = true,
       --   -- update_root = false, -- đổi thành true nếu muốn root đổi theo file
       -- },
-      filesystem_watchers = {
-        enable = true,
-      },
+      -- filesystem_watchers = {
+      --   enable = true,
+      -- },
       sort = {
         sorter = "case_sensitive"
       },
       view = {
         float = {
-          enable = true,
+          enable = false,
           open_win_config = function()
             local screen_w = vim.opt.columns:get()
             local screen_h = vim.opt.lines:get()
@@ -42,7 +42,7 @@ return {
         width = 50
       },
       git = {
-        ignore = false,
+        ignore = true,
         show_on_open_dirs = false,
       },
       renderer = {

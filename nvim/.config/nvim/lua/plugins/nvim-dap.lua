@@ -111,7 +111,7 @@ return {
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
     vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
-    vim.keymap.set({'n', 'v'}, '<leader>dw', dapview.add_expr, { desc = "Step Forward" })
+    vim.keymap.set({'n', 'v'}, '<leader>dw', dapview.add_expr, { desc = "Add express for dap" })
   end
 }
 
