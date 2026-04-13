@@ -13,10 +13,12 @@ return {
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
-        -- winopts = {
-        --   height = 0.85,
-        --   width = 0.90,
-        -- },
+        winopts = {
+          preview = {
+            layout = "vertical",
+            vertical = "up:50%",
+          },
+        },
         fzf_colors = {
           true,
           bg = "-1",
@@ -39,6 +41,19 @@ return {
 
       local harpoon = require('harpoon')
       harpoon:setup({})
+
+      vim.keymap.set("n", "<leader>fd", function()
+        local cor = vim.fn.systemlist("fd -t d --hidden --exclude '.git'")
+        require("fzf-lua").fzf_exec(cor, {
+          previewer = "shell",
+          preview = "LS_COLORS='di=34:fi=37:ln=35:pi=33:so=32:bd=34;46:cd=34;43:ex=31' ls --color=always {}",
+          actions = {
+            ['default'] = function(selected, _)
+              vim.cmd("Oil " .. vim.fn.fnamemodify(selected[1], ":p"))
+            end,
+          },
+        })
+      end, { desc = "Find Directories" })
 
       vim.keymap.set("n", "<leader>ff", function() require("aerial").fzf_lua_picker({}) end,
         { desc = "Open Aerial (functions only)" })
