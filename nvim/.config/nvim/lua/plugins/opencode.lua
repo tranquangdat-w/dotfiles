@@ -8,6 +8,9 @@ return {
         input = { enabled = true },
         styles = {
           input = {
+            relative = "cursor",
+            width = 40,
+            row = -3,
             keys = {
               i_ctrl_j = "<C-n>",
               i_ctrl_k = "<C-p>",
