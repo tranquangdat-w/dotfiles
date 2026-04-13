@@ -15,7 +15,10 @@ return {
         controls = {
           enabled = true,
         }
-      }
+      },
+      virtual_text = {
+        enabled = true,
+      },
     })
     require("dap-go").setup()
     -- require("dap-python").setup("uv")
@@ -111,6 +114,7 @@ return {
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
     vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
+    vim.keymap.set('n', '<leader>dV', '<cmd>DapViewVirtualTextToggle<cr>', { desc = "Toggle Dap inline virtual text" })
     vim.keymap.set({'n', 'v'}, '<leader>dw', dapview.add_expr, { desc = "Add express for dap" })
   end
 }
