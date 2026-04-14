@@ -75,6 +75,9 @@ vim.keymap.set("n", "]d", function()
   vim.cmd("normal! zz")
 end)
 
+vim.keymap.set('c', '<C-j>', '<C-n>')
+vim.keymap.set('c', '<C-k>', '<C-p>')
+
 vim.keymap.set("n", "[d", function()
   vim.diagnostic.jump({ count = -1,  float = true })
   vim.cmd("normal! zz")
