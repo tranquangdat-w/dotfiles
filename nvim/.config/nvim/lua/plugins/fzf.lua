@@ -64,10 +64,16 @@ return {
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
 
       vim.keymap.set("n", "<leader><leader>", function()
+        local cwd = nil
+
+        if vim.bo.filetype == "oil" then
+          cwd = require("oil").get_current_dir()
+        end
         require("fzf-lua").files({
+          cwd = cwd,
           fd_opts =
           "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
-          previewer = false,
+          -- previewer = false,
         })
       end, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fg", fzf.git_status, { desc = "Find Git status Files" })
