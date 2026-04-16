@@ -58,3 +58,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 -- DadbodUI
 vim.g.db_ui_force_echo_notifications = 1
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Toggle undo tree" })
