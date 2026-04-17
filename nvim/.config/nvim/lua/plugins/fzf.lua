@@ -77,10 +77,15 @@ return {
         })
       end, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fg", fzf.git_status, { desc = "Find Git status Files" })
-      vim.keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Live Grep" })
+      vim.keymap.set("n", "<leader>fs", function()
+        local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
+        fzf.live_grep({ cwd = cwd })
+      end, { desc = "Live Grep" })
       vim.keymap.set("n", "<leader>fm", fzf.marks, { desc = "Find marks" })
       vim.keymap.set("n", "<leader>fS", function()
+        local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
         require("fzf-lua").live_grep({
+          cwd = cwd,
           rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
         })
       end, { desc = "Live Grep includes hidden files" })
