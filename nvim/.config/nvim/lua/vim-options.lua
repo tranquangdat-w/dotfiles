@@ -197,8 +197,7 @@ vim.keymap.set("n", "<CR>", function()
 end, { expr = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-    -- pattern = { "qf", "fugitive" },
-    pattern = { "qf" },
+    pattern = { "qf", "harpoon" },
     callback = function()
         vim.opt_local.cursorline = true
     end,

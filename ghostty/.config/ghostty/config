@@ -3,7 +3,7 @@
 font-family = "JetBrainsMono Nerd Font"
 background = "#101117"
 theme=TokyoNight Night
-font-size = 12
+font-size = 15
 window-decoration = server
 title = ""
 adjust-cursor-thickness = 2
@@ -16,3 +16,4 @@ shell-integration-features = no-cursor
 app-notifications=no-clipboard-copy
 clipboard-read = allow
 clipboard-write = allow
+keybind=clear
