@@ -23,7 +23,7 @@ function M.get()
     return ""
   end
 
-  return string.format(" 󰀱 %d/%d", current_idx, total)
+  return string.format(" [󰀱 %d/%d]", current_idx, total)
 end
 
 return M

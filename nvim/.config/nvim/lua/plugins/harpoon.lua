@@ -34,6 +34,40 @@ return {
       list._index = idx
     end
 
+    local uv = vim.uv or vim.loop
+
+    local function normalize_path(path)
+      if not path or path == "" then
+        return nil
+      end
+
+      local expanded = vim.fn.fnamemodify(vim.fn.expand(path), ":p")
+      return uv.fs_realpath(expanded) or expanded
+    end
+
+    local function sync_index_with_current_buffer()
+      local current_path = normalize_path(vim.api.nvim_buf_get_name(0))
+      if not current_path then
+        return
+      end
+
+      local list = harpoon:list()
+      for idx, item in ipairs(list.items or {}) do
+        local item_path = normalize_path(item.value or item.path or item.filename)
+        if item_path and item_path == current_path then
+          list._index = idx
+          return
+        end
+      end
+    end
+
+    local sync_group = vim.api.nvim_create_augroup("HarpoonSyncIndex", { clear = true })
+    vim.api.nvim_create_autocmd("BufEnter", {
+      group = sync_group,
+      callback = sync_index_with_current_buffer,
+      desc = "Sync harpoon index to current buffer",
+    })
+
     do
       local stl = vim.o.statusline ~= "" and vim.o.statusline
       local harpoon_part = "%{luaeval(\"require('harpoon_statusline').get()\")}"
