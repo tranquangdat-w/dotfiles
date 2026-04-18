@@ -16,4 +16,3 @@ shell-integration-features = no-cursor
 app-notifications=no-clipboard-copy
 clipboard-read = allow
 clipboard-write = allow
-keybind=clear

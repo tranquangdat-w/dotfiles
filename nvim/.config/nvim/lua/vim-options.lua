@@ -47,10 +47,9 @@ vim.o.background = "dark" -- or "light" for light mode
 
 -- Folding
 vim.o.foldenable = true
-vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0"
 -- vim.o.fillchars = "eob:~,fold: ,foldopen:▾,foldsep: ,foldclose:▸"
 vim.o.fillchars = "eob:~,fold: ,foldopen: ,foldsep: ,foldclose: "
 vim.opt.foldmethod = "expr"
@@ -178,6 +177,7 @@ end, { expr = true })
 
 vim.keymap.set("n", "<left>", "gT")
 vim.keymap.set("n", "<right>", "gt")
+vim.keymap.set("n", "<C-Tab>", "<cmd>e #<CR>", { desc = "Toggle alternate file" })
 
 vim.keymap.set("c", "<CR>", function()
   local cmdtype = vim.fn.getcmdtype()
@@ -197,7 +197,7 @@ vim.keymap.set("n", "<CR>", function()
 end, { expr = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "qf", "harpoon" },
+    pattern = { "qf" },
     callback = function()
         vim.opt_local.cursorline = true
     end,

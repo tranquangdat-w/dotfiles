@@ -16,7 +16,7 @@ return {
         winopts = {
           preview = {
             layout = "vertical",
-            vertical = "up:50%",
+            vertical = "up:40%",
           },
         },
         fzf_colors = {
@@ -89,7 +89,11 @@ return {
           rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
         })
       end, { desc = "Live Grep includes hidden files" })
-      vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buffers" })
+      vim.keymap.set("n", "<C-,>", function()
+        fzf.buffers({
+          previewer = false
+        })
+      end, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
       vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "Resume fzf serach" })
       vim.keymap.set("n", "<leader>fq", fzf.quickfix_stack, { desc = "Open quickfix history" })

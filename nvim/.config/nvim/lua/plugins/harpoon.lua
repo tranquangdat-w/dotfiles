@@ -34,6 +34,23 @@ return {
       list._index = idx
     end
 
+    do
+      local stl = vim.o.statusline ~= "" and vim.o.statusline
+      local harpoon_part = "%{luaeval(\"require('harpoon_statusline').get()\")}"
+
+      if stl ~= nil and not stl:find("harpoon_statusline", 1, true) then
+        local f_start = stl:find("%f", 1, true)
+        if f_start then
+          local f_end = f_start + 1
+          stl = stl:sub(1, f_end) .. harpoon_part .. stl:sub(f_end + 1)
+        else
+          stl = stl .. harpoon_part
+        end
+      end
+
+      vim.o.statusline = stl
+    end
+
     vim.keymap.set("n", "<leader>a", function()
       local list = harpoon:list()
       list:add()
