@@ -63,8 +63,8 @@ vim.keymap.set("n", "]`", "]`zz")
 vim.keymap.set("n", "[`", "[`zz")
 vim.keymap.set("n", "<C-o>", "<C-o>zz")
 vim.keymap.set("n", "<C-i>", "<C-i>zz")
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<cr>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<cr>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ count = 1, float = true })
   vim.cmd("normal! zz")
@@ -116,13 +116,6 @@ vim.keymap.set("n", "<leader>cc", function()
     vim.cmd("copen")
   end
 end, { noremap = true, silent = true, desc = "Toggle quickfix" })
-
--- change size panel
-vim.keymap.set("n", "<A-h>", "3<C-w><", { desc = "Decrease window width" })
-vim.keymap.set("n", "<A-l>", "3<C-w>>", { desc = "Increase window width" })
-
-vim.keymap.set("n", "<A-j>", "3<C-w>-", { desc = "Decrease window height" })
-vim.keymap.set("n", "<A-k>", "3<C-w>+", { desc = "Increase window height" })
 
 -- DBUIToggle
 vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true, desc = "Toggle database UI" })
@@ -207,4 +200,3 @@ vim.keymap.set("n", "<leader>q", function()
   vim.diagnostic.setqflist()
   vim.cmd("copen")
 end)
-vim.keymap.set("n", "<C-f>", "<Nop>")
