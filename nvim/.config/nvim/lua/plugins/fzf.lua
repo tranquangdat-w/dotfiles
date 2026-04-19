@@ -86,7 +86,7 @@ return {
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
         require("fzf-lua").live_grep({
           cwd = cwd,
-          rg_opts = "--hidden --glob '!.git/*' --column --line-number --no-heading --color=always -e",
+          rg_opts = "--hidden --no-ignore --glob=!.git/* --glob=!**/node_modules/* --column --line-number --no-heading --color=always --smart-case -e",
         })
       end, { desc = "Live Grep includes hidden files" })
       vim.keymap.set("n", "<M-,>", function()
