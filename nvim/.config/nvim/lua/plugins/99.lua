@@ -73,12 +73,21 @@ return {
       },
     })
 
+    local function prompt_with_insert(open_prompt)
+      open_prompt()
+      vim.defer_fn(function()
+        if vim.api.nvim_get_mode().mode == "n" then
+          vim.cmd("startinsert")
+        end
+      end, 30)
+    end
+
     vim.keymap.set("v", "9v", function()
-      _99.visual()
+      prompt_with_insert(_99.visual)
     end, { desc = "visual selection" })
 
     vim.keymap.set("n", "9t", function()
-      _99.tutorial()
+      prompt_with_insert(_99.tutorial)
     end, { desc = "AI tutorial" })
 
     vim.keymap.set("n", "9d", function()
@@ -86,11 +95,11 @@ return {
     end, { desc = "Clear previous request" })
 
     vim.keymap.set("n", "9c", function()
-      _99.vibe()
+      prompt_with_insert(_99.vibe)
     end, { desc = "AI coding only" })
 
     vim.keymap.set("n", "9s", function()
-      _99.search()
+      prompt_with_insert(_99.search)
     end, { desc = "search" })
 
     vim.keymap.set("n", "9o", function()
