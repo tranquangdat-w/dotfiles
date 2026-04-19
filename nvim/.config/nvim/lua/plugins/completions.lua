@@ -29,6 +29,9 @@ return {
     config = function()
       local cmp = require("cmp")
       require("luasnip.loaders.from_vscode").lazy_load()
+      vim.keymap.set("n", "<leader>nw", function()
+        require("luasnip").jump(1)
+      end, { silent = true })
 
       cmp.setup({
         snippet = {
