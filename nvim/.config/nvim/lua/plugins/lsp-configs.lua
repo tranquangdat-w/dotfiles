@@ -220,7 +220,7 @@ return {
 
       -- lsp kepmap setting
       vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, { desc = "Hover Documentation" })
-      vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help({ border = "rounded", anchor_bias = 'above' }) end, { desc = "Lsp signature help" })
+      -- vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help({ border = "rounded", anchor_bias = 'above' }) end, { desc = "Lsp signature help" })
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
