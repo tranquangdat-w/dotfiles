@@ -68,6 +68,7 @@ return {
           { name = "ts_ls" },
           { name = "gopls" },
           { name = "vim-dadbod-completion" },
+          { name = "copilot", group_index = 2 },
         }),
       })
     end,

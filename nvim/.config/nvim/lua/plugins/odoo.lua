@@ -1,0 +1,1 @@
+return  {'odoo/odoo-neovim'}

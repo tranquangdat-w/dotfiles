@@ -190,6 +190,13 @@ return {
       vim.lsp.config.jsonls = {
         capabilities = capabilities
       }
+      vim.lsp.config.doo_ls = {
+        cmd = {
+          vim.fn.expand('/home/dat.tran5/.local/share/nvim/odoo/odoo_ls_server'),
+          '--stdlib',
+          '/home/dat.tran5/.local/share/nvim/odoo/typeshed/stdlib',
+        }
+      }
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "proto",
@@ -216,6 +223,7 @@ return {
         "cssls",
         "pylsp",
         "jsonls",
+        "odoo_ls",
       })
 
       -- lsp kepmap setting
