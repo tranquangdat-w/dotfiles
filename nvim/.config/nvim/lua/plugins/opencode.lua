@@ -24,9 +24,7 @@ return {
   },
   config = function()
     vim.o.autoread = true
-    vim.keymap.set({ "n", "x" }, "<leader>o", function() require("opencode").ask("@this: ", { submit = false }) end,
-      { desc = "Ask opencode…" })
-    vim.keymap.set({ "n", "x" }, "<leader>O", function() require("opencode").ask("", { submit = true }) end,
+    vim.keymap.set({ "n", "x" }, "<leader>o", function() require("opencode").ask("@this: ", { submit = true }) end,
       { desc = "Ask opencode…" })
     vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
       { desc = "Execute opencode action…" })
