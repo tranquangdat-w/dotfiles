@@ -37,6 +37,11 @@ vim.diagnostic.config({
 
 -- Set Esc to switch to normal mode in terminal
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
