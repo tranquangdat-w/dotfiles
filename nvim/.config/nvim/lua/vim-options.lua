@@ -36,7 +36,7 @@ vim.diagnostic.config({
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Set Esc to switch to normal mode in terminal
--- vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
