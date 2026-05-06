@@ -16,6 +16,9 @@ return {
     opts = function()
       require("cmp").setup({
         enabled = function()
+          if vim.bo.filetype == "oil" then
+            return false
+          end
           return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
         end,
       })
@@ -69,6 +72,7 @@ return {
           { name = "gopls" },
           { name = "vim-dadbod-completion" },
           { name = "copilot", group_index = 2 },
+          { name = "codeium", group_index = 2 },
         }),
       })
     end,
