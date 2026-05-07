@@ -61,3 +61,6 @@ vim.g.db_ui_force_echo_notifications = 1
 
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Toggle undo tree" })
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#7dd3fc" })
+vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#f9a8d4" })
