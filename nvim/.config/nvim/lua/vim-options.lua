@@ -151,6 +151,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+for c in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"):gmatch(".") do
+  vim.keymap.set("n", "'" .. c, "'" .. c .. "zz")
+  vim.keymap.set("n", "`" .. c, "`" .. c .. "zz")
+end
 
 vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
 vim.keymap.set("n", "j", function(...)
@@ -201,10 +205,10 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.keymap.set("n", "<leader>q", function()
+vim.keymap.set("n", "<leader>qq", function()
   vim.diagnostic.setqflist()
   vim.cmd("copen")
-end)
+end, { desc = "Send diagnostics to quickfix" })
 
 vim.keymap.set("n", "<M-e>", function()
   local dir
