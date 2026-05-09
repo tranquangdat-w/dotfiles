@@ -20,6 +20,7 @@ require("lazy").setup("plugins")
 -- vim.cmd([[colorscheme nightfox]])
 vim.cmd("colorscheme rose-pine-moon")
 
+-- Get current WinBar highlight to preserve its background color
 local winbar_hl = vim.api.nvim_get_hl(0, { name = "WinBar", link = false })
 
 vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
@@ -27,33 +28,40 @@ vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
 -- Disable Copilot
 -- vim.cmd("Copilot disable")
 
--- convert to english input
+-- Switch to English keyboard
 local function force_english()
-  vim.fn.jobstart({ "ibus", "engine", "xkb:us::eng" }, { detach = true })
+  vim.fn.jobstart({ "fcitx5-remote", "-s", "keyboard-us" }, { detach = true })
 end
 
+-- Switch to Vietnamese Unikey
 local function force_unikey()
-  vim.fn.jobstart({ "ibus", "engine", "Unikey" }, { detach = true }) -- hoặc "ibus-unikey" nếu bạn dùng ibus-unikey
+  vim.fn.jobstart({ "fcitx5-remote", "-s", "unikey" }, { detach = true })
 end
 
--- when leave insertMode change input method to english
+-- Auto switch to English when leaving insert/cmdline
 vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineEnter", "CmdlineLeave" }, {
   callback = force_english,
 })
 
-local ibus_switch_enabled = false
+local vn_enabled = false
 
--- FOR VIETNAMESE
 vim.api.nvim_create_user_command("ToggleUnikey", function()
-  ibus_switch_enabled = not ibus_switch_enabled
+  vn_enabled = not vn_enabled
+
+  if vn_enabled then
+    print("Vietnamese ON")
+  else
+    print("Vietnamese OFF")
+    force_english()
+  end
 end, {})
 
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
-    if ibus_switch_enabled then
+    if vn_enabled then
       force_unikey()
     end
-  end
+  end,
 })
 
 -- DadbodUI
