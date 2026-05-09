@@ -166,9 +166,6 @@ export PATH=$PATH:/usr/local/go/bin
 
 bindkey -v
 
-setxkbmap -option caps:escape
-# setxkbmap -option ctrl:swap_lalt_lctl
-
 # pnpm
 export PNPM_HOME="/home/dat/.local/share/pnpm"
 case ":$PATH:" in
