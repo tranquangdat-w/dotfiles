@@ -27,7 +27,6 @@ return {
         "docker_compose_language_service",
         "pylsp",
         "jsonls",
-        "copilot"
       },
     },
   },
@@ -197,9 +196,6 @@ return {
           '--stdlib',
           '/home/dat.tran5/.local/share/nvim/odoo/typeshed/stdlib',
         }
-      }
-      vim.lsp.config['copilot'] = {
-        capabilities = capabilities,
       }
 
       vim.api.nvim_create_autocmd("FileType", {

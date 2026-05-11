@@ -210,17 +210,17 @@ vim.keymap.set("n", "<leader>qq", function()
   vim.cmd("copen")
 end, { desc = "Send diagnostics to quickfix" })
 
-vim.keymap.set("n", "<M-e>", function()
-  local dir
-
-  if vim.bo.filetype == "oil" then
-    dir = require("oil").get_current_dir()
-  else
-    dir = vim.fn.expand("%:p:h")
-  end
-
-  vim.cmd("lcd " .. dir)
-
-  -- mở command-line với :e sẵn
-  vim.api.nvim_feedkeys(":e ", "n", false)
-end, { desc = "Smart edit file" })
+-- vim.keymap.set("n", "<M-e>", function()
+--   local dir
+--
+--   if vim.bo.filetype == "oil" then
+--     dir = require("oil").get_current_dir()
+--   else
+--     dir = vim.fn.expand("%:p:h")
+--   end
+--
+--   vim.cmd("lcd " .. dir)
+--
+--   -- mở command-line với :e sẵn
+--   vim.api.nvim_feedkeys(":e ", "n", false)
+-- end, { desc = "Smart edit file" })

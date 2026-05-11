@@ -97,6 +97,8 @@ return {
       vim.keymap.set("n", "<M-/>", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
       vim.keymap.set("n", "<M-r>", fzf.resume, { desc = "Resume fzf serach" })
       vim.keymap.set("n", "<M-q>", fzf.quickfix_stack, { desc = "Open quickfix history" })
+      vim.keymap.set("n", "<M-e>", fzf.diagnostics_document, { desc = "Diagnostics (buffer)" })
+      vim.keymap.set("n", "<M-S-e>", fzf.diagnostics_workspace, { desc = "Diagnostics (workspace)" })
       vim.keymap.set("n", "<M-w>", function()
         require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
       end)

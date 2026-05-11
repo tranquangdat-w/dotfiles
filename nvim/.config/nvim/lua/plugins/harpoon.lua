@@ -41,11 +41,24 @@ return {
         return nil
       end
 
-      local expanded = vim.fn.fnamemodify(vim.fn.expand(path), ":p")
+      local ok, expanded = pcall(vim.fn.expand, path)
+      if not ok then
+        return path
+      end
+      expanded = vim.fn.fnamemodify(expanded, ":p")
       return uv.fs_realpath(expanded) or expanded
     end
 
     local function sync_index_with_current_buffer()
+      local buftype = vim.bo.buftype
+      if buftype ~= "" and buftype ~= "terminal" then
+        return
+      end
+
+      if vim.bo.filetype:match("^dap") then
+        return
+      end
+
       local current_path = normalize_path(vim.api.nvim_buf_get_name(0))
       if not current_path then
         return
