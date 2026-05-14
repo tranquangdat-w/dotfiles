@@ -3,11 +3,11 @@ return {
   event = "InsertEnter",
   opts = {
     bind = true,
-    floating_window = false,
+    floating_window = true,
     floating_window_above_cur_line = true,
     toggle_key = "<C-s>",
     toggle_key_flip_floatwin_setting = false,
-    always_trigger = false,
+    always_trigger = true,
     fix_pos = false,
     close_timeout = 1200,
     hi_parameter = "LspSignatureActiveParameter",
