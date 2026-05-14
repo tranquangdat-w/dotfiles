@@ -1,69 +1,65 @@
 return {
   "folke/sidekick.nvim",
-  opts = {
-    -- add any options here
-    -- cli = {
-    --   mux = {
-    --     backend = "zellij",
-    --     enabled = true,
-    --   },
-    -- },
-  },
   keys = {
     {
-      "<tab>",
-      function()
-        -- if there is a next edit, jump to it, otherwise apply it if any
-        if not require("sidekick").nes_jump_or_apply() then
-          return "<Tab>" -- fallback to normal tab
-        end
-      end,
-      expr = true,
-      desc = "Goto/Apply Next Edit Suggestion",
-    },
-    {
-      "<C-p>f",
+      "3f",
       function() require("sidekick.cli").focus() end,
       desc = "Sidekick Focus",
       mode = { "n", "t", "i", "x" },
     },
     {
-      "<C-p><C-a>",
-      function() require("sidekick.cli").toggle() end,
-      desc = "Sidekick Toggle CLI",
-    },
-    {
-      "<C-p><C-s>",
+      "3s",
       function() require("sidekick.cli").select() end,
       desc = "Select CLI",
     },
     {
-      "<C-p><C-d>",
+      "3d",
       function() require("sidekick.cli").close() end,
       desc = "Detach a CLI Session",
     },
     {
-      "<C-p><C-t>",
+      "3t",
       function() require("sidekick.cli").send({ msg = "{this}" }) end,
       mode = { "x", "n" },
       desc = "Send This",
     },
     {
-      "<C-p><C-f>",
+      "3f",
       function() require("sidekick.cli").send({ msg = "{file}" }) end,
       desc = "Send File",
     },
     {
-      "<C-p><C-v>",
+      "3v",
       function() require("sidekick.cli").send({ msg = "{selection}" }) end,
       mode = { "x" },
       desc = "Send Visual Selection",
     },
     {
-      "<C-p><C-p>",
+      "3p",
       function() require("sidekick.cli").prompt() end,
       mode = { "n", "x" },
       desc = "Sidekick Select Prompt",
+    },
+    {
+      "3o",
+      function()
+        require("snacks").input({
+          prompt = "Sidekick",
+          default = "{this}: ",
+          icon = "󰚩",
+        }, function(user_input)
+          if user_input and user_input ~= "" then
+            local last_char = user_input:sub(-1)
+            local should_submit = not (last_char == " " or last_char == "\t")
+            require("sidekick.cli").send({
+              msg = user_input,
+              submit = should_submit,
+            })
+          end
+        end)
+      end,
+      mode = { "n", "x" },
+      desc = "Sidekick: Custom prompt (space at end to append)",
     },
   },
 }
