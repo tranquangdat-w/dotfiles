@@ -50,6 +50,7 @@ return {
           prompt = "Sidekick",
           default = "{this}: ",
           icon = "󰚩",
+          win = { title_pos = "left" }
         }, function(user_input)
           if user_input and user_input ~= "" then
             local last_char = user_input:sub(-1)
