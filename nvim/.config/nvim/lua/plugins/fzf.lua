@@ -86,7 +86,8 @@ return {
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
         require("fzf-lua").live_grep({
           cwd = cwd,
-          rg_opts = "--hidden --no-ignore --glob=!.git/* --glob=!**/node_modules/* --column --line-number --no-heading --color=always --smart-case -e",
+          rg_opts =
+          "--hidden --no-ignore --glob=!.git/* --glob=!**/node_modules/* --column --line-number --no-heading --color=always --smart-case -e",
         })
       end, { desc = "Live Grep includes hidden files" })
       vim.keymap.set("n", "<M-,>", function()
@@ -102,6 +103,19 @@ return {
       vim.keymap.set("n", "<M-w>", function()
         require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
       end)
+      vim.keymap.set('n', '<M-c>', function()
+        -- Lấy số buffer của file hiện tại
+        local current_buf = vim.api.nvim_get_current_buf()
+
+        -- Gọi trực tiếp setqflist với cấu hình ép dùng location list và KHÔNG tự mở
+        require('gitsigns').setqflist(current_buf, {
+          use_location_list = true,
+          open = false,
+        })
+
+        -- Mở danh sách bằng fzf-lua
+        require('fzf-lua').loclist()
+      end, { desc = "Git hunks (Current File via FZF)" })
     end,
   }
 }
