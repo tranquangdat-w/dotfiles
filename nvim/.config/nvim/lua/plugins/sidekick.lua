@@ -43,6 +43,9 @@ return {
     {
       "3o",
       function()
+        local cli = require("sidekick.cli")
+        local context = require("sidekick.cli.context").get()
+
         require("snacks").input({
           prompt = "Sidekick",
           default = "{this}: ",
@@ -51,8 +54,14 @@ return {
           if user_input and user_input ~= "" then
             local last_char = user_input:sub(-1)
             local should_submit = not (last_char == " " or last_char == "\t")
-            require("sidekick.cli").send({
-              msg = user_input,
+
+            local _, text = context:render({ msg = user_input })
+            if not text then
+              return
+            end
+
+            cli.send({
+              text = text,
               submit = should_submit,
             })
           end
