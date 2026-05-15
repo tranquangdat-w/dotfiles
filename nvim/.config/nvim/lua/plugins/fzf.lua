@@ -104,18 +104,8 @@ return {
         require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
       end)
       vim.keymap.set('n', '<M-c>', function()
-        -- Lấy số buffer của file hiện tại
-        local current_buf = vim.api.nvim_get_current_buf()
-
-        -- Gọi trực tiếp setqflist với cấu hình ép dùng location list và KHÔNG tự mở
-        require('gitsigns').setqflist(current_buf, {
-          use_location_list = true,
-          open = false,
-        })
-
-        -- Mở danh sách bằng fzf-lua
-        require('fzf-lua').loclist()
-      end, { desc = "Git hunks (Current File via FZF)" })
+        require('gitsigns').setqflist(0)
+      end, { desc = "Git hunks (Quickfix)" })
     end,
   }
 }
