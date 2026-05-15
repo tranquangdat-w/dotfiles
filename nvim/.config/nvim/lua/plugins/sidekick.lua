@@ -1,6 +1,26 @@
 return {
   "folke/sidekick.nvim",
+  opts = {
+    nes = { enabled = false },
+    cli = {
+      mux = {
+        backend = "tmux",
+        enabled = true,
+        create = "split",
+      },
+      tools = {
+        kilo = {
+          cmd = { "kilo" },
+        },
+      },
+    },
+  },
   keys = {
+    {
+      "3a",
+      function() require("sidekick.cli").toggle() end,
+      desc = "Sidekick Toggle CLI",
+    },
     {
       "3f",
       function() require("sidekick.cli").focus() end,
