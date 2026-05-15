@@ -20,33 +20,22 @@ return {
 
     local has_cmp, cmp = pcall(require, "cmp")
     if has_cmp then
-      local source = {
-        items = { "{buffers}", "{file}", "{position}", "{line}", "{selection}", "{diagnostics}", "{diagnostics_all}", "{quickfix}", "{function}", "{class}", "{this}" }
-      }
-      function source.new() return setmetatable({}, { __index = source }) end
-      function source.get_keyword_pattern() return [[\%({[^{}]*\)]] end
-      function source.get_trigger_characters() return { "{" } end
-      function source.complete(self, params, callback)
-        local line, col = params.context.cursor_line, params.context.cursor.col
-        local start_pos = line:sub(1, col - 1):find("{[^}]*$")
-        if not start_pos then return callback() end
-        local end_col = line:sub(col, col) == "}" and col or col - 1
-        callback({
-          items = vim.tbl_map(function(item)
-            return {
-              label = item,
-              textEdit = {
-                newText = item,
-                range = {
-                  start = { line = params.context.cursor.line, character = start_pos - 1 },
-                  ["end"] = { line = params.context.cursor.line, character = end_col },
-                },
-              },
-            }
-          end, self.items),
-        })
-      end
-      cmp.register_source("sidekick_context", source.new())
+      local items = { "{buffers}", "{file}", "{position}", "{line}", "{selection}", "{diagnostics}", "{diagnostics_all}", "{quickfix}", "{function}", "{class}", "{this}" }
+      cmp.register_source("sidekick_context", {
+        get_keyword_pattern = function() return [[\%({[^{}]*\)]] end,
+        get_trigger_characters = function() return { "{" } end,
+        complete = function(_, params, callback)
+          local line, col = params.context.cursor_line, params.context.cursor.col
+          local start = line:sub(1, col - 1):find("{[^}]*$")
+          if not start then return callback() end
+          callback({ items = vim.tbl_map(function(item)
+            return { label = item, textEdit = { newText = item, range = {
+              start = { line = params.context.cursor.line, character = start - 1 },
+              ["end"] = { line = params.context.cursor.line, character = line:sub(col, col) == "}" and col or col - 1 },
+            } } }
+          end, items) })
+        end,
+      })
       cmp.setup.filetype("snacks_input", { sources = { { name = "sidekick_context" }, { name = "buffer" } } })
     end
   end,
