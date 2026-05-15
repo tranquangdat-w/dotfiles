@@ -22,6 +22,9 @@ return {
           if vim.bo.filetype == "oil" then
             return false
           end
+          if vim.bo.filetype == "snacks_input" then
+            return true
+          end
           return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
         end,
       })

@@ -28,9 +28,9 @@ return {
       function source.get_trigger_characters() return { "{" } end
       function source.complete(self, params, callback)
         local line, col = params.context.cursor_line, params.context.cursor.col
-        local start_pos = line:sub(1, col):find("{[^}]*$")
+        local start_pos = line:sub(1, col - 1):find("{[^}]*$")
         if not start_pos then return callback() end
-        local end_col = line:sub(col + 1, col + 1) == "}" and col + 1 or col
+        local end_col = line:sub(col, col) == "}" and col or col - 1
         callback({
           items = vim.tbl_map(function(item)
             return {
