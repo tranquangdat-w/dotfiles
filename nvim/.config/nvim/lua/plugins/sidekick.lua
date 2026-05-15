@@ -11,6 +11,7 @@ return {
       tools = {
         kilo = {
           cmd = { "kilo" },
+          is_proc = "\\<kilo\\>",
         },
       },
     },
