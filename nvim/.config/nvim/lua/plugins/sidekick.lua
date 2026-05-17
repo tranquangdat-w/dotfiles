@@ -1,5 +1,8 @@
 return {
   "folke/sidekick.nvim",
+  dependencies = {
+    "folke/snacks.nvim"
+  },
   opts = {
     nes = { enabled = false },
     cli = {
@@ -21,7 +24,8 @@ return {
 
     local has_cmp, cmp = pcall(require, "cmp")
     if has_cmp then
-      local items = { "{buffers}", "{file}", "{position}", "{line}", "{selection}", "{diagnostics}", "{diagnostics_all}", "{quickfix}", "{function}", "{class}", "{this}" }
+      local items = { "{buffers}", "{file}", "{position}", "{line}", "{selection}", "{diagnostics}", "{diagnostics_all}",
+        "{quickfix}", "{function}", "{class}", "{this}" }
       cmp.register_source("sidekick_context", {
         get_keyword_pattern = function() return [[\%({[^{}]*\)]] end,
         get_trigger_characters = function() return { "{" } end,
@@ -29,12 +33,20 @@ return {
           local line, col = params.context.cursor_line, params.context.cursor.col
           local start = line:sub(1, col - 1):find("{[^}]*$")
           if not start then return callback() end
-          callback({ items = vim.tbl_map(function(item)
-            return { label = item, textEdit = { newText = item, range = {
-              start = { line = params.context.cursor.line, character = start - 1 },
-              ["end"] = { line = params.context.cursor.line, character = line:sub(col, col) == "}" and col or col - 1 },
-            } } }
-          end, items) })
+          callback({
+            items = vim.tbl_map(function(item)
+              return {
+                label = item,
+                textEdit = {
+                  newText = item,
+                  range = {
+                    start = { line = params.context.cursor.line, character = start - 1 },
+                    ["end"] = { line = params.context.cursor.line, character = line:sub(col, col) == "}" and col or col - 1 },
+                  }
+                }
+              }
+            end, items)
+          })
         end,
       })
       cmp.setup.filetype("snacks_input", { sources = { { name = "sidekick_context" }, { name = "buffer" } } })
@@ -95,7 +107,7 @@ return {
           prompt = "Sidekick",
           default = "{this}: ",
           icon = "󰚩",
-          win = { title_pos = "left" }
+          win = { title_pos = "left", width = 40 }
         }, function(user_input)
           if user_input and user_input ~= "" then
             local last_char = user_input:sub(-1)
