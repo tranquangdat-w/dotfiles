@@ -16,6 +16,10 @@ return {
           cmd = { "kilo" },
           is_proc = "\\<kilo\\>",
         },
+        antigravity = {
+          cmd = { "agy" },
+          is_proc = "\\<agy\\>",
+        },
       },
     },
   },
