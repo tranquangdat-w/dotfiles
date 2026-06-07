@@ -103,6 +103,11 @@ return {
 
       vim.lsp.config['tailwindcss'] = {
         capabilities = capabilities,
+        init_options = {
+          userLanguages = {
+            typescript = 'typescriptreact',
+          },
+        }
       }
 
       vim.lsp.config['gopls'] = {

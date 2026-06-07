@@ -72,7 +72,7 @@ return {
         require("fzf-lua").files({
           cwd = cwd,
           fd_opts =
-          "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build'",
+          "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build' --exclude '.next'",
           -- previewer = false,
         })
       end, { desc = "Find Files" })

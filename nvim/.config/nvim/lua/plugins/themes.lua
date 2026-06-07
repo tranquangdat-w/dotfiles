@@ -14,11 +14,11 @@ return {
         underline = false,
         bold = true,
         italic = {
-            strings = true,
-            emphasis = false,
-            comments = true,
-            operators = false,
-            folds = false,
+          strings = true,
+          emphasis = false,
+          comments = true,
+          operators = false,
+          folds = false,
         },
         strikethrough = true,
         invert_selection = false,
@@ -26,7 +26,7 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = "", -- can be "hard", "soft" or empty string
+        contrast = "",  -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
@@ -50,7 +50,11 @@ return {
     name = "rose-pine",
     config = function()
       require("rose-pine").setup({
-          disable_background = true
+        disable_background = true,
+        styles = {
+          -- Tắt các style không mong muốn
+          underline = false,
+        }
       })
     end
 
