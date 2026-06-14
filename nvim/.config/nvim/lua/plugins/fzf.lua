@@ -42,7 +42,7 @@ return {
       local harpoon = require('harpoon')
       harpoon:setup({})
 
-      vim.keymap.set("n", "<M-l>", function()
+      vim.keymap.set("n", "<BS>l", function()
         local cor = vim.fn.systemlist("fd -t d --hidden --exclude '.git'")
         require("fzf-lua").fzf_exec(cor, {
           previewer = "shell",
@@ -55,7 +55,7 @@ return {
         })
       end, { desc = "Find Directories" })
 
-      vim.keymap.set("n", "<A-m>", function() require("aerial").fzf_lua_picker({}) end,
+      vim.keymap.set("n", "<BS>m", function() require("aerial").fzf_lua_picker({}) end,
         { desc = "Open Aerial (functions only)" })
 
       vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
@@ -76,13 +76,13 @@ return {
           -- previewer = false,
         })
       end, { desc = "Find Files" })
-      vim.keymap.set("n", "<A-g>", fzf.git_status, { desc = "Find Git status Files" })
-      vim.keymap.set("n", "<A-;>", function()
+      vim.keymap.set("n", "<BS>g", fzf.git_status, { desc = "Find Git status Files" })
+      vim.keymap.set("n", "<BS>;", function()
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
         fzf.live_grep({ cwd = cwd })
       end, { desc = "Live Grep" })
-      vim.keymap.set("n", "<A-'>", fzf.marks, { desc = "Find marks" })
-      vim.keymap.set("n", "<A-.>", function()
+      vim.keymap.set("n", "<BS>'", fzf.marks, { desc = "Find marks" })
+      vim.keymap.set("n", "<BS>.", function()
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
         require("fzf-lua").live_grep({
           cwd = cwd,
@@ -90,20 +90,20 @@ return {
           "--hidden --no-ignore --glob=!.git/* --glob=!**/node_modules/* --column --line-number --no-heading --color=always --smart-case -e",
         })
       end, { desc = "Live Grep includes hidden files" })
-      vim.keymap.set("n", "<M-,>", function()
+      vim.keymap.set("n", "<BS>,", function()
         fzf.buffers({
           previewer = false
         })
       end, { desc = "Buffers" })
-      vim.keymap.set("n", "<M-/>", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
-      vim.keymap.set("n", "<M-r>", fzf.resume, { desc = "Resume fzf serach" })
-      vim.keymap.set("n", "<M-q>", fzf.quickfix_stack, { desc = "Open quickfix history" })
-      vim.keymap.set("n", "<M-e>", fzf.diagnostics_document, { desc = "Diagnostics (buffer)" })
-      vim.keymap.set("n", "<M-S-e>", fzf.diagnostics_workspace, { desc = "Diagnostics (workspace)" })
-      vim.keymap.set("n", "<M-w>", function()
+      vim.keymap.set("n", "<BS>/", fzf.grep_curbuf, { desc = "Grep in Current Buffer" })
+      vim.keymap.set("n", "<BS>r", fzf.resume, { desc = "Resume fzf serach" })
+      vim.keymap.set("n", "<BS>q", fzf.quickfix_stack, { desc = "Open quickfix history" })
+      vim.keymap.set("n", "<BS>e", fzf.diagnostics_document, { desc = "Diagnostics (buffer)" })
+      vim.keymap.set("n", "<BS>E", fzf.diagnostics_workspace, { desc = "Diagnostics (workspace)" })
+      vim.keymap.set("n", "<BS>w", function()
         require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
       end)
-      vim.keymap.set('n', '<M-c>', function()
+      vim.keymap.set('n', '<BS>c', function()
         require('gitsigns').setqflist(0)
       end, { desc = "Git hunks (Quickfix)" })
     end,

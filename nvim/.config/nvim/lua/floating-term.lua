@@ -41,4 +41,4 @@ local toggle_term = function()
 end
 
 vim.api.nvim_create_user_command("FTerm", toggle_term, {})
-vim.keymap.set({ "n", "t" }, "<M-t>", toggle_term)
+vim.keymap.set({ "n", "t" }, "<BS>t", toggle_term)
