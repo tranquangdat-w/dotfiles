@@ -179,7 +179,6 @@ end, { expr = true })
 
 vim.keymap.set("n", "<left>", "gT")
 vim.keymap.set("n", "<right>", "gt")
-vim.keymap.set("n", "<C-Tab>", "<cmd>e #<CR>", { desc = "Toggle alternate file" })
 
 vim.keymap.set("c", "<CR>", function()
   local cmdtype = vim.fn.getcmdtype()

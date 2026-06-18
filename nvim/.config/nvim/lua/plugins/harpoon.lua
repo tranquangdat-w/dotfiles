@@ -121,10 +121,10 @@ return {
     end, { desc = "Add to harpoon" })
     vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end,
       { desc = "Show harpoon list", remap = false })
-    vim.keymap.set("n", "<BS>a", function() select_and_sync(1) end, { desc = "Move to harpoon item 1" })
-    vim.keymap.set("n", "<BS>s", function() select_and_sync(2) end, { desc = "Move to harpoon item 2" })
-    vim.keymap.set("n", "<BS>d", function() select_and_sync(3) end, { desc = "Move to harpoon item 3" })
-    vim.keymap.set("n", "<BS>f", function() select_and_sync(4) end, { desc = "Move to harpoon item 4" })
+    vim.keymap.set("n", "<C-f>", function() select_and_sync(1) end, { desc = "Move to harpoon item 1" })
+    vim.keymap.set("n", "<C-t>", function() select_and_sync(2) end, { desc = "Move to harpoon item 2" })
+    vim.keymap.set("n", "<C-n>", function() select_and_sync(3) end, { desc = "Move to harpoon item 3" })
+    vim.keymap.set("n", "<C-s>", function() select_and_sync(4) end, { desc = "Move to harpoon item 4" })
 
     vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
     vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
