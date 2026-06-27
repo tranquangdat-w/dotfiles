@@ -35,14 +35,6 @@ vim.diagnostic.config({
 -- To copy in clipboard in vim
 -- vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
--- Set Esc to switch to normal mode in terminal
-vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
-vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    vim.cmd("startinsert")
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
   command = "setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab",
@@ -208,6 +200,22 @@ vim.keymap.set("n", "<leader>qq", function()
   vim.diagnostic.setqflist()
   vim.cmd("copen")
 end, { desc = "Send diagnostics to quickfix" })
+
+vim.api.nvim_create_user_command("E", function(opts)
+  local dir
+
+  if vim.bo.filetype == "oil" then
+    dir = require("oil").get_current_dir()
+  else
+    dir = vim.fn.expand("%:p:h")
+  end
+
+  local path = vim.fs.joinpath(dir, opts.args)
+  vim.cmd.edit(vim.fn.fnameescape(path))
+end, {
+  nargs = 1,
+  complete = "file",
+})
 
 -- vim.keymap.set("n", "<M-e>", function()
 --   local dir

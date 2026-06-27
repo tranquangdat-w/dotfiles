@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("vim-helpers")
-require("floating-term")
+-- require("floating-term")
 require("lazy").setup("plugins")
 
 -- vim.cmd([[colorscheme catppuccin]])

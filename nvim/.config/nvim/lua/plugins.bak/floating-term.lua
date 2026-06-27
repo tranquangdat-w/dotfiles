@@ -41,4 +41,11 @@ local toggle_term = function()
 end
 
 vim.api.nvim_create_user_command("FTerm", toggle_term, {})
-vim.keymap.set({ "n", "t" }, "<BS>t", toggle_term)
+vim.keymap.set({ "n" }, "<BS>t", toggle_term)
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
+
