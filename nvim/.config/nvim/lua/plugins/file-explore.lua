@@ -88,7 +88,7 @@ return {
               }
             end,
           },
-          width = 50
+          -- width = 50
         },
         git = {
           ignore = true,
@@ -143,12 +143,7 @@ return {
         "<leader>cw",
         function()
           if vim.bo.filetype == "oil" then
-            local old = vim.fn.getcwd()
-            vim.cmd.lcd(require("oil").get_current_dir())
-            vim.cmd("Yazi cwd")
-            vim.schedule(function()
-              vim.cmd.lcd(old)
-            end)
+            require("yazi").yazi({}, require("oil").get_current_dir())
           else
             vim.cmd("Yazi")
           end
