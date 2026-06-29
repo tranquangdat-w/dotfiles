@@ -1,6 +1,6 @@
 return {
     'akinsho/git-conflict.nvim',
-    versino = "*",
+    version = "*",
     config = function()
         require("git-conflict").setup({
             default_mappings = true, -- Tắt mapping mặc định nếu bạn muốn tự định nghĩa

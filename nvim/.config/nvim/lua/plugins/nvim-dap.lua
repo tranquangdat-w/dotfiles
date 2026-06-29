@@ -4,7 +4,7 @@ return {
     'igorlfs/nvim-dap-view',
     'nvim-neotest/nvim-nio',
     'leoluz/nvim-dap-go',
-    -- 'mfussenegger/nvim-dap-python',
+    'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require("dap")
@@ -21,7 +21,7 @@ return {
       },
     })
     require("dap-go").setup()
-    -- require("dap-python").setup("uv")
+    require("dap-python").setup("uv")
 
     -- CHECK
     local js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
@@ -66,6 +66,14 @@ return {
           cwd = "${workspaceFolder}/src",
           -- we don't want to debug code inside node_modules, so skip it!
           skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+        },
+        {
+          name = 'Next.js: debug server-side',
+          type = 'pwa-node',
+          request = 'attach',
+          port = 9231,
+          skipFiles = { 'node_modules/**' },
+          cwd = '${workspaceFolder}',
         },
 
         -- {
@@ -115,7 +123,8 @@ return {
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
     vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
     vim.keymap.set('n', '<leader>dV', '<cmd>DapViewVirtualTextToggle<cr>', { desc = "Toggle Dap inline virtual text" })
-    vim.keymap.set({'n', 'v'}, '<leader>dw', dapview.add_expr, { desc = "Add express for dap" })
+    vim.keymap.set('n', '<leader>ds', '<cmd>DapViewToggle<cr>', { desc = "Toggle Dap view" })
+    vim.keymap.set({ 'n', 'v' }, '<leader>dw', dapview.add_expr, { desc = "Add express for dap" })
   end
 }
 

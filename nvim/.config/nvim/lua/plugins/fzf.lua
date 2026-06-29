@@ -63,19 +63,19 @@ return {
       -- Tùy chỉnh màu số dòng trong grep
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
 
-      vim.keymap.set("n", "<leader><leader>", function()
-        local cwd = nil
-
-        if vim.bo.filetype == "oil" then
-          cwd = require("oil").get_current_dir()
-        end
-        require("fzf-lua").files({
-          cwd = cwd,
-          fd_opts =
-          "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build' --exclude '.next'",
-          -- previewer = false,
-        })
-      end, { desc = "Find Files" })
+      -- vim.keymap.set("n", "<leader><leader>", function()
+      --   local cwd = nil
+      --
+      --   if vim.bo.filetype == "oil" then
+      --     cwd = require("oil").get_current_dir()
+      --   end
+      --   require("fzf-lua").files({
+      --     cwd = cwd,
+      --     fd_opts =
+      --     "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build' --exclude '.next'",
+      --     -- previewer = false,
+      --   })
+      -- end, { desc = "Find Files" })
       vim.keymap.set("n", "<BS>g", fzf.git_status, { desc = "Find Git status Files" })
       vim.keymap.set("n", "<BS>;", function()
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
@@ -107,5 +107,49 @@ return {
         require('gitsigns').setqflist(0)
       end, { desc = "Git hunks (Quickfix)" })
     end,
+  },
+  {
+    'dmtrKovalenko/fff.nvim',
+    build = function()
+      -- downloads a prebuilt binary or falls back to cargo build
+      require("fff.download").download_or_build_binary()
+    end,
+    -- for nixos:
+    -- build = "nix run .#release",
+    opts = {
+      debug = {
+        enabled = true,
+        show_scores = true,
+      },
+    },
+    lazy = false, -- the plugin lazy-initialises itself
+    keys = {
+      { "<BS>f", function()
+        local cwd = nil
+        if vim.bo.filetype == "oil" then
+          cwd = require("oil").get_current_dir()
+        end
+        require('fff').find_files({ cwd = cwd })
+      end, desc = 'Find Files' },
+    },
+    config = function()
+      require('fff').setup({
+        layout = {
+          height = 0.9,
+          width = 0.9,
+          prompt_position = 'bottom',
+          preview_position = 'top',
+          preview_size = 0.5,
+          flex = { size = 130, wrap = 'top' },
+          min_list_height = 10,
+          show_scrollbar = true,
+          path_shorten_strategy = 'middle_number',
+          anchor = 'center',
+        },
+        keymaps = {
+          preview_scroll_up = '<C-b>',
+        },
+      })
+    end
   }
 }
