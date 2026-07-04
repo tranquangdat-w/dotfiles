@@ -25,7 +25,6 @@ return {
         keymaps = {
           ["g?"] = { "actions.show_help", mode = "n" },
           ["<CR>"] = "actions.select",
-          ["l"] = { "actions.select", mode = "n" },
           ["<C-s>"] = { "actions.select", opts = { vertical = true } },
           ["<C-x>"] = { "actions.select", opts = { horizontal = true } },
           ["<C-t>"] = { "actions.select", opts = { tab = true } },
@@ -33,7 +32,6 @@ return {
           ["<C-c>"] = { "actions.close", mode = "n" },
           ["<C-r>"] = "actions.refresh",
           ["<Tab>"] = { "actions.parent", mode = "n" },
-          ["h"] = { "actions.parent", mode = "n" },
           ["_"] = { "actions.open_cwd", mode = "n" },
           ["`"] = { "actions.cd", mode = "n" },
           ["g~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
@@ -151,9 +149,16 @@ return {
         desc = "Open Yazi",
       },
       {
-        "<c-up>",
-        "<cmd>Yazi toggle<cr>",
-        desc = "Resume the last yazi session",
+        -- Open in the current working directory
+        "<leader>cl",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cr",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
       },
     },
     opts = {

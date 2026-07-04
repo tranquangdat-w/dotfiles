@@ -56,6 +56,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "{", "{zz")
 vim.keymap.set("n", "}", "}zz")
+vim.keymap.set("n", "G", "Gzz")
 vim.keymap.set("n", "]`", "]`zz")
 vim.keymap.set("n", "[`", "[`zz")
 vim.keymap.set("n", "<C-o>", "<C-o>zz")
@@ -216,18 +217,3 @@ end, {
   nargs = 1,
   complete = "file",
 })
-
--- vim.keymap.set("n", "<M-e>", function()
---   local dir
---
---   if vim.bo.filetype == "oil" then
---     dir = require("oil").get_current_dir()
---   else
---     dir = vim.fn.expand("%:p:h")
---   end
---
---   vim.cmd("lcd " .. dir)
---
---   -- mở command-line với :e sẵn
---   vim.api.nvim_feedkeys(":e ", "n", false)
--- end, { desc = "Smart edit file" })

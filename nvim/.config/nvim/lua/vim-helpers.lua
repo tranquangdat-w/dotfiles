@@ -11,6 +11,9 @@ vim.keymap.set("n", "<leader>ce", function()
     end
 end, { noremap = true, silent = true, desc = "Copy diagnostic message" })
 
+vim.keymap.set("n", "<Right>", "5<C-w>>", { remap = true })
+vim.keymap.set("n", "<Left>", "5<C-w><", { remap = true })
+
 -- vim.keymap.set("n", "<leader>ob", function()
 -- 	local file_path = vim.fn.expand("%:p") -- get the current file path
 -- 	if file_path ~= "" then
