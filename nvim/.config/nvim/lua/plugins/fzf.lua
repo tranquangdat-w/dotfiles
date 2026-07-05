@@ -16,7 +16,7 @@ return {
         winopts = {
           preview = {
             -- layout = "vertical",
-            -- vertical = "up:40%",
+            horizontal = "right:45%",
           },
         },
         fzf_colors = {
