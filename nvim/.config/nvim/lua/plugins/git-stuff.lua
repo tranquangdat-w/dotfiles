@@ -72,6 +72,7 @@ return {
     "sindrets/diffview.nvim",
     config = function()
       require("diffview").setup({
+        enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
         file_panel = {
           listing_style = "list", -- mặc định là "tree", đổi thành "list"
         },
