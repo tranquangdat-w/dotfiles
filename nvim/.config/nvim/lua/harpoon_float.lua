@@ -1,6 +1,36 @@
 local M = {}
 local win, buf
 
+local function should_hide()
+  -- Command-line window
+  if vim.fn.getcmdwintype() ~= "" then
+    return true
+  end
+
+  local bt = vim.bo.buftype
+  local ft = vim.bo.filetype
+
+  -- Quickfix & Location List
+  if bt == "quickfix" then
+    return true
+  end
+
+  -- Optional: hide in special buffers
+  if ft == "qf" then
+    return true
+  end
+
+  -- Hide when cursor is on the last visible line
+  local cursor = vim.api.nvim_win_get_cursor(0)[1]
+  local last = vim.api.nvim_buf_line_count(0)
+
+  if cursor == last then
+    return true
+  end
+
+  return false
+end
+
 local function get_info()
   local ok, harpoon = pcall(require, "harpoon")
   if not ok then return end
@@ -48,6 +78,9 @@ end
 
 function M.show()
   if not get_info() then return end
+  if should_hide() then
+    return
+  end
   M.hide()
   buf = vim.api.nvim_create_buf(false, true)
   vim.bo[buf].buftype, vim.bo[buf].bufhidden = "nofile", "wipe"
@@ -76,6 +109,10 @@ end
 function M.toggle() if win and vim.api.nvim_win_is_valid(win) then M.hide() else M.show() end end
 
 function M.refresh()
+  if should_hide() then
+    M.hide()
+    return
+  end
   if not win or not vim.api.nvim_win_is_valid(win) then return M.show() end
   vim.api.nvim_win_set_config(win, {
     relative = "editor",
@@ -111,6 +148,12 @@ function M.setup()
     group = group,
     pattern = { "*", "HarpoonAdd", "HarpoonUpdate" },
     callback = function() vim.schedule(M.refresh) end,
+  })
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    group = group,
+    callback = function()
+      vim.schedule(M.refresh)
+    end,
   })
   vim.keymap.set("n", "<leader>h", M.toggle, { desc = "Harpoon float toggle" })
   M.show()
