@@ -7,6 +7,7 @@ return {
     lazy = false,
     config = function()
       require("oil").setup({
+        default_file_explorer = true,
         columns = { 'icon' },
         use_default_keymaps = false,
         skip_confirm_for_simple_edits = true,
@@ -52,28 +53,36 @@ return {
       "nvim-tree/nvim-web-devicons"
     },
     keys = {
-      { "<leader>E", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Open tree at current file" },
+      { "-", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Open tree at current file" },
     },
+
     config = function()
+      local function on_attach(bufnr)
+        local api = require("nvim-tree.api")
+        api.config.mappings.default_on_attach(bufnr)
+        vim.keymap.del("n", "-", { buffer = bufnr })
+      end
       require("nvim-tree").setup({
-        -- update_focused_file = {
-        --   -- enable = true,
-        --   -- update_root = false, -- đổi thành true nếu muốn root đổi theo file
-        -- },
-        -- filesystem_watchers = {
-        --   enable = true,
-        -- },
+        on_attach = on_attach,
+        update_focused_file = {
+          enable = false,
+          update_root = false, -- đổi thành true nếu muốn root đổi theo file
+        },
+        filesystem_watchers = {
+          enable = false,
+        },
         sort = {
           sorter = "case_sensitive"
         },
         view = {
+          side = "right",
           float = {
-            enable = false,
+            enable = true,
             open_win_config = function()
               local screen_w = vim.opt.columns:get()
               local screen_h = vim.opt.lines:get()
-              local width = math.floor(screen_w * 0.4)
-              local height = math.floor(screen_h * 0.95)
+              local width = math.floor(screen_w * 1.0)
+              local height = math.floor(screen_h * 1.0)
               local row = math.floor((screen_h - height) / 2)
               local col = math.floor((screen_w - width) / 2)
               return {
@@ -86,25 +95,25 @@ return {
               }
             end,
           },
-          -- width = 50
+          width = 50
         },
         git = {
-          ignore = true,
+          ignore = false,
           show_on_open_dirs = false,
         },
         renderer = {
           indent_markers = {
-            enable = true,
+            enable = false,
           },
           group_empty = true,
-          -- indent_width = 0.1,
+          indent_width = 4,
           highlight_modified = "icon",
           icons = {
             show = {
               git = true,
               file = true,
-              folder = true,
-              folder_arrow = false,
+              folder = false,
+              folder_arrow = true,
               modified = true,
             },
             glyphs = {
@@ -170,7 +179,6 @@ return {
       },
     },
     init = function()
-      vim.g.loaded_netrwPlugin = 1
     end,
   }
 }
