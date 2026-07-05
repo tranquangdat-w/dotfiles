@@ -6,6 +6,30 @@ return {
     -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
     config = function()
+      local oil = require("oil")
+
+      local function update_winbar()
+        if vim.bo.filetype ~= "oil" then
+          return
+        end
+
+        local dir = oil.get_current_dir()
+        if not dir then
+          return
+        end
+
+        vim.wo.winbar =  vim.fn.fnamemodify(dir, ":.")
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "oil",
+        callback = update_winbar,
+      })
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "OilDirChanged",
+        callback = update_winbar,
+      })
       require("oil").setup({
         default_file_explorer = true,
         columns = { 'icon' },
