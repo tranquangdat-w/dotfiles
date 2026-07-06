@@ -132,8 +132,8 @@ return {
     vim.keymap.set("n", "<leader>8", function() select_and_sync(8) end, { desc = "Move to harpoon item 8" })
     vim.keymap.set("n", "<leader>9", function() select_and_sync(9) end, { desc = "Move to harpoon item 9" })
 
-    vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
-    vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
+    vim.keymap.set("n", "<A-;>", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
+    vim.keymap.set("n", "<A-n>", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
     vim.keymap.set("n", "<leader>h", function() require("harpoon_float").toggle() end, { desc = "Toggle harpoon float" })
 
     require("harpoon_float").setup()
