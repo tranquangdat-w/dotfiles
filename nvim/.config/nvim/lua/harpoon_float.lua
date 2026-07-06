@@ -22,9 +22,9 @@ local function should_hide()
 
   -- Hide when cursor is on the last visible line
   local cursor = vim.api.nvim_win_get_cursor(0)[1]
-  local last = vim.api.nvim_buf_line_count(0)
+  local last_visible = vim.fn.line("w$")
 
-  if cursor == last then
+  if cursor == last_visible then
     return true
   end
 
