@@ -104,6 +104,13 @@ return {
       vim.keymap.set('n', '<BS>c', function()
         require('gitsigns').setqflist(0)
       end, { desc = "Git hunks (Quickfix)" })
+
+      vim.keymap.set("n", "<BS>b", function()
+        require("fzf-lua").git_branches({
+          prompt = "Branches> ",
+          preview = "git log --oneline --graph --decorate -20 {1}",
+        })
+      end, { desc = "Git branches (fzf)" })
     end,
   },
 }
