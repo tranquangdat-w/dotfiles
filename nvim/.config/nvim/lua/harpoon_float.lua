@@ -149,12 +149,6 @@ function M.setup()
     pattern = { "*", "HarpoonAdd", "HarpoonUpdate" },
     callback = function() vim.schedule(M.refresh) end,
   })
-  vim.api.nvim_create_autocmd("CursorMoved", {
-    group = group,
-    callback = function()
-      vim.schedule(M.refresh)
-    end,
-  })
   vim.keymap.set("n", "<leader>h", M.toggle, { desc = "Harpoon float toggle" })
   M.show()
 end

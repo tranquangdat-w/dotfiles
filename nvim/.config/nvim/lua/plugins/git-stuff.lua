@@ -85,6 +85,13 @@ return {
           vim.cmd("DiffviewClose")
         end
       end, { desc = "Toggle Diffview" })
+      vim.keymap.set("n", "<leader>dh", function()
+        if next(require("diffview.lib").views) == nil then
+          vim.cmd("DiffviewFileHistory")
+        else
+          vim.cmd("DiffviewClose")
+        end
+      end, { desc = "Toggle Diffview file history" })
     end,
   }
 }
