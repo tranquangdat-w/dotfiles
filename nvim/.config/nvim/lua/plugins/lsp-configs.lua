@@ -27,6 +27,7 @@ return {
         "docker_compose_language_service",
         "pylsp",
         "jsonls",
+        "dockerls",
       },
     },
   },
@@ -92,6 +93,11 @@ return {
       vim.lsp.config['eslint'] = {
         capabilities = capabilities,
       }
+
+      vim.lsp.config['dockerls'] = {
+        capabilities = capabilities,
+      }
+
 
       vim.lsp.config['zls'] = {
         capabilities = capabilities,
@@ -230,6 +236,7 @@ return {
         "pylsp",
         "jsonls",
         "odoo_ls",
+        "dockerls",
       })
 
       -- lsp kepmap setting
