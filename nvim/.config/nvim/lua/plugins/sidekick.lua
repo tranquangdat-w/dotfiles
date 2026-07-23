@@ -1,3 +1,30 @@
+local function prompt_send(default_text)
+  local cli = require("sidekick.cli")
+  local context = require("sidekick.cli.context").get()
+
+  require("snacks").input({
+    prompt = "Sidekick",
+    default = default_text,
+    icon = "󰚩",
+    win = { title_pos = "left", width = 40 }
+  }, function(user_input)
+    if user_input and user_input ~= "" then
+      local last_char = user_input:sub(-1)
+      local should_submit = not (last_char == " " or last_char == "\t")
+
+      local _, text = context:render({ msg = user_input })
+      if not text then
+        return
+      end
+
+      cli.send({
+        text = text,
+        submit = should_submit,
+      })
+    end
+  end)
+end
+
 return {
   "folke/sidekick.nvim",
   dependencies = {
@@ -80,18 +107,18 @@ return {
     },
     {
       "3t",
-      function() require("sidekick.cli").send({ msg = "{this}" }) end,
+      function() prompt_send("{this} ") end,
       mode = { "x", "n" },
       desc = "Send This",
     },
     {
       "3f",
-      function() require("sidekick.cli").send({ msg = "{file}" }) end,
+      function() prompt_send("{file} ") end,
       desc = "Send File",
     },
     {
       "3v",
-      function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+      function() prompt_send("{selection} ") end,
       mode = { "x" },
       desc = "Send Visual Selection",
     },
@@ -103,32 +130,7 @@ return {
     },
     {
       "3o",
-      function()
-        local cli = require("sidekick.cli")
-        local context = require("sidekick.cli.context").get()
-
-        require("snacks").input({
-          prompt = "Sidekick",
-          default = "{this}: ",
-          icon = "󰚩",
-          win = { title_pos = "left", width = 40 }
-        }, function(user_input)
-          if user_input and user_input ~= "" then
-            local last_char = user_input:sub(-1)
-            local should_submit = not (last_char == " " or last_char == "\t")
-
-            local _, text = context:render({ msg = user_input })
-            if not text then
-              return
-            end
-
-            cli.send({
-              text = text,
-              submit = should_submit,
-            })
-          end
-        end)
-      end,
+      function() prompt_send("{this} ") end,
       mode = { "n", "x" },
       desc = "Sidekick: Custom prompt (space at end to append)",
     },
