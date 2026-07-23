@@ -31,6 +31,27 @@ local function should_hide()
   return false
 end
 
+local function get_display_name(path)
+  if not path or path == "" then return "" end
+  local is_dir = path:match("^oil://") ~= nil or path:sub(-1) == "/"
+  local clean = path:gsub("^oil://", ""):gsub("/+$", "")
+  if clean == "" then return path end
+
+  if not is_dir then
+    local uv = vim.uv or vim.loop
+    local o, exp = pcall(vim.fn.expand, clean)
+    local full = o and exp or clean
+    local stat = uv.fs_stat(full)
+    if stat and stat.type == "directory" then
+      is_dir = true
+    end
+  end
+
+  local tail = vim.fn.fnamemodify(clean, ":t")
+  local name = (tail ~= "" and tail) or clean
+  return is_dir and (name .. "/") or name
+end
+
 local function get_info()
   local ok, harpoon = pcall(require, "harpoon")
   if not ok then return end
@@ -40,8 +61,10 @@ local function get_info()
   local cur = vim.api.nvim_buf_get_name(0)
   local function norm(p)
     if not p or p == "" then return end
-    local o, exp = pcall(vim.fn.expand, p)
-    exp = vim.fn.fnamemodify(o and exp or p, ":p")
+    local clean = p:gsub("^oil://", ""):gsub("/+$", "")
+    if clean == "" then clean = "/" end
+    local o, exp = pcall(vim.fn.expand, clean)
+    exp = vim.fn.fnamemodify(o and exp or clean, ":p"):gsub("/+$", "")
     return (vim.uv or vim.loop).fs_realpath(exp) or exp
   end
 
@@ -61,7 +84,8 @@ local function render()
 
   local segs, hls, col = {}, {}, 0
   for i, item in ipairs(info.items) do
-    local seg = i .. ":" .. vim.fn.fnamemodify(item.value or item.path or item.filename, ":t") .. "  "
+    local name = get_display_name(item.value or item.path or item.filename)
+    local seg = i .. ":" .. name .. "  "
     table.insert(segs, seg)
     table.insert(hls, { col, col + #seg - 2, i == info.current and "HarpoonCurrent" or "HarpoonInactive" })
     col = col + #seg

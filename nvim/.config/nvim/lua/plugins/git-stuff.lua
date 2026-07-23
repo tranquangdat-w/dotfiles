@@ -71,7 +71,7 @@ return {
     "sindrets/diffview.nvim",
     config = function()
       require("diffview").setup({
-        enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
+        enhanced_diff_hl = true,  -- See |diffview-config-enhanced_diff_hl|
         file_panel = {
           listing_style = "list", -- mặc định là "tree", đổi thành "list"
         },
@@ -92,6 +92,47 @@ return {
           vim.cmd("DiffviewClose")
         end
       end, { desc = "Toggle Diffview file history" })
+    end,
+  },
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      {
+        "<leader>gw",
+        function()
+          require("telescope").extensions.git_worktree.git_worktrees()
+        end,
+        desc = "Git Worktrees",
+      },
+      {
+        "<leader>gW",
+        function()
+          require("telescope").extensions.git_worktree.create_git_worktree()
+        end,
+        desc = "Create Git Worktree",
+      },
+    },
+    config = function()
+      local Worktree = require("git-worktree")
+
+      Worktree.setup({
+       confirm_telescope_deletions = true,
+      })
+
+      Worktree.on_tree_change(function(op, metadata)
+        if op == Worktree.Operations.Switch then
+          vim.notify("Switched to: " .. metadata.path)
+
+          -- Optional
+          -- vim.cmd("LspRestart")
+          -- vim.cmd("edit .")
+        end
+      end)
+
+      require("telescope").load_extension("git_worktree")
     end,
   }
 }
