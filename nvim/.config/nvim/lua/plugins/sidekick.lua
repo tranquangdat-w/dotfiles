@@ -2,8 +2,11 @@ local function prompt_send(default_text)
   local cli = require("sidekick.cli")
   local context = require("sidekick.cli.context").get()
 
+  local attached = require("sidekick.cli.state").get({ attached = true })
+  local prompt_title = #attached == 1 and ("Sidekick - " .. attached[1].tool.name) or "Sidekick"
+
   require("snacks").input({
-    prompt = "Sidekick",
+    prompt = prompt_title,
     default = default_text,
     icon = "󰚩",
     win = { title_pos = "left", width = 40 }
