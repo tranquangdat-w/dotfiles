@@ -17,11 +17,11 @@ return {
       -- Không tự execute (execute_on_save=0) → mở template để điền rồi <C-s> chạy.
       vim.g.db_ui_table_helpers = {
         postgresql = {
-          Count = 'select count(*) from {optional_schema}{table}',
-          ['Last 100'] = 'select * from {optional_schema}{table} order by id desc limit 100',
+          Count = 'select count(*) from {optional_schema}{table};',
+          ['Last 100'] = 'select * from {optional_schema}{table} order by id desc limit 100;',
           ['Select Where'] = 'SELECT * FROM {optional_schema}{table} WHERE ',
-          ['Delete'] = 'SELECT * FROM {optional_schema}{table} WHERE \nDELETE FROM {optional_schema}{table} WHERE ',
-          ['Update'] = 'SELECT * FROM {optional_schema}{table} WHERE \nUPDATE {optional_schema}{table} SET  WHERE ',
+          ['Delete'] = 'SELECT * FROM {optional_schema}{table};\nSELECT * FROM {optional_schema}{table} WHERE id = :varUp;\nDELETE FROM {optional_schema}{table} WHERE id = :varUp;',
+          ['Update'] = 'SELECT * FROM {optional_schema}{table};\nSELECT * FROM {optional_schema}{table} WHERE id = :varDel;\nUPDATE {optional_schema}{table} SET \nWHERE id = :varDel;',
         },
       }
       vim.api.nvim_create_autocmd('FileType', {

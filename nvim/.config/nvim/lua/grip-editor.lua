@@ -84,16 +84,17 @@ local function text_editor(prompt, initial, on_save)
     if done then return end
     done = true
     local val = table.concat(vim.api.nvim_buf_get_lines(buf, 0, -1, false), "\n")
+    vim.cmd("stopinsert") -- về normal mode sau khi đóng float
     pcall(vim.api.nvim_win_close, win, true)
     if save then on_save(val) end
   end
 
   local o = { buffer = buf, noremap = true, nowait = true }
-  vim.keymap.set("i", "<Esc>", "<C-\\><C-n>", o)
+  vim.keymap.set("i", "<Esc>", "<C-\\><C-n>", o)      -- insert → normal
+  vim.keymap.set({ "i", "n" }, "<CR>", function() finish(true) end, o)  -- Enter lưu
   vim.keymap.set("n", "<Esc>", function() finish(false) end, o)
   vim.keymap.set("n", "q", function() finish(false) end, o)
-  vim.keymap.set("n", "<CR>", function() finish(true) end, o)
-  vim.keymap.set({ "i", "n" }, "<C-s>", function() finish(true) end, o)
+  vim.keymap.set({ "i", "n" }, "<C-s>", function() finish(true) end, o) -- xuống dòng: <C-o>o hoặc <C-s> để lưu
 end
 
 -- Dropdown: j/k (+ ctrl variants) move, <CR> pick, <Esc>/q cancel.
