@@ -28,9 +28,6 @@ vim.api.nvim_set_hl(0, "WinBar", { fg = "#ffffff", bg = winbar_hl.bg, })
 -- Disable Copilot
 -- vim.cmd("Copilot disable")
 
--- DadbodUI
-vim.g.db_ui_force_echo_notifications = 1
-
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Toggle undo tree" })
 
