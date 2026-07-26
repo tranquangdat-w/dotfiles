@@ -13,7 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("vim-helpers")
 -- require("floating-term")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  pkg = { sources = { "packspec", "rockspec" } },
+})
 
 -- vim.cmd([[colorscheme catppuccin]])
 -- vim.cmd([[colorscheme gruvbox]])
