@@ -171,7 +171,7 @@ return {
     },
     keys = {
       {
-        "<leader>cw",
+        "<leader>w",
         function()
           if vim.bo.filetype == "oil" then
             require("yazi").yazi({}, require("oil").get_current_dir())
@@ -183,13 +183,7 @@ return {
       },
       {
         -- Open in the current working directory
-        "<leader>cl",
-        "<cmd>Yazi cwd<cr>",
-        desc = "Open the file manager in nvim's working directory",
-      },
-      {
-        -- Open in the current working directory
-        "<leader>cr",
+        "<leader>_",
         "<cmd>Yazi cwd<cr>",
         desc = "Open the file manager in nvim's working directory",
       },
