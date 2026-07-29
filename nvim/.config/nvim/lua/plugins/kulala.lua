@@ -4,28 +4,28 @@ return {
 
     keys = {
         {
-            "<leader>Kt",
+            "<leader>kt",
             function()
                 require("kulala").run()
             end,
             desc = "Send request",
         },
         {
-            "<leader>Ka",
+            "<leader>ka",
             function()
                 require("kulala").run_all()
             end,
             desc = "Send all requests",
         },
         {
-            "<leader>Ko",
+            "<leader>ko",
             function()
                 require("kulala").scratchpad()
             end,
             desc = "Open scratchpad",
         },
         {
-            "<leader>Ke",
+            "<leader>ke",
             function()
                 require("kulala").set_selected_env()
             end,
@@ -38,7 +38,7 @@ return {
             timeout = 0, -- disable subprocess timeout
         },
         global_keymaps = false,
-        global_keymaps_prefix = "<leader>K",
+        global_keymaps_prefix = "<leader>k",
         kulala_keymaps_prefix = "",
     },
 }
