@@ -37,6 +37,30 @@ return {
           min_width = 30,
           default_direction = "left",
         },
+        keymaps = {
+          -- Send the HTTP request under the cursor via kulala, without leaving the Aerial window
+          ["<C-s>"] = {
+            callback = function()
+              local util = require("aerial.util")
+              local src_buf = util.get_source_buffer()
+              if not src_buf or not vim.tbl_contains({ "http", "rest" }, vim.bo[src_buf].filetype) then
+                return
+              end
+              -- Move the source window's cursor to the request line (keeps focus in Aerial)
+              require("aerial").select({ jump = false })
+              -- Find the window showing the source buffer and run kulala in its context
+              for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_buf(win) == src_buf then
+                  vim.api.nvim_win_call(win, function()
+                    require("kulala").run()
+                  end)
+                  break
+                end
+              end
+            end,
+            desc = "Send HTTP request under cursor (kulala)",
+          },
+        },
       })
 
       local harpoon = require('harpoon')
@@ -63,6 +87,10 @@ return {
         { desc = "Open Aerial (functions only)" })
 
       vim.keymap.set("n", "<leader>m", ":AerialToggle<CR>")
+
+      -- Jump to next/previous function (symbol) using Aerial
+      vim.keymap.set("n", "]f", "<cmd>AerialNext<CR>", { desc = "Next function/symbol" })
+      vim.keymap.set("n", "[f", "<cmd>AerialPrev<CR>", { desc = "Prev function/symbol" })
 
       -- Tùy chỉnh màu số dòng trong grep
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })

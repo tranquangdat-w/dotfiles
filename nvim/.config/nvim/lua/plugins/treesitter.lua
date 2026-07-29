@@ -32,7 +32,8 @@ return {
       "markdown",
       "tsx",
       "yaml",
-      "xml"
+      "xml",
+      "http",
     }
     local alreadyInstalled = require('nvim-treesitter.config').get_installed()
     local parsersToInstall = vim.iter(ensure_installed)
