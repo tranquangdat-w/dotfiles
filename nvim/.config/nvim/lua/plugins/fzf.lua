@@ -141,11 +141,7 @@ return {
       end, { desc = "Git branches (fzf)" })
 
       vim.keymap.set("n", "<BS>W", function()
-        require("fzf-lua").git_worktrees({
-          actions = {
-            ["alt-a"] = { fn = require("fzf-lua.actions").git_worktree_add, field_index = "{q}", reload = true },
-          },
-        })
+        require("fzf-lua").git_worktrees()
       end, { desc = "Git worktrees (fzf)" })
     end,
   },
