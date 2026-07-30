@@ -63,6 +63,7 @@ return {
     keys = {
       { "<leader>gs", "<cmd>Git<CR>",               desc = "Git status" },
       { "<leader>gp", "<cmd>Git pull<CR>",          desc = "Git pull" },
+      { "<leader>gP", "<cmd>Git push<CR>",          desc = "Git push" },
       { "<leader>gb", "<cmd>Git blame<CR>",         desc = "Git blame" },
       { "<leader>gl", "<cmd>Git log --oneline<CR>", desc = "Git log" },
     },

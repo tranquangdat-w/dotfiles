@@ -1,25 +1,15 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'igorlfs/nvim-dap-view',
+    'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
     'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require("dap")
-    local dapview = require("dap-view")
-    dapview.setup({
-      winbar = {
-        sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
-        controls = {
-          enabled = true,
-        }
-      },
-      virtual_text = {
-        enabled = true,
-      },
-    })
+    local dapui = require("dapui")
+    dapui.setup()
     require("dap-go").setup()
     require("dap-python").setup("uv")
 
@@ -105,16 +95,16 @@ return {
     end
 
     dap.listeners.before.attach.dapui_config = function()
-      dapview.open()
+      dapui.open()
     end
     dap.listeners.before.launch.dapui_config = function()
-      dapview.open()
+      dapui.open()
     end
     dap.listeners.before.event_terminated.dapui_config = function()
-      dapview.close()
+      dapui.close()
     end
     dap.listeners.before.event_exited.dapui_config = function()
-      dapview.close()
+      dapui.close()
     end
 
     vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
@@ -122,9 +112,6 @@ return {
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
     vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
-    vim.keymap.set('n', '<leader>dV', '<cmd>DapViewVirtualTextToggle<cr>', { desc = "Toggle Dap inline virtual text" })
-    vim.keymap.set('n', '<leader>ds', '<cmd>DapViewToggle<cr>', { desc = "Toggle Dap view" })
-    vim.keymap.set({ 'n', 'v' }, '<leader>dw', dapview.add_expr, { desc = "Add express for dap" })
   end
 }
 

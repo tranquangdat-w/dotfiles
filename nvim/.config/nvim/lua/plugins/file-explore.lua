@@ -105,8 +105,8 @@ return {
             open_win_config = function()
               local screen_w = vim.opt.columns:get()
               local screen_h = vim.opt.lines:get()
-              local width = math.floor(screen_w * 1.0)
-              local height = math.floor(screen_h * 1.0)
+              local width = math.floor(screen_w * 0.9)
+              local height = math.floor(screen_h * 0.9)
               local row = math.floor((screen_h - height) / 2)
               local col = math.floor((screen_w - width) / 2)
               return {
