@@ -115,9 +115,6 @@ vim.keymap.set("n", "<leader>cc", function()
   end
 end, { noremap = true, silent = true, desc = "Toggle quickfix" })
 
--- DBUIToggle
-vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", { noremap = false, silent = true, desc = "Toggle database UI" })
-
 -- Diagnostic state (global để dễ dùng ở nơi khác, ví dụ lualine)
 vim.g.minimal_diagnostic = false
 

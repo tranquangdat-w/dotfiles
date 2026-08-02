@@ -117,7 +117,7 @@ return {
           { name = "gci" },
           { name = "ts_ls" },
           { name = "gopls" },
-          { name = "vim-dadbod-completion" },
+          { name = "dadbod_grip" },
           { name = "copilot", group_index = 2 },
           { name = "codeium", group_index = 2 },
         }),

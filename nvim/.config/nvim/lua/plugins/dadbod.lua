@@ -13,6 +13,8 @@ return {
       vim.g.db_ui_execute_on_save = 0            -- không tự execute query khi :w
       vim.g.db_ui_win_position = 'left'          -- 'left' hoặc 'right'
 
+      vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>",
+        { noremap = false, silent = true, desc = "Toggle database UI" })
       -- Table helpers: query có sẵn khi expand table trong drawer.
       -- Không tự execute (execute_on_save=0) → mở template để điền rồi <C-s> chạy.
       vim.g.db_ui_table_helpers = {
@@ -53,17 +55,30 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         pattern = { 'sql', 'mysql', 'plsql' },
         callback = function(args)
-          -- Normal mode: tự select dòng hiện tại (V) rồi execute như visual
-          -- -> chỉ chạy 1 dòng cursor NHƯNG vẫn qua đường bind parameters của dadbod-ui
-          vim.keymap.set('n', '<C-s>', 'V<Plug>(DBUI_ExecuteQuery)', {
-            buffer = args.buf,
-            desc = 'Execute current line (with bind params)',
-          })
-          -- Visual mode: giữ nguyên execute selection
-          vim.keymap.set('v', '<C-s>', '<Plug>(DBUI_ExecuteQuery)', {
-            buffer = args.buf,
-            desc = 'Execute selection (with bind params)',
-          })
+          local function grip_run(sql)
+            local url = vim.b[args.buf].db
+            if type(url) ~= "string" or url == "" then url = vim.g.db end
+            if not url or url == "" then
+              vim.notify("Grip: no database connection", vim.log.levels.WARN)
+              return
+            end
+            require("dadbod-grip").open(sql, url)
+          end
+
+          vim.keymap.set('n', '<C-s>', function()
+            grip_run(vim.api.nvim_get_current_line())
+          end, { buffer = args.buf, desc = 'Execute current line in grip' })
+
+          vim.keymap.set('v', '<C-s>', function()
+            local s = vim.fn.getpos("'<")
+            local e = vim.fn.getpos("'>")
+            local lines = vim.api.nvim_buf_get_lines(args.buf, s[2] - 1, e[2], false)
+            if #lines > 0 then
+              lines[#lines] = lines[#lines]:sub(1, e[3])
+              lines[1] = lines[1]:sub(s[3])
+            end
+            grip_run(table.concat(lines, "\n"))
+          end, { buffer = args.buf, desc = 'Execute selection in grip' })
         end,
       })
     end,
@@ -78,7 +93,9 @@ return {
         limit         = 100,
         max_col_width = 40,
         timeout       = 10000,
+        completion    = false, -- dùng nvim-cmp thay vì native completion
       })
+      require("dadbod-grip.completion").register_cmp_source()
 
       vim.keymap.set("n", "<leader>dg", "<cmd>GripTables<cr>", { desc = "Data grid: pick table" })
 
