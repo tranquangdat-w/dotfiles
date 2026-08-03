@@ -63,7 +63,7 @@ return {
         end
       })
 
-      vim.keymap.set("n", "<leader>nw", function()
+      vim.keymap.set({"i", "s"}, "<C-l>", function()
         require("luasnip").jump(1)
       end, { silent = true })
 

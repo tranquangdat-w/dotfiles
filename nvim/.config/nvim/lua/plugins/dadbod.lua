@@ -99,7 +99,7 @@ return {
 
       vim.keymap.set("n", "<leader>dg", "<cmd>GripTables<cr>", { desc = "Data grid: pick table" })
 
-      -- Enum/boolean picker + esc-to-normal cell editor (see lua/grip-editor.lua)
+      -- Enum/boolean cells → dropdown picker instead of text input (see lua/grip-editor.lua)
       require("grip-editor").setup()
     end,
   },

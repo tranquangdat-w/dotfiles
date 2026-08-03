@@ -108,6 +108,24 @@ return {
     end
 
     vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set('n', '<leader>dT', function()
+      local bufnr = vim.api.nvim_get_current_buf()
+      local line = vim.api.nvim_win_get_cursor(0)[1]
+      local existing = require("dap.breakpoints").get(bufnr)[bufnr] or {}
+
+      for _, bp in ipairs(existing) do
+        if bp.line == line then
+          dap.toggle_breakpoint()
+          return
+        end
+      end
+
+      vim.ui.input({ prompt = "Breakpoint condition: " }, function(condition)
+        if condition and condition ~= "" then
+          dap.set_breakpoint(condition)
+        end
+      end)
+    end, { desc = "Toggle Conditional Breakpoint" })
     vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Start/Continue Debugging" })
     vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
     vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
