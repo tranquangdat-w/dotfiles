@@ -34,8 +34,11 @@ return {
   },
 
   opts = {
+    ui = {
+      max_response_size = 5 * 1024 * 1024, -- 5 MiB
+    },
     kulala_core = {
-      timeout = 0,       -- disable subprocess timeout
+      timeout = 0, -- disable subprocess timeout
     },
     kulala_keymaps = {
       -- Chuyển tab response bằng { và } thay vì Ctrl+h / Ctrl+l
