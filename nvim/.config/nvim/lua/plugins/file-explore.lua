@@ -99,9 +99,9 @@ return {
           sorter = "case_sensitive"
         },
         view = {
-          side = "right",
+          side = "left",
           float = {
-            enable = true,
+            enable = false,
             open_win_config = function()
               local screen_w = vim.opt.columns:get()
               local screen_h = vim.opt.lines:get()
@@ -119,7 +119,7 @@ return {
               }
             end,
           },
-          width = 50
+          width = 40
         },
         git = {
           ignore = false,
@@ -130,7 +130,7 @@ return {
             enable = false,
           },
           group_empty = true,
-          indent_width = 4,
+          -- indent_width = 4,
           highlight_modified = "icon",
           icons = {
             show = {

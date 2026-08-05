@@ -95,13 +95,27 @@ return {
       -- Tùy chỉnh màu số dòng trong grep
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
 
-      vim.keymap.set("n", "<BS>f", function()
+      local scoped_files = false
+      local find_files
+      find_files = function()
+        local cwd = nil
+        if scoped_files then
+          cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+        end
         require("fzf-lua").files({
+          cwd = cwd,
           fd_opts =
           "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build' --exclude '.next'",
           previewer = false,
+          actions = {
+            ["ctrl-o"] = function()
+              scoped_files = not scoped_files
+              find_files()
+            end,
+          },
         })
-      end, { desc = "Find Files" })
+      end
+      vim.keymap.set("n", "<BS>f", find_files, { desc = "Find Files (ctrl-o: toggle dir scope)" })
       vim.keymap.set("n", "<BS>g", fzf.git_status, { desc = "Find Git status Files" })
       vim.keymap.set("n", "<BS>;", function()
         local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
