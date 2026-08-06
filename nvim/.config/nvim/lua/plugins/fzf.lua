@@ -66,8 +66,36 @@ return {
       local harpoon = require('harpoon')
       harpoon:setup({})
 
-      vim.keymap.set("n", "<BS>l", function()
-        require("fzf-lua").files({
+      -- Wraps a fzf-lua picker with a ctrl-o action that toggles cwd
+      -- between global and current dir (oil dir or current buffer's dir).
+      -- Query only carries over across the ctrl-o toggle itself; a fresh
+      -- invocation of the keymap always starts with an empty query.
+      -- query_field is "search" for live_grep-style pickers, "query" otherwise.
+      local function make_scoped_picker(picker, build_opts, query_field)
+        query_field = query_field or "query"
+        local scoped = false
+        local run
+        run = function(preserve_query)
+          local query = preserve_query and fzf.get_last_query() or nil
+          local cwd = nil
+          if scoped then
+            cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+          end
+          local opts = build_opts(cwd)
+          opts[query_field] = query
+          opts.actions = opts.actions or {}
+          opts.actions["ctrl-o"] = function()
+            scoped = not scoped
+            run(true)
+          end
+          picker(opts)
+        end
+        return function() run(false) end
+      end
+
+      local find_dirs = make_scoped_picker(fzf.files, function(cwd)
+        return {
+          cwd = cwd,
           fd_opts = "--type d --hidden --exclude .git",
           previewer = false,
           actions = {
@@ -80,8 +108,9 @@ return {
               vim.cmd("Oil " .. vim.fn.fnameescape(entry.path))
             end,
           },
-        })
-      end, { desc = "Find Directories" })
+        }
+      end)
+      vim.keymap.set("n", "<BS>l", find_dirs, { desc = "Find Directories (ctrl-o: toggle dir scope)" })
 
       vim.keymap.set("n", "<BS>m", function() require("aerial").fzf_lua_picker({}) end,
         { desc = "Open Aerial (functions only)" })
@@ -95,41 +124,31 @@ return {
       -- Tùy chỉnh màu số dòng trong grep
       vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { bg = "#1e1e1e", bold = true })
 
-      local scoped_files = false
-      local find_files
-      find_files = function()
-        local cwd = nil
-        if scoped_files then
-          cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
-        end
-        require("fzf-lua").files({
+      local find_files = make_scoped_picker(fzf.files, function(cwd)
+        return {
           cwd = cwd,
           fd_opts =
           "--type f --hidden --exclude '*.class' --exclude 'app/bin' --exclude 'node_modules' --exclude '.git' --exclude .gradle --exclude .settings --exclude 'build' --exclude '.next'",
           previewer = false,
-          actions = {
-            ["ctrl-o"] = function()
-              scoped_files = not scoped_files
-              find_files()
-            end,
-          },
-        })
-      end
+        }
+      end)
       vim.keymap.set("n", "<BS>f", find_files, { desc = "Find Files (ctrl-o: toggle dir scope)" })
       vim.keymap.set("n", "<BS>g", fzf.git_status, { desc = "Find Git status Files" })
-      vim.keymap.set("n", "<BS>;", function()
-        local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
-        fzf.live_grep({ cwd = cwd })
-      end, { desc = "Live Grep" })
+
+      local live_grep = make_scoped_picker(fzf.live_grep, function(cwd)
+        return { cwd = cwd }
+      end, "search")
+      vim.keymap.set("n", "<BS>;", live_grep, { desc = "Live Grep (ctrl-o: toggle dir scope)" })
       vim.keymap.set("n", "<BS>'", fzf.marks, { desc = "Find marks" })
-      vim.keymap.set("n", "<BS>.", function()
-        local cwd = vim.bo.filetype == "oil" and require("oil").get_current_dir() or nil
-        require("fzf-lua").live_grep({
+
+      local live_grep_hidden = make_scoped_picker(fzf.live_grep, function(cwd)
+        return {
           cwd = cwd,
           rg_opts =
           "--hidden --no-ignore --glob=!.git/* --glob=!**/node_modules/* --column --line-number --no-heading --color=always --smart-case -e",
-        })
-      end, { desc = "Live Grep includes hidden files" })
+        }
+      end, "search")
+      vim.keymap.set("n", "<BS>.", live_grep_hidden, { desc = "Live Grep includes hidden files (ctrl-o: toggle dir scope)" })
       vim.keymap.set("n", "<BS>,", function()
         fzf.buffers({
           previewer = false
