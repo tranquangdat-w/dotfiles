@@ -66,6 +66,10 @@ return {
       local harpoon = require('harpoon')
       harpoon:setup({})
 
+      -- Shared scope state across all pickers: ctrl-o in any picker toggles
+      -- all pickers together. Persists between invocations (not reset on open).
+      local scoped = false
+
       -- Wraps a fzf-lua picker with a ctrl-o action that toggles cwd
       -- between global and current dir (oil dir or current buffer's dir).
       -- Query only carries over across the ctrl-o toggle itself; a fresh
@@ -73,7 +77,6 @@ return {
       -- query_field is "search" for live_grep-style pickers, "query" otherwise.
       local function make_scoped_picker(picker, build_opts, query_field)
         query_field = query_field or "query"
-        local scoped = false
         local run
         run = function(preserve_query)
           local query = preserve_query and fzf.get_last_query() or nil
