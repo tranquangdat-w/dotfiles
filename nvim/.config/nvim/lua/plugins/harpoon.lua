@@ -118,8 +118,13 @@ return {
       local list = harpoon:list()
       list:add()
       list._index = list:length()
-      require("harpoon_float").refresh()
-    end, { desc = "Add to harpoon" })
+      -- require("harpoon_float").refresh()
+    end, { desc = "Add to harpoon last" })
+    vim.keymap.set("n", "<leader>A", function()
+      local list = harpoon:list()
+      list:prepend()
+      list._index = 1
+    end, { desc = "Prepend to harpoon" })
     vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end,
       { desc = "Show harpoon list", remap = false })
     vim.keymap.set("n", "<leader>1", function() select_and_sync(1) end, { desc = "Move to harpoon item 1" })
@@ -134,8 +139,8 @@ return {
 
     vim.keymap.set("n", "H", function() harpoon:list():prev() end, { desc = "Move to previous harpoon" })
     vim.keymap.set("n", "L", function() harpoon:list():next() end, { desc = "Move to next harpoon" })
-    vim.keymap.set("n", "<leader>h", function() require("harpoon_float").toggle() end, { desc = "Toggle harpoon float" })
+    -- vim.keymap.set("n", "<leader>h", function() require("harpoon_float").toggle() end, { desc = "Toggle harpoon float" })
 
-    require("harpoon_float").setup()
+    -- require("harpoon_float").setup()
   end
 }

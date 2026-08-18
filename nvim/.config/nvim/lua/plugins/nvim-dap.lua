@@ -7,9 +7,150 @@ return {
     'mfussenegger/nvim-dap-python',
   },
   config = function()
+    vim.api.nvim_create_augroup("DapGroup", { clear = true })
+
+    local function navigate(args)
+      local buffer = args.buf
+
+      local wid = nil
+      local win_ids = vim.api.nvim_list_wins()
+      for _, win_id in ipairs(win_ids) do
+        local win_bufnr = vim.api.nvim_win_get_buf(win_id)
+        if win_bufnr == buffer then
+          wid = win_id
+        end
+      end
+
+      if wid == nil then
+        return
+      end
+
+      vim.schedule(function()
+        if vim.api.nvim_win_is_valid(wid) then
+          vim.api.nvim_set_current_win(wid)
+        end
+      end)
+    end
+
+    local function create_nav_options(name)
+      return {
+        group = "DapGroup",
+        pattern = string.format("*%s*", name),
+        callback = navigate,
+      }
+    end
+
     local dap = require("dap")
     local dapui = require("dapui")
-    dapui.setup()
+
+    vim.fn.sign_define("DapBreakpoint",
+      { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapBreakpointCondition",
+      { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapBreakpointRejected",
+      { text = "", texthl = "DiagnosticSignHint", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapLogPoint",
+      { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapStopped",
+      { text = "", texthl = "DiagnosticSignWarn", linehl = "Visual", numhl = "DiagnosticSignWarn" })
+
+    local function layout(name)
+      return {
+        elements = {
+          { id = name },
+        },
+        enter = true,
+        size = 50,
+        position = "right",
+      }
+    end
+
+    local name_to_layout = {
+      repl = { layout = layout("repl"), index = 0 },
+      stacks = { layout = layout("stacks"), index = 0 },
+      scopes = { layout = layout("scopes"), index = 0 },
+      console = { layout = layout("console"), index = 0 },
+      watches = { layout = layout("watches"), index = 0 },
+      breakpoints = { layout = layout("breakpoints"), index = 0 },
+    }
+    local layouts = {}
+
+    for name, config in pairs(name_to_layout) do
+      table.insert(layouts, config.layout)
+      name_to_layout[name].index = #layouts
+    end
+
+    local DEFAULT_PANEL_SIZE = 40
+
+    -- open one element at its normal size, without toggling it shut again
+    local function open_debug_ui(name)
+      local layout_config = name_to_layout[name]
+
+      if layout_config == nil then
+        error(string.format("bad name: %s", name))
+      end
+
+      dapui.close()
+      layout_config.layout.size = DEFAULT_PANEL_SIZE
+      pcall(dapui.open, layout_config.index)
+    end
+
+    local function toggle_debug_ui(name)
+      dapui.close()
+      local layout_config = name_to_layout[name]
+
+      if layout_config == nil then
+        error(string.format("bad name: %s", name))
+      end
+
+      local uis = vim.api.nvim_list_uis()[1]
+      if uis ~= nil then
+        layout_config.layout.size = uis.width
+      end
+
+      pcall(dapui.toggle, layout_config.index)
+    end
+
+    vim.keymap.set("n", "<leader>dr", function() toggle_debug_ui("repl") end, { desc = "Debug: toggle repl ui" })
+    vim.keymap.set("n", "<leader>dS", function() toggle_debug_ui("stacks") end, { desc = "Debug: toggle stacks ui" })
+    vim.keymap.set("n", "<leader>dw", function() toggle_debug_ui("watches") end, { desc = "Debug: toggle watches ui" })
+    vim.keymap.set("n", "<leader>dp", function() toggle_debug_ui("breakpoints") end,
+      { desc = "Debug: toggle breakpoints ui" })
+    vim.keymap.set("n", "<leader>ds", function() toggle_debug_ui("scopes") end, { desc = "Debug: toggle scopes ui" })
+    vim.keymap.set("n", "<leader>dc", function() toggle_debug_ui("console") end, { desc = "Debug: toggle console ui" })
+
+    vim.api.nvim_create_autocmd("BufEnter", {
+      group = "DapGroup",
+      pattern = "*dap-repl*",
+      callback = function()
+        vim.wo.wrap = true
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("BufWinEnter", create_nav_options("dap-repl"))
+    vim.api.nvim_create_autocmd("BufWinEnter", create_nav_options("DAP Watches"))
+
+    dapui.setup({
+      layouts = layouts,
+      enter = true,
+      icons = { expanded = "", collapsed = "", current_frame = "" },
+      controls = {
+        enabled = true,
+        element = "repl",
+        icons = {
+          pause = "",
+          play = "",
+          step_into = "",
+          step_over = "",
+          step_out = "",
+          step_back = "",
+          run_last = "",
+          terminate = "",
+          disconnect = "",
+        },
+      },
+    })
+
     require("dap-go").setup()
     require("dap-python").setup("uv")
 
@@ -94,12 +235,11 @@ return {
       }
     end
 
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
+    -- auto-open the repl once the adapter is ready
+    dap.listeners.after.event_initialized.dapui_config = function()
+      open_debug_ui("repl")
     end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
+
     dap.listeners.before.event_terminated.dapui_config = function()
       dapui.close()
     end
@@ -107,8 +247,19 @@ return {
       dapui.close()
     end
 
-    vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    vim.keymap.set('n', '<leader>dT', function()
+    dap.listeners.after.event_output.dapui_config = function(_, body)
+      if body.category == "console" then
+        dapui.eval(body.output) -- Sends stdout/stderr to Console
+      end
+    end
+
+    vim.keymap.set("n", "<F1>", dap.continue, { desc = "Debug: Continue" })
+    vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+    vim.keymap.set("n", "<F3>", dap.run_to_cursor, { desc = "Debug: Run to Cursor" })
+    vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug: Step Into" })
+    vim.keymap.set("n", "<F5>", dap.step_out, { desc = "Debug: Step Out" })
+    vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+    vim.keymap.set("n", "<leader>B", function()
       local bufnr = vim.api.nvim_get_current_buf()
       local line = vim.api.nvim_win_get_cursor(0)[1]
       local existing = require("dap.breakpoints").get(bufnr)[bufnr] or {}
@@ -125,11 +276,7 @@ return {
           dap.set_breakpoint(condition)
         end
       end)
-    end, { desc = "Toggle Conditional Breakpoint" })
-    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Start/Continue Debugging" })
-    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into Function" })
-    vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out of Function" })
-    vim.keymap.set('n', '<leader>df', dap.step_over, { desc = "Step Forward" })
+    end, { desc = "Debug: Toggle Conditional Breakpoint" })
   end
 }
 
