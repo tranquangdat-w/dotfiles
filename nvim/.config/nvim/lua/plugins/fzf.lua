@@ -14,9 +14,12 @@ return {
       local fzf = require("fzf-lua")
       fzf.setup({
         winopts = {
+          height = 0.9,
+          width = 0.9,
           preview = {
-            -- layout = "vertical",
-            horizontal = "right:45%",
+            layout = "vertical",
+            vertical = "down:65%",
+            -- horizontal = "right:45%",
           },
         },
         fzf_colors = {
@@ -27,6 +30,9 @@ return {
         keymap = {
           fzf = {
             ["ctrl-q"] = "select-all+accept",
+          },
+          builtin = {
+            ["<M-v>"] = "focus-preview",
           },
         }
       })
@@ -162,7 +168,7 @@ return {
       vim.keymap.set("n", "<BS>q", fzf.quickfix_stack, { desc = "Open quickfix history" })
       vim.keymap.set("n", "<BS>e", fzf.diagnostics_document, { desc = "Diagnostics (buffer)" })
       vim.keymap.set("n", "<BS>E", fzf.diagnostics_workspace, { desc = "Diagnostics (workspace)" })
-      vim.keymap.set("n", "<BS>w", function()
+      vim.keymap.set("n", "<C-f>", function()
         require("fzf-lua").grep_cword({ rg_opts = "--word-regexp" })
       end)
       vim.keymap.set('n', '<BS>c', function()

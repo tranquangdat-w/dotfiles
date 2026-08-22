@@ -3,14 +3,39 @@ return {
   config = function()
     local _99 = require("99")
 
+    local AgyProvider = setmetatable({
+      _get_provider_name = function() return "AgyProvider" end,
+      _get_default_model = function() return "gemini-3.7-flash-high" end,
+      _build_command = function(_, q, ctx)
+        local cmd = { "agy", "--dangerously-skip-permissions" }
+        if ctx.model and ctx.model ~= "auto" and ctx.model ~= "" then
+          vim.list_extend(cmd, { "--model", ctx.model })
+        end
+        return vim.list_extend(cmd, { "--print", q })
+      end,
+      fetch_models = function(cb)
+        vim.system({ "agy", "models" }, { text = true }, function(res)
+          vim.schedule(function()
+            local models = {}
+            for _, l in ipairs(vim.split(res.stdout or "", "\n", { trimempty = true })) do
+              local id = l:match("^(%S+)")
+              if id and not id:find("Fetching") then table.insert(models, id) end
+            end
+            cb(models, nil)
+          end)
+        end)
+      end,
+    }, { __index = _99.Providers.BaseProvider })
+    _99.Providers.AgyProvider = AgyProvider
+
     -- For logging that is to a file if you wish to trace through requests
     -- for reporting bugs, i would not rely on this, but instead the provided
     -- logging mechanisms within 99.  This is for more debugging purposes
     local cwd = vim.uv.cwd()
     local basename = vim.fs.basename(cwd)
     _99.setup({
-      provider = _99.Providers.KiroProvider, -- default: OpenCodeProvider
-      model = "auto",
+      provider = AgyProvider,
+      model = "gemini-3.7-flash-high",
       logger = {
         level = _99.DEBUG,
         path = "/tmp/" .. basename .. ".99.debug",
@@ -52,7 +77,7 @@ return {
           -- enabled = true,
           -- max_file_size = 102400,     -- bytes, skip files larger than this
           -- max_files = 5000,            -- cap on total discovered files
-          -- exclude = { ".env", ".env.*", "node_modules", ".git", ... },
+          exclude = { ".env", ".env.*", "node_modules", ".git" },
         },
 
         --- What autocomplete you use.
